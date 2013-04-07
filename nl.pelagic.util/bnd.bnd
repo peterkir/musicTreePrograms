@@ -1,0 +1,7 @@
+-buildpath:	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+Export-Package: nl.pelagic.util.file,\
+	nl.pelagic.util.string
+Private-Package: nl.pelagic.util.i18n
+Bundle-Version: 1.0.0
+Bundle-Name: Pelagic Utilities Library
+Bundle-Description: This library bundle contains utility methods

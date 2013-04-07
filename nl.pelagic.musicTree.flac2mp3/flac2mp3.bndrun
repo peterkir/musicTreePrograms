@@ -1,0 +1,42 @@
+-include bnd.bnd
+
+-runbundles: args4j;version='[2.0.21,2.0.22)',\
+	jaudiotagger;version='[2.2.0,2.2.1)',\
+	nl.pelagic.audio.conversion.flac2mp3;version=latest,\
+	nl.pelagic.audio.conversion.flac2mp3.api;version=latest,\
+	nl.pelagic.audio.musicTree.configuration.api;version=latest,\
+	nl.pelagic.audio.musicTree.syncer;version=latest,\
+	nl.pelagic.audio.musicTree.syncer.api;version=latest,\
+	nl.pelagic.jaudiotagger.util;version=latest,\
+	nl.pelagic.musicTree.flac2mp3;version=latest,\
+	nl.pelagic.shell.script.listener;version=latest,\
+	nl.pelagic.shell.script.listener.api;version=latest,\
+	nl.pelagic.shutdownhook;version=latest,\
+	nl.pelagic.shutdownhook.api;version=latest,\
+	nl.pelagic.util;version=latest,\
+	org.apache.felix.configadmin;version='[1.4.0,1.4.1)',\
+	org.apache.felix.gogo.command;version='[0.12.0,0.12.1)',\
+	org.apache.felix.gogo.runtime;version='[0.10.0,0.10.1)',\
+	org.apache.felix.metatype;version='[1.0.4,1.0.5)',\
+	org.apache.felix.scr;version='[1.6.2,1.6.3)'
+-runee: JavaSE-1.7
+-runfw: org.apache.felix.framework;version='[4,5)'
+-runrequires: osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.conversion.flac2mp3)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.conversion.flac2mp3.api)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.musicTree.configuration.api)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.musicTree.syncer)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.jaudiotagger.util)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.musicTree.flac2mp3)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.shell.script.listener)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.shell.script.listener.api)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.shutdownhook)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.shutdownhook.api)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.util)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.configadmin)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.metatype)',\
+	osgi.identity;filter:='(osgi.identity=org.apache.felix.scr)'
+-runvm: -ea
+
+# needed for nl.pelagic.shutdownhook: sun.misc
+# needed for jaudiotagger library   : sun.misc,sun.nio,sun.nio.ch
+-runsystempackages: sun.misc,sun.nio,sun.nio.ch

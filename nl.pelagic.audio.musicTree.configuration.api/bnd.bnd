@@ -1,0 +1,5 @@
+-buildpath: biz.aQute.bnd.annotation
+Export-Package: nl.pelagic.audio.musicTree.configuration.api
+Bundle-Version: 1.0.0
+Bundle-Name: Music Tree Configuration - API
+Bundle-Description: Configuration API of the music tree

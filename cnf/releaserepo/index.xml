@@ -1,0 +1,409 @@
+<?xml version='1.0' encoding='utf-8'?>
+<repository increment='1365325173242' name='Release' xmlns='http://www.osgi.org/xmlns/repository/v1.0.0'>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.audio.musicTree.configuration.api'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='e338429a91a3323b1fdd275825cdfd11548ed92198f31e97df4ce9f3ea33f245'/>
+      <attribute name='url' value='nl.pelagic.audio.musicTree.configuration.api/nl.pelagic.audio.musicTree.configuration.api-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='4148'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.audio.musicTree.configuration.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.audio.musicTree.configuration.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='nl.pelagic.audio.musicTree.configuration.api'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+      <attribute name='bundle-symbolic-name' value='nl.pelagic.audio.musicTree.configuration.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.shell.script.listener.api'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='76c431cb41eb99cea3bfee84459970c205efcd6f45b71cad6958888fbc5711aa'/>
+      <attribute name='url' value='nl.pelagic.shell.script.listener.api/nl.pelagic.shell.script.listener.api-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='4136'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.shell.script.listener.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.shell.script.listener.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='nl.pelagic.shell.script.listener.api'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+      <attribute name='bundle-symbolic-name' value='nl.pelagic.shell.script.listener.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.audio.conversion.flac2mp3'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='8481307db0e1a2bdb7f9b15ec2b578242af3c7fdbbec41118bcfd9721b9c2d13'/>
+      <attribute name='url' value='nl.pelagic.audio.conversion.flac2mp3/nl.pelagic.audio.conversion.flac2mp3-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='23973'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.audio.conversion.flac2mp3'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.audio.conversion.flac2mp3'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.audio.conversion.flac2mp3.api)(version&gt;=1.0.0)(!(version&gt;=1.1.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.jaudiotagger.util)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.shell.script.listener.api)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.shutdownhook.api)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.util.file)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.util.string)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.jaudiotagger.audio)'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.jaudiotagger.audio.mp3)'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.jaudiotagger.tag)'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.jaudiotagger.tag.flac)'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.jaudiotagger.tag.id3)'/>
+    </requirement>
+    <requirement namespace='osgi.extender'>
+      <directive name='filter' value='(&amp;(osgi.extender=osgi.ds)(version&gt;=1.1.0)(!(version&gt;=2.0.0)))'/>
+      <directive name='effective' value='active'/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.shell.script.listener'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='a99127e6c1d6b4e6ca8580cfd9abb404a0790b8dbe6f4f8510dae17148cea496'/>
+      <attribute name='url' value='nl.pelagic.shell.script.listener/nl.pelagic.shell.script.listener-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='6486'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.shell.script.listener'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.shell.script.listener'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.shell.script.listener.api)(version&gt;=1.0.0)(!(version&gt;=1.1.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.extender'>
+      <directive name='filter' value='(&amp;(osgi.extender=osgi.ds)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+      <directive name='effective' value='active'/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.audio.conversion.flac2mp3.api'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='8223a2321acbfa784b3cc536054f275965fd610cb409286f55fba728d3708e6e'/>
+      <attribute name='url' value='nl.pelagic.audio.conversion.flac2mp3.api/nl.pelagic.audio.conversion.flac2mp3.api-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='9936'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.audio.conversion.flac2mp3.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.audio.conversion.flac2mp3.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='nl.pelagic.audio.conversion.flac2mp3.api'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+      <attribute name='bundle-symbolic-name' value='nl.pelagic.audio.conversion.flac2mp3.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.jaudiotagger.util'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='a138f8d82737583175a5f12238b3256d097cb27d71ce4839e098de50a1ac8e08'/>
+      <attribute name='url' value='nl.pelagic.jaudiotagger.util/nl.pelagic.jaudiotagger.util-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='3998'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.jaudiotagger.util'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.jaudiotagger.util'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='nl.pelagic.jaudiotagger.util'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+      <attribute name='bundle-symbolic-name' value='nl.pelagic.jaudiotagger.util'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+      <directive name='uses' value='org.jaudiotagger.tag'/>
+    </capability>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.jaudiotagger.tag)'/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.shutdownhook'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='3505b9549268cdc34f1a97a936aee93b9b99bae824f5bc14f715b4839bdabdcb'/>
+      <attribute name='url' value='nl.pelagic.shutdownhook/nl.pelagic.shutdownhook-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='6457'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.shutdownhook'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.shutdownhook'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.shutdownhook.api)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=sun.misc)'/>
+    </requirement>
+    <requirement namespace='osgi.extender'>
+      <directive name='filter' value='(&amp;(osgi.extender=osgi.ds)(version&gt;=1.1.0)(!(version&gt;=2.0.0)))'/>
+      <directive name='effective' value='active'/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.util'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='338cb98b35b0546d8b142dc7177927063f9534391367c2b8eadc90ab24ace253'/>
+      <attribute name='url' value='nl.pelagic.util/nl.pelagic.util-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='13146'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.util'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.util'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='nl.pelagic.util.file'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+      <attribute name='bundle-symbolic-name' value='nl.pelagic.util'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='nl.pelagic.util.string'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+      <attribute name='bundle-symbolic-name' value='nl.pelagic.util'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.musicTree.flac2mp3'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='1a60bb45eef77a90967dcb2b2dba2676d288f39c23dcdca9de3c16cd67453318'/>
+      <attribute name='url' value='nl.pelagic.musicTree.flac2mp3/nl.pelagic.musicTree.flac2mp3-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='19044'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.musicTree.flac2mp3'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.musicTree.flac2mp3'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.audio.conversion.flac2mp3.api)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.audio.musicTree.syncer.api)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.shell.script.listener.api)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.util.file)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.kohsuke.args4j)'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.kohsuke.args4j.spi)'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=org.osgi.framework)(version&gt;=1.3.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.extender'>
+      <directive name='filter' value='(&amp;(osgi.extender=osgi.ds)(version&gt;=1.1.0)(!(version&gt;=2.0.0)))'/>
+      <directive name='effective' value='active'/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.audio.musicTree.syncer.api'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='2db289a625e7b94e202e5b304f73b120758343f948bd12a9ca449c8efd1cd826'/>
+      <attribute name='url' value='nl.pelagic.audio.musicTree.syncer.api/nl.pelagic.audio.musicTree.syncer.api-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='4307'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.audio.musicTree.syncer.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.audio.musicTree.syncer.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='nl.pelagic.audio.musicTree.syncer.api'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+      <attribute name='bundle-symbolic-name' value='nl.pelagic.audio.musicTree.syncer.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+      <directive name='uses' value='nl.pelagic.audio.conversion.flac2mp3.api'/>
+    </capability>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.audio.conversion.flac2mp3.api)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.shutdownhook.api'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='a604bfbbf692ced0fd407ef7ba780a3342439b82ab80ae6fe52aadc7f7157d21'/>
+      <attribute name='url' value='nl.pelagic.shutdownhook.api/nl.pelagic.shutdownhook.api-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='3103'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.shutdownhook.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.shutdownhook.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='nl.pelagic.shutdownhook.api'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+      <attribute name='bundle-symbolic-name' value='nl.pelagic.shutdownhook.api'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+  </resource>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='nl.pelagic.audio.musicTree.syncer'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='66bb0dd5f573cba1a593f5f7136b1d3b22212859724908878f6d2b6abb03a9a4'/>
+      <attribute name='url' value='nl.pelagic.audio.musicTree.syncer/nl.pelagic.audio.musicTree.syncer-1.0.0.jar'/>
+      <attribute name='size' type='Long' value='18394'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='nl.pelagic.audio.musicTree.syncer'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='nl.pelagic.audio.musicTree.syncer'/>
+      <attribute name='bundle-version' type='Version' value='1.0.0'/>
+    </capability>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.audio.conversion.flac2mp3.api)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.audio.musicTree.syncer.api)(version&gt;=1.0.0)(!(version&gt;=1.1.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.shell.script.listener.api)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.util.file)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(&amp;(osgi.wiring.package=nl.pelagic.util.string)(version&gt;=1.0.0)(!(version&gt;=2.0.0)))'/>
+    </requirement>
+    <requirement namespace='osgi.extender'>
+      <directive name='filter' value='(&amp;(osgi.extender=osgi.ds)(version&gt;=1.1.0)(!(version&gt;=2.0.0)))'/>
+      <directive name='effective' value='active'/>
+    </requirement>
+  </resource>
+</repository>

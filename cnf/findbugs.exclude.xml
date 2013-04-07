@@ -1,0 +1,12 @@
+<FindBugsFilter>
+	<Match>
+		<Class name="nl.pelagic.shutdownhook.StopHandler" />
+		<Method name="handle" />
+		<Bug pattern="RU_INVOKE_RUN" />
+	</Match>
+	<Match>
+		<Class name="nl.pelagic.musicTree.flac2mp3.Main" />
+		<Method name="run" />
+		<Bug pattern="DM_EXIT" />
+	</Match>
+</FindBugsFilter>

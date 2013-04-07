@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="project" default="build">
+	<target name="iterate_init" unless="iterate_init_done">
+		<!-- tasks and macros must be defined in a task or we'll get
+		     'Trying to override old definition of task ...' reports -->
+
+		<macrodef name="iterate">
+			<attribute name="target" />
+			<sequential>
+				<subant target="@{target}">
+					<fileset dir="." includes="*/build.xml" excludes="cnf/*" />
+				</subant>
+			</sequential>
+		</macrodef>
+
+		<!-- mark iterate_init has been run -->
+		<property name="iterate_init_done" value="set" />
+	</target>
+
+	<target name="build" depends="iterate_init">
+		<iterate target="build" />
+	</target>
+
+	<target name="junit" depends="iterate_init">
+		<iterate target="junit" />
+	</target>
+
+	<target name="clean" depends="iterate_init">
+		<iterate target="clean" />
+	</target>
+
+	<target name="javadoc" depends="iterate_init">
+		<iterate target="javadoc" />
+	</target>
+
+	<target name="findbugs-prepare">
+		<exec dir="." executable="./cnf/scripts/fb_generate_includes.bash" osfamily="unix" />
+	</target>
+
+	<target name="findbugs" depends="iterate_init">
+		<iterate target="findbugs" />
+	</target>
+
+	<target name="wipecache">
+		<delete dir="${user.home}/.bnd/cache"/>
+	</target>
+
+	<target name="package" depends="iterate_init">
+		<iterate target="package" />
+	</target>
+</project>

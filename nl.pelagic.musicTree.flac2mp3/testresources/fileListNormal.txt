@@ -1,0 +1,2 @@
+testresources/testdata/Music/dummy1.flac
+testresources/testdata/Music/dummydir1/dummy1.flac

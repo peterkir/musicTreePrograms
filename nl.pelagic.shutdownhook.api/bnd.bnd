@@ -1,0 +1,4 @@
+-buildpath: biz.aQute.bnd.annotation
+Bundle-Version: 1.0.0
+Export-Package: nl.pelagic.shutdownhook.api
+Bundle-Name: Shutdown Hook Thread - API

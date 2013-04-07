@@ -1,0 +1,6 @@
+-buildpath: jaudiotagger,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+Export-Package: nl.pelagic.jaudiotagger.util
+Bundle-Version: 1.0.0
+Bundle-Name: Pelagic JAudioTagger Utilities Library
+Bundle-Description: This library bundle contains utility methods

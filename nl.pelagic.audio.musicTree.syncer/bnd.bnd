@@ -1,0 +1,13 @@
+-buildpath: biz.aQute.bnd.annotation,\
+	nl.pelagic.audio.conversion.flac2mp3.api;version=latest,\
+	nl.pelagic.shell.script.listener.api;version=latest,\
+	nl.pelagic.audio.musicTree.syncer.api;version=latest,\
+	nl.pelagic.audio.musicTree.configuration.api;version=latest,\
+	nl.pelagic.util;version=latest,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+Service-Component: *
+Bundle-Version: 1.0.0
+Bundle-Name: MusicTreeSyncer
+Bundle-Description: Synchronises a tree with flac files into a tree with mp3 files
+Private-Package: nl.pelagic.audio.musicTree.syncer,\
+	nl.pelagic.audio.musicTree.syncer.i18n

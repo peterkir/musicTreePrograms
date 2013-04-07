@@ -1,0 +1,71 @@
+<FindBugsFilter>
+     <Match>
+       <Package name="nl.pelagic.audio.conversion.flac2mp3" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.conversion.flac2mp3.api" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.conversion.flac2mp3.api.i18n" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.conversion.flac2mp3.i18n" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.conversion.flac2mp3.testhelpers" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.musicTree.configuration.api" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.musicTree.syncer" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.musicTree.syncer.api" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.musicTree.syncer.i18n" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.musicTree.syncer.testhelpers" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.jaudiotagger.util" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.musicTree.flac2mp3" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.musicTree.flac2mp3.i18n" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.musicTree.flac2mp3.testhelpers" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.shell.script.listener" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.shell.script.listener.api" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.shell.script.listener.testhelpers" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.shutdownhook" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.shutdownhook.api" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.util" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.util.file" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.util.i18n" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.util.string" />
+     </Match>
+</FindBugsFilter>

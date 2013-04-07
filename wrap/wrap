@@ -1,0 +1,212 @@
+#!/bin/bash
+
+set -e
+set -u
+
+
+################################################################################
+#
+#
+# Exit Traps and Stack Trace
+#
+#
+################################################################################
+
+declare -i exitPrintStackTracePrint=1
+function exitPrintStackTrace() {
+  if [[ ${exitPrintStackTracePrint} -eq 0 ]]; then
+    return
+  fi
+
+  local -i result=0
+  local -i pos=0
+  echo "================================================================================"
+  echo "=                                  Stacktrace                                  ="
+  echo "= line / function / file                                                       ="
+  echo "================================================================================"
+  echo "${LINENO} ${FUNCNAME} ${BASH_SOURCE}"
+  while [[ ${result} -eq 0 ]]; do
+    set +e
+    caller ${pos}
+    result=${?}
+    set -e
+    pos+=1
+  done
+  echo "================================================================================"
+}
+
+
+function exitTrapHandler() {
+  local -i exitCode=${?}
+
+  if [[ -d "${WRAPPEDDIRTMP:-}" ]]; then
+    rm -fr "${WRAPPEDDIRTMP}"
+  fi
+
+  if [[ ${exitCode} -ne 0 ]]; then
+    exitPrintStackTrace
+    echo "Exiting with code ${exitCode}"
+  fi
+  exit ${exitCode}
+}
+
+trap exitTrapHandler EXIT
+
+
+function exitPrintArguments() {
+  local -i index=1
+  while [[ ${#} -gt 0 ]]; do
+    echo "  Argument ${index} : \"${1}\""
+    index+=1
+    shift 1
+  done
+}
+
+
+################################################################################
+#
+#
+# Strings
+#
+#
+################################################################################
+
+#
+# Trim a string: remove spaces from the beginning and end of the string
+#
+# 1=string to trim  return=trimmed string
+function stringTrim() {
+  if [[ ${#} -ne 1 ]]; then
+    echo "Expected 1 argument in ${FUNCNAME}, got ${#}"
+    if [[ ${#} -gt 0 ]]; then exitPrintArguments "${@}"; fi
+    exit 1
+  fi
+
+  if [[ -z "${1}" ]]; then
+    return
+  fi
+
+  # remove leading whitespace characters
+  local var="${1#${1%%[![:space:]]*}}"
+
+  # remove trailing whitespace characters
+  echo "${var%${var##*[![:space:]]}}"
+}
+
+
+################################################################################
+#
+#
+# Paths
+#
+#
+################################################################################
+
+#
+# Get the canonical path of a file or directory
+# This is the physical path without any links
+#
+# 1=the file or directory
+function pathCanonicalPath() {
+  if [[ ${#} -ne 1 ]]; then
+    echo "Expected 1 argument in ${FUNCNAME}, got ${#}"
+    if [[ ${#} -gt 0 ]]; then exitPrintArguments "${@}"; fi
+    exit 1
+  fi
+
+  local src="$(stringTrim "${1}")"
+
+  if [[ -h "${src}" ]] && [[ -d "${src}" ]]; then
+    # src is a link to a directory
+    pushd . &> /dev/null
+    cd -P "${src}" &> /dev/null
+    pwd -P
+    popd &> /dev/null
+    return
+  fi
+
+  # we're not dealing with a directory here
+  while [[ -h "${src}" ]]; do
+    # keep getting the link target while src is a link
+    src="$(ls -la "${src}" | \
+           sed -r 's#^.*?[[:space:]]+->[[:space:]]+(.*)$#\1#')"
+  done
+  # src is no longer a link here
+
+  pushd . &> /dev/null
+  cd -P "$(dirname "${src}")" &> /dev/null
+  echo "$(pwd -P)/$(basename "${src}")"
+  popd &> /dev/null
+}
+
+
+################################################################################
+#
+#
+# Main
+#
+#
+################################################################################
+
+
+declare script="$(pathCanonicalPath "${0}")"
+declare scriptDir="$(dirname "${script}")"
+
+if [[ ${#} -ne 2 ]]; then
+  echo "Usage: ${script} BSN VERSION"
+  exit 1
+fi
+unset script
+
+declare BSN="$(stringTrim "${1}")"
+declare VERSION="$(stringTrim "${2}")"
+
+
+declare JAR_IN="${scriptDir}/${BSN}-${VERSION}"
+declare JAR_OUT="${scriptDir}/${BSN}-${VERSION}-wrapped"
+
+
+exitPrintStackTracePrint=0
+if [[ ! -f "${JAR_IN}.jar" ]]; then
+  echo "Input file ${JAR_IN}.jar does not exist"
+  exit 1
+fi
+if [[ ! -f "${JAR_IN}-sources.jar" ]]; then
+  echo "Input file ${JAR_IN}-sources.jar does not exist"
+  exit 1
+fi
+exitPrintStackTracePrint=1
+
+
+rm -f "${JAR_OUT}.jar"
+java -jar "${scriptDir}/biz.aQute.bnd.jar" wrap --output "${JAR_OUT}.jar" "${JAR_IN}.jar"
+
+
+declare WRAPPEDDIRTMP="$(mktemp -d -p "${scriptDir}" "WRAPPEDDIRTMP.XXXXXXXXXX")"
+WRAPPEDDIRTMP="$(pathCanonicalPath "${WRAPPEDDIRTMP}")"
+
+cd "${WRAPPEDDIRTMP}"
+jar xf "${JAR_OUT}.jar"
+
+mkdir -p "${WRAPPEDDIRTMP}/OSGI-OPT/src"
+cd "${WRAPPEDDIRTMP}/OSGI-OPT/src"
+jar xf "${JAR_IN}-sources.jar"
+rm -fr META-INF
+
+cd "${WRAPPEDDIRTMP}"
+
+sed -r -i \
+    -e "s/^(Bundle-Version:).*\$/\1 ${VERSION}/" \
+    -e "s/^(Bundle-(|Symbolic)Name:).*\$/\1 ${BSN}/" \
+    "META-INF/MANIFEST.MF"
+
+
+rm -f "${JAR_OUT}.jar"
+jar cmf "META-INF/MANIFEST.MF" "${JAR_OUT}.jar" *
+
+
+echo "Produced jars:"
+echo "${JAR_OUT}.jar"
+
+exit 0
+

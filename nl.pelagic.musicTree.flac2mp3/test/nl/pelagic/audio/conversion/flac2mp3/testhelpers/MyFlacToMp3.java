@@ -1,0 +1,1 @@
+../../../../../../../..//nl.pelagic.audio.conversion.flac2mp3/test/nl/pelagic/audio/conversion/flac2mp3/testhelpers/MyFlacToMp3.java

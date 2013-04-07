@@ -1,0 +1,12 @@
+These files contain settings that I use on my Fedora machine
+for grip and easytag.
+
+Dump them into your home directory and you're ready to use them with proper
+settings ;-)
+
+
+Files:
+======
+.grip
+.grip-flac
+.easytag/easytagrc

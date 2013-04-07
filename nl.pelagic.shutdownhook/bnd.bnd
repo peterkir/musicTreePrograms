@@ -1,0 +1,11 @@
+-buildpath: nl.pelagic.shutdownhook.api;version=latest,\
+	biz.aQute.bnd.annotation,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+Private-Package: nl.pelagic.shutdownhook
+Service-Component: *
+Bundle-Version: 1.0.0
+Bundle-Name: Shutdown Hook Thread
+Bundle-Description: This bundle attaches itself to the VM shutdown hook and signals\n\
+	every ShutdownHook participant in case the VM is shut down.\n\
+	\n\
+	This is to be able to shut down running processes in a controlled way.

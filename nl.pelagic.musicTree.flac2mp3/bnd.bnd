@@ -1,0 +1,21 @@
+-buildpath: nl.pelagic.audio.conversion.flac2mp3.api;version=latest,\
+	nl.pelagic.shell.script.listener.api;version=latest,\
+	nl.pelagic.audio.musicTree.configuration.api;version=latest,\
+	nl.pelagic.audio.musicTree.syncer.api;version=latest,\
+	nl.pelagic.util;version=latest,\
+	args4j,\
+	biz.aQute.bnd.annotation,\
+	osgi.core,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+
+Private-Package: nl.pelagic.musicTree.flac2mp3,\
+	nl.pelagic.musicTree.flac2mp3.i18n
+Service-Component: *
+Bundle-Version: 1.0.0
+Bundle-Name: Flac2Mp3
+
+
+# program arguments (not exported)
+-runprogramargs: -flac /home/ferry/workspace/audioTagChecker/Music\n\
+	-mp3 /home/ferry/workspace/audioTagChecker/from.flac\n\
+	-n
