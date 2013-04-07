@@ -16,6 +16,6 @@ Bundle-Name: Flac2Mp3
 
 
 # program arguments (not exported)
--runprogramargs: -flac /home/ferry/workspace/audioTagChecker/Music\n\
-	-mp3 /home/ferry/workspace/audioTagChecker/from.flac\n\
+-runprogramargs: -flac /home/ferry/workspace/musicTreePrograms/Music\n\
+	-mp3 /home/ferry/workspace/musicTreePrograms/from.flac\n\
 	-n
