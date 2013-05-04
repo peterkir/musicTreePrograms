@@ -361,8 +361,6 @@ public class TestMain {
     assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
   }
 
-  // FIXME
-
   @Test(timeout = 1000)
   public void testRun_Normal() {
     syncer.returnValue = true;

@@ -54,37 +54,37 @@ public class MyBundleContext implements BundleContext {
 
   @Override
   public void addServiceListener(ServiceListener listener, String filter) throws InvalidSyntaxException {
-    //
+    /* empty */
   }
 
   @Override
   public void addServiceListener(ServiceListener listener) {
-    //
+    /* empty */
   }
 
   @Override
   public void removeServiceListener(ServiceListener listener) {
-    //
+    /* empty */
   }
 
   @Override
   public void addBundleListener(BundleListener listener) {
-    //
+    /* empty */
   }
 
   @Override
   public void removeBundleListener(BundleListener listener) {
-    //
+    /* empty */
   }
 
   @Override
   public void addFrameworkListener(FrameworkListener listener) {
-    //
+    /* empty */
   }
 
   @Override
   public void removeFrameworkListener(FrameworkListener listener) {
-    //
+    /* empty */
   }
 
   @Override
