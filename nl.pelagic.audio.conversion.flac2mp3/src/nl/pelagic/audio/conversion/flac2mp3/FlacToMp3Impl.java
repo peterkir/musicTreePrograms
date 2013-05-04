@@ -465,7 +465,6 @@ public class FlacToMp3Impl implements FlacToMp3, ShutdownHookParticipant {
       /* flac */
       List<String> flacCommandList = new LinkedList<>();
 
-      // FIXME replace this by a cmd line option with a default
       flacCommandList.add(config.getFlacExecutable());
 
       flacCommandList.addAll(config.getFlacOptions());
@@ -474,7 +473,6 @@ public class FlacToMp3Impl implements FlacToMp3, ShutdownHookParticipant {
       /* lame */
       List<String> lameCommandList = new LinkedList<>();
 
-      // FIXME replace this by a cmd line option with a default
       lameCommandList.add(config.getLameExecutable());
 
       lameCommandList.addAll(config.getLameOptions());
