@@ -17,6 +17,12 @@ public class TagUtils {
    * concatenate these values and put a " - " in between. Only non-zero length
    * values are concatenated.
    * </p>
+   * <p>
+   * This functionality basically exists because there is a bug in the EasyTag
+   * application that splits fields values like 'aa - bb' into 2 tag values in
+   * the file. This functionality allows the application to merge those back
+   * together.
+   * </p>
    * 
    * @param fieldValues a list with the field values
    * @param defaultValue the default value for the field
