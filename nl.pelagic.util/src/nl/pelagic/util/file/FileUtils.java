@@ -31,7 +31,7 @@ public class FileUtils {
     try {
       String directoryPath = directory.getCanonicalPath();
       String filePath = file.getCanonicalPath();
-      return filePath.startsWith(directoryPath);
+      return (directoryPath.equals(filePath)) || filePath.startsWith(directoryPath + File.separator);
     }
     catch (IOException e) {
       /* swallow, can't be covered by a test */

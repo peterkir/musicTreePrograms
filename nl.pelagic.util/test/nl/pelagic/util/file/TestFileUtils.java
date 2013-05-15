@@ -41,6 +41,20 @@ public class TestFileUtils {
   }
 
   @Test
+  public void testIsFileBelowDirectory_Directory_NameAlike() {
+    boolean r =
+        FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, new File(TestConstants.tmpTestBaseDir2,
+            ".gitignore"));
+    assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
+  }
+
+  @Test
+  public void testIsFileBelowDirectory_Directory_Normal_Same() {
+    boolean r = FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, TestConstants.tmpTestBaseDir);
+    assertThat(Boolean.valueOf(r), equalTo(Boolean.TRUE));
+  }
+
+  @Test
   public void testIsFileBelowDirectory_Directory_Normal_Below() {
     boolean r =
         FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, new File(TestConstants.tmpTestBaseDir,
