@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  * 
  * </p>
  */
-class FilenameFilterWithRegex implements FilenameFilter {
+public class FilenameFilterWithRegex implements FilenameFilter {
   /** the base path */
   protected final File basePathFile;
 
