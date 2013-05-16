@@ -16,15 +16,17 @@ import nl.pelagic.util.i18n.Messages;
  */
 public class FileUtils {
   /**
-   * Determine if a file is below a directory.
+   * Determine if a file is the same as or below a directory (both files are
+   * first resolved as canonical paths).
    * 
    * @param directory the directory. When null or not an existing directory then
    *          false is returned.
    * @param file the file. When null then false is returned.
-   * @return true when file is below directory
+   * @return true when file is equal to directory or when file is below
+   *         directory
    */
   public static boolean isFileBelowDirectory(File directory, File file) {
-    if ((directory == null) || (file == null) || !directory.isDirectory()) {
+    if ((directory == null) || !directory.isDirectory() || (file == null)) {
       return false;
     }
 
