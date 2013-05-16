@@ -14,4 +14,7 @@ public class TestConstants {
 
   /** the 2nd temporary test directory */
   public static final File tmpTestBaseDir2 = new File("testresources/tmpTestBaseDir2"); //$NON-NLS-1$
+
+  /** the 3nd temporary test directory */
+  public static final File tmpTestBaseDir3 = new File("testresources/tmpTestBaseDir3"); //$NON-NLS-1$
 }
