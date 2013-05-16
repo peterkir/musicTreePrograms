@@ -48,39 +48,62 @@ public class TestTagUtils {
   }
 
   @Test
-  public void testConcatenateTagFields_Two() {
-    List<TagField> fieldValues = new LinkedList<>();
+  public void testConcatenateTagValues_Null() {
+    List<String> fieldValues = null;
+    String defaultValue = "default"; //$NON-NLS-1$
+    String result = TagUtils.concatenateTagValues(fieldValues, defaultValue);
+
+    assertThat(result, equalTo(defaultValue));
+  }
+
+  @Test
+  public void testConcatenateTagValues_Empty() {
+    List<String> fieldValues = new LinkedList<>();
+    String defaultValue = "default"; //$NON-NLS-1$
+    String result = TagUtils.concatenateTagValues(fieldValues, defaultValue);
+
+    assertThat(result, equalTo(defaultValue));
+  }
+
+  @Test
+  public void testConcatenateTagValues_One() {
+    List<String> fieldValues = new LinkedList<>();
     String defaultValue = "default"; //$NON-NLS-1$
 
-    String fieldId1 = "fieldId1"; //$NON-NLS-1$
     String fieldContent1 = "fieldContent1"; //$NON-NLS-1$
-    TagField field1 = new ID3v1TagField(fieldId1, fieldContent1);
-    String fieldId2 = "fieldId2"; //$NON-NLS-1$
-    String fieldContent2 = "fieldContent2"; //$NON-NLS-1$
-    TagField field2 = new ID3v1TagField(fieldId2, fieldContent2);
-    fieldValues.add(field1);
-    fieldValues.add(field2);
+    fieldValues.add(fieldContent1);
 
-    String result = TagUtils.concatenateTagFields(fieldValues, defaultValue);
+    String result = TagUtils.concatenateTagValues(fieldValues, defaultValue);
+
+    assertThat(result, equalTo(fieldContent1));
+  }
+
+  @Test
+  public void testConcatenateTagValues_Two() {
+    List<String> fieldValues = new LinkedList<>();
+    String defaultValue = "default"; //$NON-NLS-1$
+
+    String fieldContent1 = "fieldContent1"; //$NON-NLS-1$
+    String fieldContent2 = "fieldContent2"; //$NON-NLS-1$
+    fieldValues.add(fieldContent1);
+    fieldValues.add(fieldContent2);
+
+    String result = TagUtils.concatenateTagValues(fieldValues, defaultValue);
 
     assertThat(result, equalTo(fieldContent1 + " - " + fieldContent2)); //$NON-NLS-1$
   }
 
   @Test
-  public void testConcatenateTagFields_SecondZeroLength() {
-    List<TagField> fieldValues = new LinkedList<>();
+  public void testConcatenateTagValues_SecondZeroLength() {
+    List<String> fieldValues = new LinkedList<>();
     String defaultValue = "default"; //$NON-NLS-1$
 
-    String fieldId1 = "fieldId1"; //$NON-NLS-1$
     String fieldContent1 = "fieldContent1"; //$NON-NLS-1$
-    TagField field1 = new ID3v1TagField(fieldId1, fieldContent1);
-    String fieldId2 = "fieldId2"; //$NON-NLS-1$
     String fieldContent2 = ""; //$NON-NLS-1$
-    TagField field2 = new ID3v1TagField(fieldId2, fieldContent2);
-    fieldValues.add(field1);
-    fieldValues.add(field2);
+    fieldValues.add(fieldContent1);
+    fieldValues.add(fieldContent2);
 
-    String result = TagUtils.concatenateTagFields(fieldValues, defaultValue);
+    String result = TagUtils.concatenateTagValues(fieldValues, defaultValue);
 
     assertThat(result, equalTo(fieldContent1));
   }
