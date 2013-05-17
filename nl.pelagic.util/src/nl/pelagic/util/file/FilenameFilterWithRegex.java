@@ -8,7 +8,10 @@ import java.util.regex.Pattern;
 /**
  * <p>
  * A filename filter that can use a base path and/or a compiled regular
- * expression
+ * expression.
+ * </p>
+ * <p>
+ * Directories are always accepted.
  * </p>
  * <p>
  * The following functionality is implemented:
@@ -16,15 +19,14 @@ import java.util.regex.Pattern;
  * <pre>
  * basePath  regexPattern    Filter result
  * ----------------------------------------------------------------------------
- * A   null          null    accept all directories and files, in all
- *                           directories
- * B   null         !null    accept only directories and files that match the
- *                           regexPattern, in any directory
- * C  !null          null    accept all directories and files, in the basePath
- *                           directory and all directories below that
- * D  !null         !null    accept only directories and files that match the
- *                           regexPattern, in the basePath directory and all
- *                           directories below that
+ * A   null          null    Accept all files, in all directories.
+ * B   null         !null    Accept only files that match the regexPattern, in
+ *                           any directory.
+ * C  !null          null    Accept all files, in the basePath directory and all
+ *                           directories below that.
+ * D  !null         !null    Accept only files that match the regexPattern, in
+ *                           the basePath directory and all directories below
+ *                           that.
  * </pre>
  * 
  * </p>
@@ -82,6 +84,9 @@ public class FilenameFilterWithRegex implements FilenameFilter {
         worker = new FilenameFilter() {
           @Override
           public boolean accept(File dir, String name) {
+            if (new File(dir, name).isDirectory()) {
+              return true;
+            }
             return regexPattern.matcher(name).matches();
           }
         };
@@ -104,12 +109,15 @@ public class FilenameFilterWithRegex implements FilenameFilter {
         worker = new FilenameFilter() {
           @Override
           public boolean accept(File dir, String name) {
-
             if (!FileUtils.isFileBelowDirectory(basePathFile, new File(dir, name))) {
               return false;
             }
 
             /* dir is equal to or below basePath */
+
+            if (new File(dir, name).isDirectory()) {
+              return true;
+            }
 
             return regexPattern.matcher(name).matches();
           }

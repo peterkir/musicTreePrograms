@@ -115,26 +115,48 @@ public class TestFilenameFilterWithRegex {
 
   @Test
   public void testFilenameFilterWithRegex_B() throws IOException {
-    FilenameFilterWithRegex filter = new FilenameFilterWithRegex(null, Pattern.compile("^[ns].*$"));
+    FilenameFilterWithRegex filter = new FilenameFilterWithRegex(null, Pattern.compile("^s.*$"));
 
     boolean[] results = {
+        /* / */
+        false,
+
+        /* /base */
+        true, false, true, false, true, false,
+
+        /* /base1 */
+        true, false, true, false, true, false,
+
+        /* /base/path1 */
+        true, false, true, false,
+
+        /* /base/path/subdir1 */
+        true, false
+    };
+
+    checkResults(filter, results);
+
+    filter = new FilenameFilterWithRegex(null, Pattern.compile("^n.*$"));
+
+    boolean[] results1 = {
         /* / */
         true,
 
         /* /base */
-        false, true, false, true, true, true,
+        true, true, true, true, true, true,
 
         /* /base1 */
-        false, true, false, true, true, true,
+        true, true, true, true, true, true,
 
         /* /base/path1 */
-        false, true, true, true,
+        true, true, true, true,
 
         /* /base/path/subdir1 */
         true, true
     };
 
-    checkResults(filter, results);
+    checkResults(filter, results1);
+
   }
 
   @Test
@@ -165,14 +187,36 @@ public class TestFilenameFilterWithRegex {
   @Test
   public void testFilenameFilterWithRegex_D() throws IOException {
     FilenameFilterWithRegex filter =
-        new FilenameFilterWithRegex(new File(TestConstants.tmpTestBaseDir3, "/base/path"), Pattern.compile("^[ns].*$"));
+        new FilenameFilterWithRegex(new File(TestConstants.tmpTestBaseDir3, "/base/path"), Pattern.compile("^s.*$"));
 
     boolean[] results = {
         /* / */
         false,
 
         /* /base */
-        false, false, false, true, true, true,
+        false, false, true, false, true, false,
+
+        /* /base1 */
+        false, false, false, false, false, false,
+
+        /* /base/path1 */
+        false, false, false, false,
+
+        /* /base/path/subdir1 */
+        true, false
+    };
+
+    checkResults(filter, results);
+
+    filter =
+        new FilenameFilterWithRegex(new File(TestConstants.tmpTestBaseDir3, "/base/path"), Pattern.compile("^n.*$"));
+
+    boolean[] results1 = {
+        /* / */
+        false,
+
+        /* /base */
+        false, false, true, true, true, true,
 
         /* /base1 */
         false, false, false, false, false, false,
@@ -184,6 +228,6 @@ public class TestFilenameFilterWithRegex {
         true, true
     };
 
-    checkResults(filter, results);
+    checkResults(filter, results1);
   }
 }
