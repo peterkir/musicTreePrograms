@@ -21,8 +21,10 @@ import java.util.regex.Pattern;
  *                           any directory. Accept all directories.
  * C  !null          null    Accept all directories and files, in the basePath
  *                           directory and all directories below that.
- * D  !null         !null    Accept only directories and files that match the
- *                           regexPattern, in the basePath directory only.
+ * D  !null         !null    In the basePath directory, accept only directories
+ *                           and files that match the regexPattern. Accept all
+ *                           directories and files below accepted directories
+ *                           in the basePath.
  * </pre>
  * 
  * </p>
@@ -105,6 +107,12 @@ public class FilenameFilterWithRegex implements FilenameFilter {
         worker = new FilenameFilter() {
           @Override
           public boolean accept(File dir, String name) {
+            if (!FileUtils.isFileBelowDirectory(basePathFile, new File(dir, name))) {
+              return false;
+            }
+
+            /* dir + name is equal to or below basePath */
+
             String fc;
 
             /* dir + name */
@@ -117,8 +125,11 @@ public class FilenameFilterWithRegex implements FilenameFilter {
               return false;
             }
             if (fc.equals(basePath)) {
+              /* dir + name is equal to basePath */
               return true;
             }
+
+            /* dir + name is NOT equal to basePath; it is below basePath */
 
             /* dir */
             f = dir;
@@ -134,7 +145,11 @@ public class FilenameFilterWithRegex implements FilenameFilter {
               return regexPattern.matcher(name).matches();
             }
 
-            return false;
+            /* dir is NOT equal to basePath; it is below basePath */
+
+            String subdir =
+                fc.substring(basePath.length() + File.separator.length()).split(Pattern.quote(File.separator))[0];
+            return regexPattern.matcher(subdir).matches();
           }
         };
       }
