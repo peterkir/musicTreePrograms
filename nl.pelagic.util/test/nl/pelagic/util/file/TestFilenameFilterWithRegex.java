@@ -169,7 +169,7 @@ public class TestFilenameFilterWithRegex {
         false,
 
         /* /base */
-        false, false, true, true, true, false,
+        false, false, true, true, true, true,
 
         /* /base1 */
         false, false, false, false, false, false,
@@ -178,7 +178,7 @@ public class TestFilenameFilterWithRegex {
         false, false, false, false,
 
         /* /base/path/subdir1 */
-        true, false
+        true, true
     };
 
     checkResults(filter, results);

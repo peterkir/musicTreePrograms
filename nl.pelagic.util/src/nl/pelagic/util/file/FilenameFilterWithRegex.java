@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  * B   null         !null    Accept only files that match the regexPattern, in
  *                           any directory. Accept all directories.
  * C  !null          null    Accept all directories and files, in the basePath
- *                           directory only.
+ *                           directory and all directories below that.
  * D  !null         !null    Accept only directories and files that match the
  *                           regexPattern, in the basePath directory only.
  * </pre>
@@ -95,35 +95,7 @@ public class FilenameFilterWithRegex implements FilenameFilter {
         worker = new FilenameFilter() {
           @Override
           public boolean accept(File dir, String name) {
-            String fc;
-
-            /* dir + name */
-            File f = new File(dir, name);
-            try {
-              fc = f.getCanonicalPath();
-            }
-            catch (IOException e) {
-              /* can't be covered by a test */
-              return false;
-            }
-            if (fc.equals(basePath)) {
-              return true;
-            }
-
-            /* dir */
-            f = dir;
-            try {
-              fc = f.getCanonicalPath();
-            }
-            catch (IOException e) {
-              /* can't be covered by a test */
-              return false;
-            }
-            if (fc.equals(basePath)) {
-              return true;
-            }
-
-            return false;
+            return FileUtils.isFileBelowDirectory(basePathFile, new File(dir, name));
           }
         };
       } else {
