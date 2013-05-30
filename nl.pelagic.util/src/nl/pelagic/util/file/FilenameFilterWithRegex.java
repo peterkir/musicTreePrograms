@@ -16,9 +16,10 @@ import java.util.regex.Pattern;
  * <pre>
  * basePath  regexPattern    Filter result
  * ----------------------------------------------------------------------------
- * A   null          null    Accept all files, in all directories.
- * B   null         !null    Accept only files that match the regexPattern, in
- *                           any directory. Accept all directories.
+ * A   null          null    Accept all directories and files, in all
+ *                           directories.
+ * B   null         !null    Accept all directories. Accept only files that
+ *                           match the regexPattern, in any directory.
  * C  !null          null    Accept all directories and files, in the basePath
  *                           directory and all directories below that.
  * D  !null         !null    In the basePath directory, accept only directories
