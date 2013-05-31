@@ -52,7 +52,7 @@ public class Main implements Runnable {
   private final Level LOGGER_JAUDIOTAGGER_LEVEL = Level.SEVERE;
 
   /** the program name */
-  private final String PROGRAM_NAME;
+  private final String PROGRAM_NAME = "flac2mp3"; //$NON-NLS-1$
 
   /** the application logger */
   private final Logger applicationLogger;
@@ -87,9 +87,6 @@ public class Main implements Runnable {
      * </pre>
      */
     System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tF %1$tT] %4$10s %2$s : %5$s%6$s%n"); //$NON-NLS-1$ //$NON-NLS-2$
-
-    String[] split = Main.class.getPackage().getName().split("\\."); //$NON-NLS-1$
-    PROGRAM_NAME = split[split.length - 1];
 
     applicationLogger = Logger.getLogger(LOGGER_APPLICATION_NAME);
     applicationLogger.setLevel(LOGGER_APPLICATION_LEVEL);
