@@ -166,7 +166,7 @@ public class SyncerImpl implements Syncer {
           }
           listener.addCommand(String.format("cp    -t \"%s\" \\%n         \"%s\"", //$NON-NLS-1$
               StringUtils.escQuote(mp3Dir.getPath()), StringUtils.escQuote(flacCoverFile.getPath())));
-          listener.addCommand(String.format("touch --reference \"%s\" \"%s\"", //$NON-NLS-1$
+          listener.addCommand(String.format("touch --reference \"%s\" \\%n                  \"%s\"", //$NON-NLS-1$
               StringUtils.escQuote(flacCoverFile.getPath()), StringUtils.escQuote(mp3CoverFile.getPath())));
         }
 
