@@ -3,7 +3,7 @@
 	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
 Private-Package: nl.pelagic.shell.script.listener
 Service-Component: *
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-Name: Shell Script Listener
 Bundle-Description: This bundle listens for shell commands are outputs them\n\
 	so that they can be copied & pasted into a shell.
