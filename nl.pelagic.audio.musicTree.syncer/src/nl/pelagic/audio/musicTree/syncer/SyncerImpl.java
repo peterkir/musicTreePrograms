@@ -144,6 +144,8 @@ public class SyncerImpl implements Syncer {
     assert (mp3Dir != null);
     assert (!mp3Dir.exists() || mp3Dir.isDirectory());
 
+    boolean reported = false;
+
     if ((covers == null) || covers.isEmpty() || !flacDir.isDirectory()) {
       return;
     }
@@ -151,16 +153,16 @@ public class SyncerImpl implements Syncer {
     /* get the shell script listener */
     ShellScriptListener listener = shellScriptListener.get();
 
-    if (listener != null) {
-      listener.addMessage(String.format(Messages.getString("SyncerImpl.2"), mp3Dir.getPath())); //$NON-NLS-1$
-    }
-
     for (String cover : covers) {
       File flacCoverFile = new File(flacDir, cover);
       File mp3CoverFile = new File(mp3Dir, cover);
 
       if (!mp3CoverFile.exists() || (flacCoverFile.lastModified() > mp3CoverFile.lastModified())) {
         if (listener != null) {
+          if (!reported) {
+            listener.addMessage(String.format(Messages.getString("SyncerImpl.2"), mp3Dir.getPath())); //$NON-NLS-1$
+            reported = true;
+          }
           if (!mp3Dir.exists()) {
             listener.addCommand(String.format("mkdir -p \"%s\"", StringUtils.escQuote(mp3Dir.getPath()))); //$NON-NLS-1$
           }
