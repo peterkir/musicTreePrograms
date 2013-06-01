@@ -1,0 +1,43 @@
+-include bnd.bnd
+
+-runrepos: Workspace,\
+	Release,\
+	Local,\
+	Bndtools Hub
+
+-runbundles: args4j;version='[2.0.21,2.0.22)',\
+	jaudiotagger;version='[2.2.0,2.2.1)',\
+	nl.pelagic.audio.tag.checker;version=latest,\
+	nl.pelagic.audio.tag.checker.api;version=latest,\
+	nl.pelagic.audio.tag.checker.basic;version=latest,\
+	nl.pelagic.audio.tag.checker.cli;version=latest,\
+	nl.pelagic.audio.tag.checker.converter.flac;version=latest,\
+	nl.pelagic.audio.tag.checker.converter.mp3;version=latest,\
+	nl.pelagic.audio.tag.checker.filename;version=latest,\
+	nl.pelagic.audio.tag.checker.id3v1;version=latest,\
+	nl.pelagic.audio.tag.checker.unchar;version=latest,\
+	nl.pelagic.jaudiotagger.util;version=latest,\
+	nl.pelagic.shutdownhook;version=latest,\
+	nl.pelagic.shutdownhook.api;version=latest,\
+	nl.pelagic.util;version=latest,\
+	org.apache.felix.scr;version='[1.6.2,1.6.3)',\
+	osgi.enterprise;version='[5.0.0,5.0.1)'
+-runee: JavaSE-1.7
+-runfw: org.apache.felix.framework;version='[4,5)'
+-runrequires: osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.tag.checker.cli)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.tag.checker.basic)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.tag.checker.converter.flac)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.tag.checker.converter.mp3)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.tag.checker.filename)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.tag.checker.id3v1)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.tag.checker.unchar)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.tag.checker)',\
+	osgi.identity;filter:='(osgi.identity=nl.pelagic.shutdownhook)'
+-resolve.effective: active
+
+
+-runvm: -ea
+
+# needed for nl.pelagic.shutdownhook: sun.misc
+# needed for jaudiotagger library   : sun.misc,sun.nio,sun.nio.ch
+-runsystempackages: sun.misc,sun.nio,sun.nio.ch

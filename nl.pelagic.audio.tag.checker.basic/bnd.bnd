@@ -1,0 +1,23 @@
+-buildpath: biz.aQute.bnd.annotation,\
+	nl.pelagic.audio.tag.checker.api;version=latest,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file,\
+	jaudiotagger
+Private-Package: nl.pelagic.audio.tag.checker.basic,\
+	nl.pelagic.audio.tag.checker.basic.i18n
+Service-Component: *
+Bundle-Version: 1.0.0
+Bundle-Name: AudioTagChecker - Basic Information Checker
+Bundle-Description: Perform basic checks on a generic tag, ensuring that:\n\
+	* A tag is present\n\
+	* The tag has no artwork\n\
+	* All primary fields are present\n\
+	\n\
+	Then only primary and pseudo-primary fields are considered when ensuring that:\n\
+	* Fields are not empty\n\
+	* Fields have no leading and/or trailing whitespace\n\
+	* Fields don't have 2 or more consecutive whitespace characters\n\
+	* Disc number fields are formatted as number/number\n\
+	* The current disc number not greater than the total number of discs\n\
+	* Track number is a number\n\
+	* Total number of track on the album is a number\n\
+	* Album year is a 4-digit year between 1500 and this year

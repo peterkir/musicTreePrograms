@@ -1,0 +1,30 @@
+-buildpath: biz.aQute.bnd.annotation,\
+	nl.pelagic.audio.tag.checker.api;version=latest,\
+	nl.pelagic.jaudiotagger.util;version=latest,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file,\
+	nl.pelagic.util;version=latest
+Private-Package: nl.pelagic.audio.tag.checker.filename,\
+	nl.pelagic.audio.tag.checker.filename.i18n
+Service-Component: *
+Bundle-Version: 1.0.0
+Bundle-Name: AudioTagChecker - Filename checker
+Bundle-Description: Perform a filename check on the backing file of a generic tag: \n\
+	- In case there is only 1 'disc' in the 'album', then the filename must be formatted as:\n\
+	    trackNumber - trackTitle.extension\n\
+	    (trackNumber has 2 digits, with leading zero)\n\
+	    For example: 05 - Forty-Six & 2.flac\n\
+	- In case there are multiple 'discs' in the 'album', then the filename must be formatted as:\n\
+	    discNumbertrackNumber - trackTitle.extension\n\
+	    (discNumber has 2 or 3 digits, with leading zero)\n\
+	    (trackNumber has 2 digits, with leading zero)\n\
+	    For example: 0103 - One Look.flac\n\
+	- The directory in which the file is located must be equal to the album title.\n\
+	- In case the albumArtist tag field is set, then the parent directory of the\n\
+	directory in which the file is located must be equal to the album artist,\n\
+	otherwise it must be equal to the track artist\n\
+	\n\
+	Summary:\n\
+	A music file is expected on the path\n\
+	  .../artistName/albumTitle/numbers - trackTitle.extension\n\
+	or\n\
+	  .../albumArtist/albumTitle/numbers - trackTitle.extension

@@ -1,0 +1,14 @@
+-buildpath: biz.aQute.bnd.annotation,\
+	jaudiotagger,\
+	nl.pelagic.audio.tag.checker.api;version=latest,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+Private-Package: nl.pelagic.audio.tag.checker.id3v1,\
+	nl.pelagic.audio.tag.checker.id3v1.i18n
+Service-Component: *
+Bundle-Version: 1.0.0
+Bundle-Name: AudioTagChecker - ID3v1 Truncated Field Checker
+Bundle-Description: Perform 'ID3v1 truncated field' checks on a generic tag.\n\
+	\n\
+	It checks the ALBUMTITLE, TRACKARTIST, TRACKTITLE and ALBUMARTIST\n\
+	fields to see if they might be truncated (are exactly 30 characters long)\n\
+	because they're (or were) part of an ID3v1 tag.

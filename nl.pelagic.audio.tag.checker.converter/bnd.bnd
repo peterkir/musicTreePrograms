@@ -1,0 +1,6 @@
+-buildpath: biz.aQute.bnd.annotation,\
+	nl.pelagic.audio.tag.checker.api;version=latest,\
+	jaudiotagger,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+
+-sub: *.bnd

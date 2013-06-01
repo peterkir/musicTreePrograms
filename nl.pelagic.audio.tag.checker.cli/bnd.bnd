@@ -1,0 +1,15 @@
+-buildpath: biz.aQute.bnd.annotation,\
+	osgi.core,\
+	nl.pelagic.audio.tag.checker.api;version=latest,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file,\
+	jaudiotagger,\
+	args4j,\
+	nl.pelagic.shutdownhook.api;version=latest
+Private-Package: nl.pelagic.audio.tag.checker.cli,\
+	nl.pelagic.audio.tag.checker.cli.i18n
+Service-Component: *
+Bundle-Version: 1.0.0
+Bundle-Name: AudioTagChecker - CLI
+Bundle-Description: The main application of the AudioTagChecker application
+
+-runprogramargs: -v -D -d ID3v1TagChecker /some/path /some/other/path /home/ferry/workspace/musicTreePrograms/Music

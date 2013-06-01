@@ -1,0 +1,11 @@
+-buildpath: biz.aQute.bnd.annotation,\
+	jaudiotagger,\
+	nl.pelagic.audio.tag.checker.api;version=latest,\
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file,\
+	nl.pelagic.util;version=latest,\
+	nl.pelagic.shutdownhook.api;version=latest
+Private-Package: nl.pelagic.audio.tag.checker
+Service-Component: *
+Bundle-Version: 1.0.0
+Bundle-Name: AudioTagChecker - Audio Tag Checker Service
+Bundle-Description: The audio tag checker service.
