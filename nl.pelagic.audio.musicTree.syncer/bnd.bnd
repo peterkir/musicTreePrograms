@@ -6,7 +6,7 @@
 	nl.pelagic.util;version=latest,\
 	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
 Service-Component: *
-Bundle-Version: 1.0.1
+Bundle-Version: 1.0.3
 Bundle-Name: MusicTreeSyncer
 Bundle-Description: Synchronises a tree with flac files into a tree with mp3 files
 Private-Package: nl.pelagic.audio.musicTree.syncer,\
