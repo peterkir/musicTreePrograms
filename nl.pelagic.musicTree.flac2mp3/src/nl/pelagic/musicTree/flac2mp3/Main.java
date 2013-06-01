@@ -399,6 +399,8 @@ public class Main implements Runnable {
       return false;
     }
 
+    mp3BaseDir = new File(commandLineOptions.getMp3BaseDir(), flacBaseDir.getName());
+
     /*
      * Run
      */
