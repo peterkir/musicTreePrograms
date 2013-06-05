@@ -115,7 +115,7 @@ public class AudioTagCheckerImpl implements AudioTagChecker, ShutdownHookPartici
     assert (configuration != null);
     assert (filenameFilter != null);
     assert (callback != null);
-    assert ((file != null) && file.exists());
+    assert (file != null);
 
     if (!run.get() || !file.exists()) {
       return;
