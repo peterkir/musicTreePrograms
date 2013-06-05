@@ -146,7 +146,6 @@ public class FlacToMp3Impl implements FlacToMp3, ShutdownHookParticipant {
   boolean setMp3TagField(File mp3, ID3v24Tag mp3tag, FieldKey fieldName, String fieldValue, boolean overRide) {
     assert (mp3 != null);
     assert (mp3tag != null);
-    assert (fieldName != null);
 
     if (!overRide) {
       try {
