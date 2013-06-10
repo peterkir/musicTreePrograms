@@ -3,8 +3,8 @@
 	nl.pelagic.audio.tag.checker.api;version=latest,\
 	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file,\
 	jaudiotagger,\
-	args4j,\
-	nl.pelagic.shutdownhook.api;version=latest
+	nl.pelagic.shutdownhook.api;version=latest,\
+	org.kohsuke.args4j
 Private-Package: nl.pelagic.audio.tag.checker.cli,\
 	nl.pelagic.audio.tag.checker.cli.i18n
 Service-Component: *

@@ -90,7 +90,7 @@ public class CommandLineOptions {
   /** the set of disabled tag checkers */
   @Option(name = "-d", aliases = {
     "--disable"
-  }, metaVar = "tagChecker", multiValued = true, usage = "Disable the specified tag checker"
+  }, metaVar = "tagChecker", usage = "Disable the specified tag checker"
       + " (see also --enable). If this option is specified then the disabled"
       + " checker(s) will not be used. Can be specified multiple times.")
   private final List<String> disabledTagCheckers = new LinkedList<>();
@@ -105,7 +105,7 @@ public class CommandLineOptions {
   /** the set of enabled tag checkers */
   @Option(name = "-e", aliases = {
     "--enable"
-  }, metaVar = "tagChecker", multiValued = true, usage = "Enable the specified tag checker."
+  }, metaVar = "tagChecker", usage = "Enable the specified tag checker."
       + " A tag checker can be specified by its simple name or by its fully-qualified class name"
       + " (use --listCheckers for an overview). If this option is specified then ONLY the enabled"
       + " checker(s) will be used. Can be specified multiple times.")

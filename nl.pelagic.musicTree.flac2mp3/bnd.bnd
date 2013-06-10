@@ -3,10 +3,10 @@
 	nl.pelagic.audio.musicTree.configuration.api;version=latest,\
 	nl.pelagic.audio.musicTree.syncer.api;version=latest,\
 	nl.pelagic.util;version=latest,\
-	args4j,\
 	biz.aQute.bnd.annotation,\
 	osgi.core,\
-	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file,\
+	org.kohsuke.args4j
 
 Private-Package: nl.pelagic.musicTree.flac2mp3,\
 	nl.pelagic.musicTree.flac2mp3.i18n
