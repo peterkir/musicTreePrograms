@@ -6,7 +6,7 @@
 	Bndtools Hub
 
 -runbundles: aQute.xray.plugin;version='[1.0.3,1.0.4)',\
-	args4j;version='[2.0.21,2.0.22)',\
+	org.kohsuke.args4j;version='[2.0.23,2.0.24)',\
 	jaudiotagger;version='[2.2.0,2.2.1)',\
 	javax.servlet;version='[2.5.0,2.5.1)',\
 	nl.pelagic.audio.conversion.flac2mp3;version=latest,\
