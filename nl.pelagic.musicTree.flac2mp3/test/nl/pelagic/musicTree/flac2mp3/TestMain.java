@@ -112,7 +112,9 @@ public class TestMain {
 
   @Test
   public void testValidateConfiguration_Normal_Relative_Scanpath() {
-    boolean result = Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"), "");
+    boolean result =
+        Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"), new File(
+            testdatadir, "Music/dummydir1").getAbsolutePath());
     assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
   }
 
@@ -373,7 +375,7 @@ public class TestMain {
             new File(testdatadir, "Music").getPath(),
             "-mp3",
             new File(testdatadir, "from.flac").getPath(),
-            "."
+            ""
         };
 
     parameters.put(Main.LAUNCHER_ARGUMENTS, args);

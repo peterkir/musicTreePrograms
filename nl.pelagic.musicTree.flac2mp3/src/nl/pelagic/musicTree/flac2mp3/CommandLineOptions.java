@@ -25,7 +25,7 @@ public class CommandLineOptions {
   public static final String DEFAULT_MP3_BASE_DIR = "./from.flac"; //$NON-NLS-1$
 
   /** The default flac sub-directory */
-  public static final String flacSubDirDefault = ""; //$NON-NLS-1$
+  public static final String flacSubDirDefault = null;
 
   /** The default quiet mode */
   public static final boolean quietDefault = false;
@@ -67,7 +67,7 @@ public class CommandLineOptions {
 
   /** the flac sub-directory */
   @Argument(metaVar = "flacSubDirectory", required = false, index = 0,
-      usage = "The subdirectory of the flac tree to process (default = \"" + flacSubDirDefault + "\")")
+      usage = "The subdirectory of the flac tree to process (by default the same as the flac tree base directory)")
   private String flacSubDir = flacSubDirDefault;
 
   /** the quiet mode */

@@ -244,7 +244,7 @@ public class Main implements Runnable {
     /* get an absolute scanPath */
     File scanPathFile = new File(scanPath);
     if (!scanPathFile.isAbsolute()) {
-      scanPathFile = new File(flacBaseDir, scanPath);
+      scanPathFile = scanPathFile.getAbsoluteFile();
     }
 
     /* check that the scanPath exists */
@@ -394,6 +394,9 @@ public class Main implements Runnable {
     File flacBaseDir = commandLineOptions.getFlacBaseDir();
     File mp3BaseDir = commandLineOptions.getMp3BaseDir();
     String flacSubDir = commandLineOptions.getFlacSubDir();
+    if ((flacSubDir == null) || flacSubDir.isEmpty()) {
+      flacSubDir = flacBaseDir.getAbsolutePath();
+    }
 
     if (!validateConfiguration(flacBaseDir, mp3BaseDir, flacSubDir)) {
       return false;
