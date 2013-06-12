@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import nl.pelagic.audio.conversion.flac2mp3.testhelpers.MyFlacToMp3;
+import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConstants;
 import nl.pelagic.audio.musicTree.syncer.testhelpers.MySyncer;
 import nl.pelagic.musicTree.flac2mp3.testhelpers.MyBundleContext;
@@ -54,75 +55,34 @@ public class TestMain {
   }
 
   @Test
-  public void testValidateConfiguration_Nulls() {
-    boolean result = Main.validateConfiguration(null, null, null);
-    assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
-
-    result = Main.validateConfiguration(new File(testdatadir, "Music"), null, null);
-    assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
-
-    result = Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"), null);
-    assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
-  }
-
-  @Test
-  public void testValidateConfiguration_FlacBaseDir_IsAFile() {
-    boolean result =
-        Main.validateConfiguration(new File(testdatadir, "Music/dummy1.flac"), new File(testdatadir, "from.flac"),
-            "Music");
-    assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
-  }
-
-  @Test
-  public void testValidateConfiguration_Mp3BaseDir_IsAFile() {
-    boolean result =
-        Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "from.flac/dummy22.mp3"),
-            "Music");
-    assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
-  }
-
-  @Test
-  public void testValidateConfiguration_Mp3BaseDir_SubdirOf_FlacBaseDir() {
-    boolean result =
-        Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "Music/dummydir1"), "Music");
-    assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
-  }
-
-  @Test
-  public void testValidateConfiguration_Mp3BaseDir_Is_FlacBaseDir() {
-    boolean result =
-        Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "Music"), "Music");
-    assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
-  }
-
-  @Test
   public void testValidateConfiguration_Scanpath_NotExists() {
     boolean result =
-        Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"),
-            "scanpathdoesnotexist");
+        Main.validateConfiguration(new MusicTreeConfiguration(new File(testdatadir, "Music"), new File(testdatadir,
+            "from.flac")), "scanpathdoesnotexist");
     assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
   }
 
   @Test
   public void testValidateConfiguration_Scanpath_NotBelow_FlacBaseDir() {
     boolean result =
-        Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"), "../from.flac");
+        Main.validateConfiguration(new MusicTreeConfiguration(new File(testdatadir, "Music"), new File(testdatadir,
+            "from.flac")), "../from.flac");
     assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
   }
 
   @Test
   public void testValidateConfiguration_Normal_Relative_Scanpath() {
     boolean result =
-        Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"), new File(
-            testdatadir, "Music/dummydir1").getAbsolutePath());
+        Main.validateConfiguration(new MusicTreeConfiguration(new File(testdatadir, "Music"), new File(testdatadir,
+            "from.flac")), new File(testdatadir, "Music/dummydir1").getAbsolutePath());
     assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
   }
 
   @Test
   public void testValidateConfiguration_Normal_Absolute_Scanpath() {
     boolean result =
-        Main.validateConfiguration(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"), new File(
-            testdatadir, "Music").getAbsolutePath());
+        Main.validateConfiguration(new MusicTreeConfiguration(new File(testdatadir, "Music"), new File(testdatadir,
+            "from.flac")), new File(testdatadir, "Music").getAbsolutePath());
     assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
   }
 
@@ -157,8 +117,9 @@ public class TestMain {
     File flacBaseDir = new File(testdatadir, "Music");
     File mp3BaseDir = new File(testdatadir, "from.flac");
     File fileList = new File("testresources");
+    MusicTreeConfiguration musicTreeConfiguration = new MusicTreeConfiguration(flacBaseDir, mp3BaseDir);
 
-    boolean result = main.syncFileList(null, flacBaseDir, mp3BaseDir, fileList, false);
+    boolean result = main.syncFileList(null, musicTreeConfiguration, fileList, false);
     assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
     assertThat(Integer.valueOf(flacToMp3.countAll), equalTo(Integer.valueOf(0)));
     assertThat(Integer.valueOf(flacToMp3.countNormal), equalTo(Integer.valueOf(0)));
@@ -169,8 +130,9 @@ public class TestMain {
     File flacBaseDir = new File(testdatadir, "Music");
     File mp3BaseDir = new File(testdatadir, "from.flac");
     File fileList = new File("testresources/fileListEmpty.txt");
+    MusicTreeConfiguration musicTreeConfiguration = new MusicTreeConfiguration(flacBaseDir, mp3BaseDir);
 
-    boolean result = main.syncFileList(null, flacBaseDir, mp3BaseDir, fileList, false);
+    boolean result = main.syncFileList(null, musicTreeConfiguration, fileList, false);
     assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
     assertThat(Integer.valueOf(flacToMp3.countAll), equalTo(Integer.valueOf(0)));
     assertThat(Integer.valueOf(flacToMp3.countNormal), equalTo(Integer.valueOf(0)));
@@ -181,8 +143,9 @@ public class TestMain {
     File flacBaseDir = new File(testdatadir, "Music");
     File mp3BaseDir = new File(testdatadir, "from.flac");
     File fileList = new File("testresources/fileListNotBelow.txt");
+    MusicTreeConfiguration musicTreeConfiguration = new MusicTreeConfiguration(flacBaseDir, mp3BaseDir);
 
-    boolean result = main.syncFileList(null, flacBaseDir, mp3BaseDir, fileList, false);
+    boolean result = main.syncFileList(null, musicTreeConfiguration, fileList, false);
     assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
     assertThat(Integer.valueOf(flacToMp3.countAll), equalTo(Integer.valueOf(0)));
     assertThat(Integer.valueOf(flacToMp3.countNormal), equalTo(Integer.valueOf(0)));
@@ -193,8 +156,9 @@ public class TestMain {
     File flacBaseDir = new File(testdatadir, "Music");
     File mp3BaseDir = new File(testdatadir, "from.flac");
     File fileList = new File("testresources/fileListNotBelow2.txt");
+    MusicTreeConfiguration musicTreeConfiguration = new MusicTreeConfiguration(flacBaseDir, mp3BaseDir);
 
-    boolean result = main.syncFileList(null, flacBaseDir, mp3BaseDir, fileList, false);
+    boolean result = main.syncFileList(null, musicTreeConfiguration, fileList, false);
     assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
     assertThat(Integer.valueOf(flacToMp3.countAll), equalTo(Integer.valueOf(0)));
     assertThat(Integer.valueOf(flacToMp3.countNormal), equalTo(Integer.valueOf(0)));
@@ -205,8 +169,9 @@ public class TestMain {
     File flacBaseDir = new File(testdatadir, "Music");
     File mp3BaseDir = new File(testdatadir, "from.flac");
     File fileList = new File("testresources/fileListUnreadable.txt");
+    MusicTreeConfiguration musicTreeConfiguration = new MusicTreeConfiguration(flacBaseDir, mp3BaseDir);
 
-    boolean result = main.syncFileList(null, flacBaseDir, mp3BaseDir, fileList, false);
+    boolean result = main.syncFileList(null, musicTreeConfiguration, fileList, false);
     assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
     assertThat(Integer.valueOf(flacToMp3.countAll), equalTo(Integer.valueOf(0)));
     assertThat(Integer.valueOf(flacToMp3.countNormal), equalTo(Integer.valueOf(0)));
@@ -218,8 +183,9 @@ public class TestMain {
     File flacBaseDir = new File(testdatadir, "Music");
     File mp3BaseDir = new File(testdatadir, "from.flac");
     File fileList = new File("testresources/fileListNormal.txt");
+    MusicTreeConfiguration musicTreeConfiguration = new MusicTreeConfiguration(flacBaseDir, mp3BaseDir);
 
-    boolean result = main.syncFileList(null, flacBaseDir, mp3BaseDir, fileList, true);
+    boolean result = main.syncFileList(null, musicTreeConfiguration, fileList, true);
     assertThat(Boolean.valueOf(result), equalTo(Boolean.FALSE));
     assertThat(Integer.valueOf(flacToMp3.countAll), equalTo(Integer.valueOf(2)));
     assertThat(Integer.valueOf(flacToMp3.countNormal), equalTo(Integer.valueOf(0)));
@@ -230,8 +196,9 @@ public class TestMain {
     File flacBaseDir = new File(testdatadir, "Music");
     File mp3BaseDir = new File(testdatadir, "from.flac");
     File fileList = new File("testresources/fileListNormal.txt");
+    MusicTreeConfiguration musicTreeConfiguration = new MusicTreeConfiguration(flacBaseDir, mp3BaseDir);
 
-    boolean result = main.syncFileList(null, flacBaseDir, mp3BaseDir, fileList, true);
+    boolean result = main.syncFileList(null, musicTreeConfiguration, fileList, true);
     assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
     assertThat(Integer.valueOf(flacToMp3.countAll), equalTo(Integer.valueOf(2)));
     assertThat(Integer.valueOf(flacToMp3.countNormal), equalTo(Integer.valueOf(2)));

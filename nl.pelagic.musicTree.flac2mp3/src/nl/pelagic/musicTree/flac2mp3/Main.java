@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 import nl.pelagic.audio.conversion.flac2mp3.api.Flac2Mp3Configuration;
 import nl.pelagic.audio.conversion.flac2mp3.api.FlacToMp3;
+import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConstants;
 import nl.pelagic.audio.musicTree.syncer.api.Syncer;
 import nl.pelagic.musicTree.flac2mp3.i18n.Messages;
@@ -202,44 +203,13 @@ public class Main implements Runnable {
    * <li>The mp3 directory must NOT be a sub directory of flac base directory</li>
    * </ul>
    * 
-   * @param flacBaseDir base directory of the flac files tree
-   * @param mp3BaseDir directory in which the tree with flac files must be
-   *          converted as mp3 files
+   * @param musicTreeConfiguration the music tree configuration
    * @param scanPath the flac sub-directory or file
    * @return true when validation is successful
    */
-  static boolean validateConfiguration(File flacBaseDir, File mp3BaseDir, String scanPath) {
-    if (flacBaseDir == null) {
-      System.err.printf(Messages.getString("Main.0")); //$NON-NLS-1$
-      return false;
-    }
-    if (mp3BaseDir == null) {
-      System.err.printf(Messages.getString("Main.1")); //$NON-NLS-1$
-      return false;
-    }
-    if (scanPath == null) {
-      System.err.printf(Messages.getString("Main.15")); //$NON-NLS-1$
-      return false;
-    }
-
-    /* check flac base directory exists */
-    if (!flacBaseDir.isDirectory()) {
-      System.err.printf(Messages.getString("Main.2"), flacBaseDir.getPath()); //$NON-NLS-1$
-      return false;
-    }
-
-    /* check mp3 base directory exists */
-    if (!mp3BaseDir.isDirectory()) {
-      System.err.printf(Messages.getString("Main.3"), mp3BaseDir.getPath()); //$NON-NLS-1$
-      return false;
-    }
-
-    /* check mp3 directory is NOT a sub directory of flac base directory */
-    if (FileUtils.isFileBelowDirectory(flacBaseDir, mp3BaseDir)) {
-      System.err.printf(Messages.getString("Main.4"), //$NON-NLS-1$
-          mp3BaseDir.getPath(), flacBaseDir.getPath());
-      return false;
-    }
+  static boolean validateConfiguration(MusicTreeConfiguration musicTreeConfiguration, String scanPath) {
+    assert (musicTreeConfiguration != null);
+    assert (scanPath != null);
 
     /* get an absolute scanPath */
     File scanPathFile = new File(scanPath);
@@ -257,9 +227,9 @@ public class Main implements Runnable {
      * check that scanPath is below the flac base directory so that it doesn't
      * escape the base directory by doing a ../../..
      */
-    if (!FileUtils.isFileBelowDirectory(flacBaseDir, scanPathFile)) {
+    if (!FileUtils.isFileBelowDirectory(musicTreeConfiguration.getFlacBaseDir(), scanPathFile)) {
       System.err.printf(Messages.getString("Main.6"), //$NON-NLS-1$
-          scanPathFile.getPath(), flacBaseDir.getPath());
+          scanPathFile.getPath(), musicTreeConfiguration.getFlacBaseDir().getPath());
       return false;
     }
 
@@ -375,6 +345,13 @@ public class Main implements Runnable {
       return false;
     }
 
+    /* Setup verbosity in the shell script listener */
+    shellScriptListener.setVerbose(commandLineOptions.isVerbose(), commandLineOptions.isQuiet());
+
+    /*
+     * Setup & validate the flac2mp3 configuration
+     */
+
     Flac2Mp3Configuration flac2Mp3Configuration = new Flac2Mp3Configuration();
     try {
       flac2Mp3Configuration.validate();
@@ -384,25 +361,36 @@ public class Main implements Runnable {
       return false;
     }
 
-    /* Setup verbosity in the shell script listener */
-    shellScriptListener.setVerbose(commandLineOptions.isVerbose(), commandLineOptions.isQuiet());
+    /*
+     * Setup & validate the music tree configuration
+     */
+
+    MusicTreeConfiguration musicTreeConfiguration =
+        new MusicTreeConfiguration(commandLineOptions.getFlacBaseDir(), commandLineOptions.getMp3BaseDir());
+
+    List<String> errors = musicTreeConfiguration.validate(true);
+    if (errors != null) {
+      for (String error : errors) {
+        System.err.println(error);
+      }
+      return false;
+    }
+
+    musicTreeConfiguration.setMp3BaseDir(new File(musicTreeConfiguration.getMp3BaseDir(), musicTreeConfiguration
+        .getFlacBaseDir().getName()));
 
     /*
      * Validate the configuration
      */
 
-    File flacBaseDir = commandLineOptions.getFlacBaseDir();
-    File mp3BaseDir = commandLineOptions.getMp3BaseDir();
     String flacSubDir = commandLineOptions.getFlacSubDir();
     if ((flacSubDir == null) || flacSubDir.isEmpty()) {
-      flacSubDir = flacBaseDir.getAbsolutePath();
+      flacSubDir = musicTreeConfiguration.getFlacBaseDir().getAbsolutePath();
     }
 
-    if (!validateConfiguration(flacBaseDir, mp3BaseDir, flacSubDir)) {
+    if (!validateConfiguration(musicTreeConfiguration, flacSubDir)) {
       return false;
     }
-
-    mp3BaseDir = new File(commandLineOptions.getMp3BaseDir(), flacBaseDir.getName());
 
     /*
      * Run
@@ -417,10 +405,10 @@ public class Main implements Runnable {
        * normal mode with default conversion configuration
        */
       result =
-          syncer.syncFlac2Mp3(null, flacBaseDir, mp3BaseDir, extensionsList, coversList,
-              commandLineOptions.isSimulate());
+          syncer.syncFlac2Mp3(flac2Mp3Configuration, musicTreeConfiguration.getFlacBaseDir(),
+              musicTreeConfiguration.getMp3BaseDir(), extensionsList, coversList, commandLineOptions.isSimulate());
     } else {
-      result = syncFileList(null, flacBaseDir, mp3BaseDir, fileList, commandLineOptions.isSimulate());
+      result = syncFileList(flac2Mp3Configuration, musicTreeConfiguration, fileList, commandLineOptions.isSimulate());
     }
 
     return result;
@@ -431,15 +419,14 @@ public class Main implements Runnable {
    * 
    * @param flac2Mp3Configuration the conversion configuration. When null then
    *          the default configuration is used.
-   * @param flacBaseDir the flac base directory
-   * @param mp3BaseDir the mp3 base directory
+   * @param musicTreeConfiguration the music tree configuration
    * @param fileList the file with the list of files to synchronise
    * @param simulate true to simulate synchronisation
    * 
    * @return true when successful
    */
-  boolean syncFileList(Flac2Mp3Configuration flac2Mp3Configuration, File flacBaseDir, File mp3BaseDir, File fileList,
-      boolean simulate) {
+  boolean syncFileList(Flac2Mp3Configuration flac2Mp3Configuration, MusicTreeConfiguration musicTreeConfiguration,
+      File fileList, boolean simulate) {
     assert (fileList != null);
 
     if (!fileList.isFile()) {
@@ -460,6 +447,7 @@ public class Main implements Runnable {
      */
     BufferedReader reader = null;
 
+    File flacBaseDir = musicTreeConfiguration.getFlacBaseDir();
     try {
       reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileList), "UTF-8")); //$NON-NLS-1$
       String line = null;
@@ -498,6 +486,7 @@ public class Main implements Runnable {
       }
     }
 
+    File mp3BaseDir = musicTreeConfiguration.getMp3BaseDir();
     for (File fileToConvert : filesToConvert) {
       File mp3File = flacFileToMp3File(flacBaseDir, mp3BaseDir, fileToConvert);
       if (mp3File == null) {

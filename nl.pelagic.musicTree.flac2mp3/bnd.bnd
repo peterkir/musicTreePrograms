@@ -19,3 +19,4 @@ Bundle-Name: Flac2Mp3
 -runprogramargs: -flac /home/ferry/workspace/musicTreePrograms/Music\n\
 	-mp3 /home/ferry/workspace/musicTreePrograms/from.flac\n\
 	-n
+Bundle-Description: CLI of the flac2mp3 program
