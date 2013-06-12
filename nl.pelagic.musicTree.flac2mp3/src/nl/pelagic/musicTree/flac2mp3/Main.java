@@ -353,11 +353,12 @@ public class Main implements Runnable {
      */
 
     Flac2Mp3Configuration flac2Mp3Configuration = new Flac2Mp3Configuration();
-    try {
-      flac2Mp3Configuration.validate();
-    }
-    catch (IllegalArgumentException e) {
-      System.err.println(e.getLocalizedMessage());
+
+    List<String> errors = flac2Mp3Configuration.validate();
+    if (errors != null) {
+      for (String error : errors) {
+        System.err.println(error);
+      }
       return false;
     }
 
@@ -368,7 +369,7 @@ public class Main implements Runnable {
     MusicTreeConfiguration musicTreeConfiguration =
         new MusicTreeConfiguration(commandLineOptions.getFlacBaseDir(), commandLineOptions.getMp3BaseDir());
 
-    List<String> errors = musicTreeConfiguration.validate(true);
+    errors = musicTreeConfiguration.validate(true);
     if (errors != null) {
       for (String error : errors) {
         System.err.println(error);

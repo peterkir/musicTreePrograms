@@ -92,7 +92,10 @@ public class TestFlacToMp3Impl {
     flacCommandList.add("bla bla bla");
     lameCommandList.add("cat");
     flac2mp3Config = new Flac2Mp3Configuration();
-    flac2mp3Config.validate();
+    List<String> r = flac2mp3Config.validate();
+    if (r != null) {
+      throw new ExceptionInInitializerError("flac2mp3Config did not validate");
+    }
   }
 
   @AfterClass

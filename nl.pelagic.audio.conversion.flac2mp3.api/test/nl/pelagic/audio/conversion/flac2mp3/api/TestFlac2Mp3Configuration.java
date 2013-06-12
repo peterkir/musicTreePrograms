@@ -1,10 +1,14 @@
 package nl.pelagic.audio.conversion.flac2mp3.api;
 
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
+
+import nl.pelagic.audio.conversion.flac2mp3.api.i18n.Messages;
 
 import org.junit.After;
 import org.junit.Before;
@@ -78,20 +82,33 @@ public class TestFlac2Mp3Configuration {
     assertThat(Boolean.valueOf(r), equalTo(Boolean.TRUE));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testValidate_NotFound_Flac() {
     Flac2Mp3Configuration config = new Flac2Mp3Configuration();
     config.setFlacExecutable(null);
     config.setLameExecutable("echo");
-    config.validate();
+    List<String> r = config.validate();
+
+    assertThat(r, notNullValue());
+    assertThat(Integer.valueOf(r.size()), equalTo(Integer.valueOf(1)));
+    String s = r.get(0);
+    assertThat(s, notNullValue());
+    assertThat(s, equalTo(String.format(Messages.getString("Flac2Mp3Configuration.0"), "null")));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testValidate_NotFound_Lame() {
     Flac2Mp3Configuration config = new Flac2Mp3Configuration();
     config.setFlacExecutable("echo");
     config.setLameExecutable(null);
-    config.validate();
+
+    List<String> r = config.validate();
+
+    assertThat(r, notNullValue());
+    assertThat(Integer.valueOf(r.size()), equalTo(Integer.valueOf(1)));
+    String s = r.get(0);
+    assertThat(s, notNullValue());
+    assertThat(s, equalTo(String.format(Messages.getString("Flac2Mp3Configuration.1"), "null")));
   }
 
   @Test
@@ -99,7 +116,8 @@ public class TestFlac2Mp3Configuration {
     Flac2Mp3Configuration config = new Flac2Mp3Configuration();
     config.setFlacExecutable("echo");
     config.setLameExecutable("echo");
-    config.validate();
+    List<String> r = config.validate();
+    assertThat(r, nullValue());
   }
 
   @Test

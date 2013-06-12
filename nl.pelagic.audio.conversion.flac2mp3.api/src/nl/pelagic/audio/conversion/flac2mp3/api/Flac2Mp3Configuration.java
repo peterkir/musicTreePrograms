@@ -86,23 +86,30 @@ public class Flac2Mp3Configuration {
    * executables are actually executable by trying to execute them with a 'help'
    * argument ("-h" and "--help" for flac and lame respectively)
    * 
-   * @throws IllegalArgumentException when either of the executables can't be
-   *           found
+   * @return A list with errors, or null when validated
    */
-  public void validate() throws IllegalArgumentException {
+  public List<String> validate() {
+    List<String> result = new LinkedList<>();
+
     String[] flacProgram = {
         flacExecutable, "-h" //$NON-NLS-1$
     };
     if (!tryProgramRun(flacProgram)) {
-      throw new IllegalArgumentException(String.format(Messages.getString("Flac2Mp3Configuration.0"), flacExecutable)); //$NON-NLS-1$
+      result.add(String.format(Messages.getString("Flac2Mp3Configuration.0"), flacExecutable)); //$NON-NLS-1$
     }
 
     String[] lameProgram = {
         lameExecutable, "--help" //$NON-NLS-1$
     };
     if (!tryProgramRun(lameProgram)) {
-      throw new IllegalArgumentException(String.format(Messages.getString("Flac2Mp3Configuration.1"), lameExecutable)); //$NON-NLS-1$
+      result.add(String.format(Messages.getString("Flac2Mp3Configuration.1"), lameExecutable)); //$NON-NLS-1$
     }
+
+    if (result.size() == 0) {
+      return null;
+    }
+
+    return result;
   }
 
   /**
