@@ -301,7 +301,8 @@ public class FlacToMp3Impl implements FlacToMp3, ShutdownHookParticipant {
       result = result && setMp3TagField(mp3, mp3tag, FieldKey.TRACK_TOTAL, tagInformation.getTrackTotal(), overRide);
 
       if (result) {
-        mp3file.save();
+        mp3file.setID3v2Tag(mp3tag);
+        mp3file.commit();
       }
     }
     catch (Throwable e) {
