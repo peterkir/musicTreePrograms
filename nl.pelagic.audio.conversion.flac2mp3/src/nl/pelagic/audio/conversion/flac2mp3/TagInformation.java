@@ -16,7 +16,7 @@ public class TagInformation {
   public static final String DEFAULT_ALBUM = new Date().toString();
 
   /** default value for the album artist */
-  public static final String DEFAULT_ALBUMARTIST = Messages.getString("TagInformation.0"); //$NON-NLS-1$
+  public static final String DEFAULT_ALBUMARTIST = ""; //$NON-NLS-1$
 
   /** default value for the artist */
   public static final String DEFAULT_ARTIST = Messages.getString("TagInformation.1"); //$NON-NLS-1$
