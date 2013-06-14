@@ -1,5 +1,6 @@
 package nl.pelagic.audio.musicTree.syncer.testhelpers;
 
+import java.io.File;
 import java.util.Set;
 
 import nl.pelagic.audio.conversion.flac2mp3.api.Flac2Mp3Configuration;
@@ -15,8 +16,8 @@ public class MySyncer implements Syncer {
 
   @Override
   public boolean syncFlac2Mp3(Flac2Mp3Configuration flac2Mp3Configuration,
-      MusicTreeConfiguration musicTreeConfiguration, Set<String> extensionsList, Set<String> fileNamesList,
-      boolean simulate) {
+      MusicTreeConfiguration musicTreeConfiguration, File directoryToSync, Set<String> extensionsList,
+      Set<String> fileNamesList, boolean simulate) {
     return returnValue;
   }
 }
