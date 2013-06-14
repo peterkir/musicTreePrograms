@@ -406,8 +406,8 @@ public class Main implements Runnable {
        * normal mode with default conversion configuration
        */
       result =
-          syncer.syncFlac2Mp3(flac2Mp3Configuration, musicTreeConfiguration.getFlacBaseDir(),
-              musicTreeConfiguration.getMp3BaseDir(), extensionsList, coversList, commandLineOptions.isSimulate());
+          syncer.syncFlac2Mp3(flac2Mp3Configuration, musicTreeConfiguration, extensionsList, coversList,
+              commandLineOptions.isSimulate());
     } else {
       result = syncFileList(flac2Mp3Configuration, musicTreeConfiguration, fileList, commandLineOptions.isSimulate());
     }

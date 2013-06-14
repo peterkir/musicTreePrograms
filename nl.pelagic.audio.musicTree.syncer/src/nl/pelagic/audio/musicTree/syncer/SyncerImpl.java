@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import nl.pelagic.audio.conversion.flac2mp3.api.Flac2Mp3Configuration;
 import nl.pelagic.audio.conversion.flac2mp3.api.FlacToMp3;
+import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConstants;
 import nl.pelagic.audio.musicTree.syncer.api.Syncer;
 import nl.pelagic.audio.musicTree.syncer.i18n.Messages;
@@ -281,27 +282,20 @@ public class SyncerImpl implements Syncer {
    * @param flac2Mp3Configuration the configuration for the flac-to-mp3
    *          conversion. May be null in which case the default configuration is
    *          used.
-   * @param flacDir the base directory of the flac tree. When null or not an
-   *          existing directory, then false is returned.
-   * @param mp3Dir the base directory of the mp3 tree. When null, then false is
-   *          returned.
+   * @param musicTreeConfiguration the music tree configuration
    * @param simulate true to simulate synchronisation/mirroring
    * @param filter the filter to use (created from the extensions to accept as
    *          flac files in the flac tree and from the additional file names to
    *          accept in the flac tree
    * @return true on success
    */
-  boolean syncFlac2Mp3(Flac2Mp3Configuration flac2Mp3Configuration, File flacDir, File mp3Dir, boolean simulate,
-      FlacTreeFilenameFilter filter) {
+  boolean syncFlac2Mp3(Flac2Mp3Configuration flac2Mp3Configuration, MusicTreeConfiguration musicTreeConfiguration,
+      boolean simulate, FlacTreeFilenameFilter filter) {
+    assert (musicTreeConfiguration != null);
     assert (filter != null);
 
-    if ((flacDir == null) || !flacDir.isDirectory()) {
-      return false;
-    }
-
-    if (mp3Dir == null) {
-      return false;
-    }
+    File flacDir = musicTreeConfiguration.getFlacBaseDir();
+    File mp3Dir = musicTreeConfiguration.getMp3BaseDir();
 
     /* get the shell script listener */
     ShellScriptListener listener = shellScriptListener.get();
@@ -357,8 +351,10 @@ public class SyncerImpl implements Syncer {
      */
 
     for (String directory : flacDirListSplit.directories) {
-      if (!syncFlac2Mp3(flac2Mp3Configuration, new File(flacDirListSplit.directory, directory), new File(mp3Dir,
-          directory), simulate, filter)) {
+      MusicTreeConfiguration subMusicTreeConfiguration =
+          new MusicTreeConfiguration(new File(flacDirListSplit.directory, directory), new File(mp3Dir, directory));
+      assert (subMusicTreeConfiguration.validate(false) == null);
+      if (!syncFlac2Mp3(flac2Mp3Configuration, subMusicTreeConfiguration, simulate, filter)) {
         return false;
       }
     }
@@ -377,9 +373,14 @@ public class SyncerImpl implements Syncer {
   }
 
   @Override
-  public boolean syncFlac2Mp3(Flac2Mp3Configuration flac2Mp3Configuration, File flacDir, File mp3Dir,
-      Set<String> extensionsList, Set<String> fileNamesList, boolean simulate) {
-    return syncFlac2Mp3(flac2Mp3Configuration, flacDir, mp3Dir, simulate, new FlacTreeFilenameFilter(extensionsList,
-        fileNamesList, true));
+  public boolean syncFlac2Mp3(Flac2Mp3Configuration flac2Mp3Configuration,
+      MusicTreeConfiguration musicTreeConfiguration, Set<String> extensionsList, Set<String> fileNamesList,
+      boolean simulate) {
+    if (musicTreeConfiguration.validate(false) != null) {
+      return false;
+    }
+
+    return syncFlac2Mp3(flac2Mp3Configuration, musicTreeConfiguration, simulate, new FlacTreeFilenameFilter(
+        extensionsList, fileNamesList, true));
   }
 }

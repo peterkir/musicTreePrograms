@@ -18,6 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import nl.pelagic.audio.conversion.flac2mp3.testhelpers.MyFlacToMp3;
+import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConstants;
 import nl.pelagic.shell.script.listener.testhelpers.MyShellScriptListener;
 import nl.pelagic.util.file.ExtensionUtils;
@@ -804,28 +805,6 @@ public class TestSyncerImpl {
   }
 
   @Test
-  public void testSyncFlac2Mp3_Dirs_NullOrNotADirectory() {
-    File flacDir = null;
-    File mp3Dir = tmpDir2;
-    Set<String> extensionsList = new HashSet<>();
-    extensionsList.add(MusicTreeConstants.FLACEXTENSION);
-    Set<String> fileNamesList = new HashSet<>();
-    fileNamesList.add(MusicTreeConstants.COVER);
-
-    boolean r = syncerImpl.syncFlac2Mp3(null, flacDir, mp3Dir, extensionsList, fileNamesList, false);
-    assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
-
-    flacDir = new File(testDirFileListSplit, "dummy1.txt");
-    r = syncerImpl.syncFlac2Mp3(null, flacDir, mp3Dir, extensionsList, fileNamesList, false);
-    assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
-
-    flacDir = testDir;
-    mp3Dir = null;
-    r = syncerImpl.syncFlac2Mp3(null, flacDir, mp3Dir, extensionsList, fileNamesList, false);
-    assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
-  }
-
-  @Test
   public void testSyncFlac2Mp3_ConversionFailure() {
     myFlacToMp3.retval = false;
 
@@ -835,8 +814,9 @@ public class TestSyncerImpl {
     extensionsList.add(MusicTreeConstants.FLACEXTENSION);
     Set<String> fileNamesList = new HashSet<>();
     fileNamesList.add(MusicTreeConstants.COVER);
+    MusicTreeConfiguration mtc = new MusicTreeConfiguration(flacDir, mp3Dir);
 
-    boolean r = syncerImpl.syncFlac2Mp3(null, flacDir, mp3Dir, extensionsList, fileNamesList, false);
+    boolean r = syncerImpl.syncFlac2Mp3(null, mtc, extensionsList, fileNamesList, false);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
 
     File subdir = new File(mp3Dir, "FileListSplit");
@@ -859,8 +839,9 @@ public class TestSyncerImpl {
     extensionsList.add(MusicTreeConstants.FLACEXTENSION);
     Set<String> fileNamesList = new HashSet<>();
     fileNamesList.add(MusicTreeConstants.COVER);
+    MusicTreeConfiguration mtc = new MusicTreeConfiguration(flacDir, mp3Dir);
 
-    boolean r = syncerImpl.syncFlac2Mp3(null, flacDir, mp3Dir, extensionsList, fileNamesList, false);
+    boolean r = syncerImpl.syncFlac2Mp3(null, mtc, extensionsList, fileNamesList, false);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.TRUE));
 
     File subdir = new File(mp3Dir, "FileListSplit");
@@ -875,6 +856,20 @@ public class TestSyncerImpl {
   }
 
   @Test
+  public void testSyncFlac2Mp3_InvalidMTC() {
+    File flacDir = null;
+    File mp3Dir = tmpDir2;
+    Set<String> extensionsList = new HashSet<>();
+    extensionsList.add(MusicTreeConstants.FLACEXTENSION);
+    Set<String> fileNamesList = new HashSet<>();
+    fileNamesList.add(MusicTreeConstants.COVER);
+    MusicTreeConfiguration mtc = new MusicTreeConfiguration(flacDir, mp3Dir);
+
+    boolean r = syncerImpl.syncFlac2Mp3(null, mtc, extensionsList, fileNamesList, false);
+    assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
+  }
+
+  @Test
   public void testSyncFlac2Mp3_Normal_NoListener() {
     syncerImpl.unsetShellScriptListener(myShellScriptListener);
 
@@ -884,8 +879,9 @@ public class TestSyncerImpl {
     extensionsList.add(MusicTreeConstants.FLACEXTENSION);
     Set<String> fileNamesList = new HashSet<>();
     fileNamesList.add(MusicTreeConstants.COVER);
+    MusicTreeConfiguration mtc = new MusicTreeConfiguration(flacDir, mp3Dir);
 
-    boolean r = syncerImpl.syncFlac2Mp3(null, flacDir, mp3Dir, extensionsList, fileNamesList, false);
+    boolean r = syncerImpl.syncFlac2Mp3(null, mtc, extensionsList, fileNamesList, false);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.TRUE));
 
     File subdir = new File(mp3Dir, "FileListSplit");

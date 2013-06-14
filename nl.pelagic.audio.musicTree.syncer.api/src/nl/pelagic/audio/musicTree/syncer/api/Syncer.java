@@ -1,9 +1,9 @@
 package nl.pelagic.audio.musicTree.syncer.api;
 
-import java.io.File;
 import java.util.Set;
 
 import nl.pelagic.audio.conversion.flac2mp3.api.Flac2Mp3Configuration;
+import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
 import aQute.bnd.annotation.ProviderType;
 
 /**
@@ -19,8 +19,8 @@ public interface Syncer {
    * 
    * @param flac2Mp3Configuration the configuration for the flac-to-mp3
    *          conversion
-   * @param flacDir the base directory of the flac tree
-   * @param mp3Dir the base directory of the mp3 tree
+   * @param musicTreeConfiguration the music tree configuration. If it's invalid
+   *          then false is returned immediately.
    * @param extensionsList the extensions to accept as flac files in the flac
    *          tree (all must include the dot)
    * @param fileNamesList additional file names to accept in the flac tree
@@ -28,6 +28,6 @@ public interface Syncer {
    * @param simulate true to simulate synchronisation/mirroring
    * @return true on success
    */
-  boolean syncFlac2Mp3(Flac2Mp3Configuration flac2Mp3Configuration, File flacDir, File mp3Dir,
+  boolean syncFlac2Mp3(Flac2Mp3Configuration flac2Mp3Configuration, MusicTreeConfiguration musicTreeConfiguration,
       Set<String> extensionsList, Set<String> fileNamesList, boolean simulate);
 }
