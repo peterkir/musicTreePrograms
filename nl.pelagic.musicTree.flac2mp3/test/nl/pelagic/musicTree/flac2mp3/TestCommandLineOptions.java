@@ -1,15 +1,19 @@
 package nl.pelagic.musicTree.flac2mp3;
 
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNot.not;
+import static org.hamcrest.core.IsNull.notNullValue;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
 @SuppressWarnings({
@@ -17,16 +21,20 @@ import org.kohsuke.args4j.CmdLineParser;
 })
 public class TestCommandLineOptions {
 
-  CommandLineOptions cli = null;
+  private CommandLineOptions cli = null;
+  private MyPrintStream out = null;
+  private String outfile = "testresources/out";
 
   @Before
-  public void setUp() {
+  public void setUp() throws FileNotFoundException {
+    out = new MyPrintStream(outfile);
     cli = new CommandLineOptions();
   }
 
   @After
   public void tearDown() {
     cli = null;
+    new File(outfile).delete();
   }
 
   @Test
@@ -36,9 +44,10 @@ public class TestCommandLineOptions {
     assertThat(cli.getFlacSubDir(), equalTo(CommandLineOptions.flacSubDirDefault));
     assertThat(cli.getFileList(), nullValue());
     assertThat(Boolean.valueOf(cli.isHelp()), equalTo(Boolean.FALSE));
-    assertThat(Boolean.valueOf(cli.isQuiet()), equalTo(Boolean.FALSE));
-    assertThat(Boolean.valueOf(cli.isSimulate()), equalTo(Boolean.FALSE));
-    assertThat(Boolean.valueOf(cli.isVerbose()), equalTo(Boolean.FALSE));
+    assertThat(Boolean.valueOf(cli.isQuiet()), equalTo(Boolean.valueOf(CommandLineOptions.quietDefault)));
+    assertThat(Boolean.valueOf(cli.isSimulate()), equalTo(Boolean.valueOf(CommandLineOptions.simulateDefault)));
+    assertThat(Boolean.valueOf(cli.isVerbose()), equalTo(Boolean.valueOf(CommandLineOptions.verboseDefault)));
+    assertThat(Boolean.valueOf(cli.isExtraVerbose()), equalTo(Boolean.valueOf(CommandLineOptions.extraVerboseDefault)));
   }
 
   @Test
@@ -76,8 +85,15 @@ public class TestCommandLineOptions {
   }
 
   @Test
-  public void testUsage() {
+  public void testUsage() throws CmdLineException {
+    String[] args = {
+      "/some/path"
+    };
     CmdLineParser parser = new CmdLineParser(cli);
-    CommandLineOptions.usage("programName", parser);
+    parser.parseArgument(args);
+    CommandLineOptions.usage(out, "programName", parser);
+
+    assertThat(out.strings, notNullValue());
+    assertThat(Integer.valueOf(out.strings.size()), not(equalTo(Integer.valueOf(0))));
   }
 }

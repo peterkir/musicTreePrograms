@@ -341,7 +341,7 @@ public class Main implements Runnable {
 
     /* print usage when so requested and exit */
     if (commandLineOptions.isHelp()) {
-      CommandLineOptions.usage(PROGRAM_NAME, parser);
+      CommandLineOptions.usage(System.err, PROGRAM_NAME, parser);
       return false;
     }
 
