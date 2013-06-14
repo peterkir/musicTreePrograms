@@ -1,7 +1,8 @@
 -buildpath: biz.aQute.bnd.annotation,\
 	nl.pelagic.util;version=latest,\
 	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
-Export-Package: nl.pelagic.audio.musicTree.configuration.api
+Export-Package: nl.pelagic.audio.musicTree.configuration.api,\
+	nl.pelagic.audio.musicTree.util
 Bundle-Version: 1.1.0
 Bundle-Name: Music Tree Configuration - API
 Bundle-Description: Configuration API of the music tree

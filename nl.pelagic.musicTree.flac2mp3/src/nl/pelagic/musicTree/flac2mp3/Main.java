@@ -19,9 +19,9 @@ import nl.pelagic.audio.conversion.flac2mp3.api.FlacToMp3;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConstants;
 import nl.pelagic.audio.musicTree.syncer.api.Syncer;
+import nl.pelagic.audio.musicTree.util.MusicTreeHelpers;
 import nl.pelagic.musicTree.flac2mp3.i18n.Messages;
 import nl.pelagic.shell.script.listener.api.ShellScriptListener;
-import nl.pelagic.util.file.ExtensionUtils;
 import nl.pelagic.util.file.FileUtils;
 
 import org.kohsuke.args4j.CmdLineException;
@@ -237,54 +237,6 @@ public class Main implements Runnable {
   }
 
   /*
-   * Helpers
-   */
-
-  /**
-   * Convert a flac file (from below the base directory of the flac files tree)
-   * to a mp3 file (below the directory in which the tree with flac files must
-   * be converted as mp3 files). Replaces a .flac extension by a .mp3 extension
-   * but leaves other extensions alone.
-   * 
-   * @param flacBaseDir the flac base directory
-   * @param mp3BaseDir the mp3 base directory
-   * @param flacFile the flac file. If null, then the base directory of the flac
-   *          files tree is converted.
-   * @return null if the flac file is not below the base directory of the flac
-   *         files tree or when a path can't be resolved, the converted file
-   *         otherwise
-   */
-  static File flacFileToMp3File(File flacBaseDir, File mp3BaseDir, File flacFile) {
-    assert (flacBaseDir != null);
-    assert (mp3BaseDir != null);
-    assert (flacFile != null);
-
-    if (!FileUtils.isFileBelowDirectory(flacBaseDir, flacFile)) {
-      return null;
-    }
-
-    String flacBaseDirPath;
-    String flacFilePath;
-    try {
-      flacBaseDirPath = flacBaseDir.getParentFile().getCanonicalPath();
-      flacFilePath = flacFile.getCanonicalPath();
-    }
-    catch (IOException e) {
-      /* can't be covered by a test */
-      return null;
-    }
-
-    String relativeFlacFile = flacFilePath.substring(flacBaseDirPath.length() + File.separator.length());
-
-    String[] relativeFlacFileSplit = ExtensionUtils.split(relativeFlacFile, true);
-    if (relativeFlacFileSplit[1].equals(MusicTreeConstants.FLACEXTENSION)) {
-      relativeFlacFile = relativeFlacFileSplit[0] + MusicTreeConstants.MP3EXTENSION;
-    }
-
-    return new File(mp3BaseDir, relativeFlacFile);
-  }
-
-  /*
    * Main
    */
 
@@ -490,7 +442,7 @@ public class Main implements Runnable {
 
     File mp3BaseDir = musicTreeConfiguration.getMp3BaseDir();
     for (File fileToConvert : filesToConvert) {
-      File mp3File = flacFileToMp3File(flacBaseDir, mp3BaseDir, fileToConvert);
+      File mp3File = MusicTreeHelpers.flacFileToMp3File(flacBaseDir, mp3BaseDir, fileToConvert);
       if (mp3File == null) {
         /* can't be covered by a test */
         System.err.printf(Messages.getString("Main.12"), fileToConvert, //$NON-NLS-1$

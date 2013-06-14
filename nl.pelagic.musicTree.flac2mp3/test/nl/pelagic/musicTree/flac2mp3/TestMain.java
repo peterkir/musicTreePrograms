@@ -1,17 +1,14 @@
 package nl.pelagic.musicTree.flac2mp3;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import nl.pelagic.audio.conversion.flac2mp3.testhelpers.MyFlacToMp3;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
-import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConstants;
 import nl.pelagic.audio.musicTree.syncer.testhelpers.MySyncer;
 import nl.pelagic.musicTree.flac2mp3.testhelpers.MyBundleContext;
 import nl.pelagic.shell.script.listener.testhelpers.MyShellScriptListener;
@@ -84,32 +81,6 @@ public class TestMain {
         Main.validateConfiguration(new MusicTreeConfiguration(new File(testdatadir, "Music"), new File(testdatadir,
             "from.flac")), new File(testdatadir, "Music").getAbsolutePath());
     assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
-  }
-
-  @Test
-  public void testFlacFileToMp3File_NotBelow() {
-    File result =
-        Main.flacFileToMp3File(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"), new File(
-            testdatadir, "from.flac"));
-    assertThat(result, nullValue());
-  }
-
-  @Test
-  public void testFlacFileToMp3File_Normal_Flac() throws IOException {
-    File result =
-        Main.flacFileToMp3File(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"), new File(
-            testdatadir, "Music/dummy1" + MusicTreeConstants.FLACEXTENSION));
-    assertThat(result.getCanonicalFile(), equalTo(new File(testdatadir, "from.flac/Music/dummy1"
-        + MusicTreeConstants.MP3EXTENSION).getCanonicalFile()));
-  }
-
-  @Test
-  public void testFlacFileToMp3File_Normal_Txt() throws IOException {
-    File result =
-        Main.flacFileToMp3File(new File(testdatadir, "Music"), new File(testdatadir, "from.flac"), new File(
-            testdatadir, "Music/dummy1.txt"));
-    assertThat(result.getCanonicalFile(),
-        equalTo(new File(testdatadir, "from.flac/Music/dummy1.txt").getCanonicalFile()));
   }
 
   @Test
