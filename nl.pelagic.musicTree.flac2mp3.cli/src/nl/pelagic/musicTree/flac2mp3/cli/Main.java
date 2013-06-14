@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ import nl.pelagic.audio.musicTree.syncer.api.Syncer;
 import nl.pelagic.audio.musicTree.util.MusicTreeHelpers;
 import nl.pelagic.musicTree.flac2mp3.cli.i18n.Messages;
 import nl.pelagic.shell.script.listener.api.ShellScriptListener;
+import nl.pelagic.shutdownhook.api.ShutdownHookParticipant;
 import nl.pelagic.util.file.FileUtils;
 
 import org.kohsuke.args4j.CmdLineException;
@@ -39,7 +41,7 @@ import aQute.bnd.annotation.component.Reference;
 @Component(properties = {
   "main.thread=true" /* Signal the launcher that this is the main thread */
 })
-public class Main implements Runnable {
+public class Main implements Runnable, ShutdownHookParticipant {
   /** the application logger name */
   private final String LOGGER_APPLICATION_NAME = "nl.pelagic"; //$NON-NLS-1$
 
@@ -439,6 +441,10 @@ public class Main implements Runnable {
 
     File mp3BaseDir = musicTreeConfiguration.getMp3BaseDir();
     for (File fileToConvert : filesToConvert) {
+      if (stop.get()) {
+        break;
+      }
+
       File mp3File = MusicTreeHelpers.flacFileToMp3File(flacBaseDir, mp3BaseDir, fileToConvert);
       if (mp3File == null) {
         /* can't be covered by a test */
@@ -474,5 +480,16 @@ public class Main implements Runnable {
     }
 
     return (errorFiles.size() == 0);
+  }
+
+  /*
+   * ShutdownHookParticipant
+   */
+
+  private AtomicBoolean stop = new AtomicBoolean(false);
+
+  @Override
+  public void shutdownHook() {
+    stop.set(true);
   }
 }

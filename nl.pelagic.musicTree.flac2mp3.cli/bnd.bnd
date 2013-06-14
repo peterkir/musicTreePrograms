@@ -6,7 +6,8 @@
 	biz.aQute.bnd.annotation,\
 	osgi.core,\
 	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file,\
-	org.kohsuke.args4j
+	org.kohsuke.args4j,\
+	nl.pelagic.shutdownhook.api;version=latest
 
 Private-Package: nl.pelagic.musicTree.flac2mp3.cli,\
 	nl.pelagic.musicTree.flac2mp3.cli.i18n
