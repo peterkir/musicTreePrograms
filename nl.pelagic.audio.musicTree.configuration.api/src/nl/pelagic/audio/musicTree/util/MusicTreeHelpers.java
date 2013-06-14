@@ -3,6 +3,7 @@ package nl.pelagic.audio.musicTree.util;
 import java.io.File;
 import java.io.IOException;
 
+import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConstants;
 import nl.pelagic.util.file.ExtensionUtils;
 import nl.pelagic.util.file.FileUtils;
@@ -18,27 +19,26 @@ public class MusicTreeHelpers {
    * be converted as mp3 files). Replaces a .flac extension by a .mp3 extension
    * but leaves other extensions alone.
    * 
-   * @param flacBaseDir the flac base directory
-   * @param mp3BaseDir the mp3 base directory
+   * @param musicTreeConfiguration the music tree configuration
    * @param flacFile the flac file. If null, then the base directory of the flac
    *          files tree is converted.
    * @return null if the flac file is not below the base directory of the flac
    *         files tree or when a path can't be resolved, the converted file
    *         otherwise
    */
-  static public File flacFileToMp3File(File flacBaseDir, File mp3BaseDir, File flacFile) {
-    assert (flacBaseDir != null);
-    assert (mp3BaseDir != null);
+  static public File flacFileToMp3File(MusicTreeConfiguration musicTreeConfiguration, File flacFile) {
+    assert (musicTreeConfiguration != null);
+    assert (musicTreeConfiguration.validate(false) == null);
     assert (flacFile != null);
 
-    if (!FileUtils.isFileBelowDirectory(flacBaseDir, flacFile)) {
+    if (!FileUtils.isFileBelowDirectory(musicTreeConfiguration.getFlacBaseDir(), flacFile)) {
       return null;
     }
 
     String flacBaseDirPath;
     String flacFilePath;
     try {
-      flacBaseDirPath = flacBaseDir.getParentFile().getCanonicalPath();
+      flacBaseDirPath = musicTreeConfiguration.getFlacBaseDir().getParentFile().getCanonicalPath();
       flacFilePath = flacFile.getCanonicalPath();
     }
     catch (IOException e) {
@@ -53,6 +53,6 @@ public class MusicTreeHelpers {
       relativeFlacFile = relativeFlacFileSplit[0] + MusicTreeConstants.MP3EXTENSION;
     }
 
-    return new File(mp3BaseDir, relativeFlacFile);
+    return new File(musicTreeConfiguration.getMp3BaseDir(), relativeFlacFile);
   }
 }

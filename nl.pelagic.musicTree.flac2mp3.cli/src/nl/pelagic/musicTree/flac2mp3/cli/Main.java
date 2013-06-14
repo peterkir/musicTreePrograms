@@ -445,7 +445,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
         break;
       }
 
-      File mp3File = MusicTreeHelpers.flacFileToMp3File(flacBaseDir, mp3BaseDir, fileToConvert);
+      File mp3File = MusicTreeHelpers.flacFileToMp3File(musicTreeConfiguration, fileToConvert);
       if (mp3File == null) {
         /* can't be covered by a test */
         System.err.printf(Messages.getString("Main.12"), fileToConvert, //$NON-NLS-1$
