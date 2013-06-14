@@ -5,10 +5,10 @@
 	Local,\
 	Bndtools Hub
 
--runbundles: org.kohsuke.args4j;version='[2.0.23,2.0.24)',\
-	jaudiotagger;version='[2.2.0,2.2.1)',\
+-runbundles: jaudiotagger;version='[2.2.0,2.2.1)',\
 	nl.pelagic.audio.conversion.flac2mp3;version=latest,\
 	nl.pelagic.audio.conversion.flac2mp3.api;version=latest,\
+	nl.pelagic.audio.musicTree.configuration.api;version=latest,\
 	nl.pelagic.audio.musicTree.syncer;version=latest,\
 	nl.pelagic.audio.musicTree.syncer.api;version=latest,\
 	nl.pelagic.jaudiotagger.util;version=latest,\
@@ -19,6 +19,7 @@
 	nl.pelagic.shutdownhook.api;version=latest,\
 	nl.pelagic.util;version=latest,\
 	org.apache.felix.scr;version='[1.6.2,1.6.3)',\
+	org.kohsuke.args4j;version='[2.0.23,2.0.24)',\
 	osgi.enterprise;version='[5.0.0,5.0.1)'
 -runee: JavaSE-1.7
 -runfw: org.apache.felix.framework;version='[4,5)'
