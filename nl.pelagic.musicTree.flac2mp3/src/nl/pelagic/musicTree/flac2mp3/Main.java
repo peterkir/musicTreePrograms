@@ -330,9 +330,6 @@ public class Main implements Runnable {
       return false;
     }
 
-    musicTreeConfiguration.setMp3BaseDir(new File(musicTreeConfiguration.getMp3BaseDir(), musicTreeConfiguration
-        .getFlacBaseDir().getName()));
-
     /*
      * Validate the configuration
      */
