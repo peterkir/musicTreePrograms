@@ -33,8 +33,12 @@ public interface ShellScriptListener {
   String commandListToString(List<String> commandList, int prefixSpaces);
 
   /**
+   * Set the verbose mode. Quiet takes priority and setting extraVerbose implies
+   * verbose.
+   * 
    * @param verbose the verbose mode to set
+   * @param extraVerbose the extraVerbose mode to set
    * @param quiet the quiet mode to set
    */
-  void setVerbose(boolean verbose, boolean quiet);
+  void setVerbose(boolean verbose, boolean extraVerbose, boolean quiet);
 }

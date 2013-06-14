@@ -346,7 +346,8 @@ public class Main implements Runnable {
     }
 
     /* Setup verbosity in the shell script listener */
-    shellScriptListener.setVerbose(commandLineOptions.isVerbose(), commandLineOptions.isQuiet());
+    shellScriptListener.setVerbose(commandLineOptions.isVerbose(), commandLineOptions.isExtraVerbose(),
+        commandLineOptions.isQuiet());
 
     /*
      * Setup & validate the flac2mp3 configuration

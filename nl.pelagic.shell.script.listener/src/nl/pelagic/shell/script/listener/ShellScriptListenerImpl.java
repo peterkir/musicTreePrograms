@@ -18,13 +18,27 @@ public class ShellScriptListenerImpl implements ShellScriptListener {
   /** whether verbose mode is enabled or not */
   private boolean verbose = false;
 
+  /** whether extra verbose mode is enabled or not */
+  private boolean extraVerbose = false;
+
   /** whether quiet mode is enabled or not */
   private boolean quiet = false;
 
   @Override
-  public void setVerbose(boolean verbose, boolean quiet) {
+  public void setVerbose(boolean verbose, boolean extraVerbose, boolean quiet) {
     this.quiet = quiet;
-    this.verbose = verbose;
+
+    if (quiet) {
+      this.verbose = false;
+      this.extraVerbose = false;
+    } else {
+      this.extraVerbose = extraVerbose;
+      if (extraVerbose) {
+        this.verbose = true;
+      } else {
+        this.verbose = verbose;
+      }
+    }
   }
 
   /** the output */
@@ -45,7 +59,7 @@ public class ShellScriptListenerImpl implements ShellScriptListener {
    */
   @Override
   public void addCommand(String command) {
-    if ((out == null) || (command == null) || quiet || !verbose) {
+    if ((out == null) || (command == null) || quiet || !extraVerbose) {
       return;
     }
 
@@ -61,7 +75,7 @@ public class ShellScriptListenerImpl implements ShellScriptListener {
    */
   @Override
   public void addMessage(String message) {
-    if ((out == null) || (message == null) || quiet) {
+    if ((out == null) || (message == null) || quiet || !verbose) {
       return;
     }
 

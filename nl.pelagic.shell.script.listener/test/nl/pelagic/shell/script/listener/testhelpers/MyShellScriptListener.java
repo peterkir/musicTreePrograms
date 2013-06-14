@@ -85,7 +85,7 @@ public class MyShellScriptListener implements ShellScriptListener {
   }
 
   @Override
-  synchronized public void setVerbose(boolean verbose, boolean quiet) {
-    received.add(new Pair(TYPE_VERBOSE, "verbose=" + verbose + ", quiet=" + quiet));
+  synchronized public void setVerbose(boolean verbose, boolean extraVerbose, boolean quiet) {
+    received.add(new Pair(TYPE_VERBOSE, "verbose=" + verbose + "extraVerbose=" + extraVerbose + ", quiet=" + quiet));
   }
 }
