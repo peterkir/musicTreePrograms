@@ -1,10 +1,10 @@
-package nl.pelagic.musicTree.flac2mp3;
+package nl.pelagic.musicTree.flac2mp3.cli;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import nl.pelagic.musicTree.flac2mp3.i18n.Messages;
+import nl.pelagic.musicTree.flac2mp3.cli.i18n.Messages;
 
 import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineParser;

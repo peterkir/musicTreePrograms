@@ -1,4 +1,4 @@
-package nl.pelagic.musicTree.flac2mp3.i18n;
+package nl.pelagic.musicTree.flac2mp3.cli.i18n;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;

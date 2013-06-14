@@ -1,4 +1,4 @@
-package nl.pelagic.musicTree.flac2mp3;
+package nl.pelagic.musicTree.flac2mp3.cli;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,7 +20,7 @@ import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConstants;
 import nl.pelagic.audio.musicTree.syncer.api.Syncer;
 import nl.pelagic.audio.musicTree.util.MusicTreeHelpers;
-import nl.pelagic.musicTree.flac2mp3.i18n.Messages;
+import nl.pelagic.musicTree.flac2mp3.cli.i18n.Messages;
 import nl.pelagic.shell.script.listener.api.ShellScriptListener;
 import nl.pelagic.util.file.FileUtils;
 

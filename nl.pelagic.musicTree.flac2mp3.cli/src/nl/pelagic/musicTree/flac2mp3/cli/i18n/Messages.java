@@ -1,4 +1,4 @@
-package nl.pelagic.musicTree.flac2mp3.i18n;
+package nl.pelagic.musicTree.flac2mp3.cli.i18n;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
  */
 public class Messages {
   /** the bundle name */
-  private static final String BUNDLE_NAME = "nl.pelagic.musicTree.flac2mp3.i18n.messages"; //$NON-NLS-1$
+  private static final String BUNDLE_NAME = "nl.pelagic.musicTree.flac2mp3.cli.i18n.messages"; //$NON-NLS-1$
 
   /** the resource bundle */
   private static final ResourceBundle RESOURCE_BUNDLE = ResourceBundle.getBundle(BUNDLE_NAME);

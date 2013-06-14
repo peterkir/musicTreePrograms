@@ -8,10 +8,10 @@
 	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file,\
 	org.kohsuke.args4j
 
-Private-Package: nl.pelagic.musicTree.flac2mp3,\
-	nl.pelagic.musicTree.flac2mp3.i18n
+Private-Package: nl.pelagic.musicTree.flac2mp3.cli,\
+	nl.pelagic.musicTree.flac2mp3.cli.i18n
 Service-Component: *
-Bundle-Version: 1.0.4
+Bundle-Version: 1.0.0
 Bundle-Name: Flac2Mp3
 
 

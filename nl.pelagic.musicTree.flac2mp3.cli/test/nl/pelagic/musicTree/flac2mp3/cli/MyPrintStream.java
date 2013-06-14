@@ -1,4 +1,4 @@
-package nl.pelagic.musicTree.flac2mp3;
+package nl.pelagic.musicTree.flac2mp3.cli;
 
 import java.io.FileNotFoundException;
 import java.io.PrintStream;

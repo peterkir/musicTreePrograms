@@ -1,4 +1,4 @@
-package nl.pelagic.musicTree.flac2mp3;
+package nl.pelagic.musicTree.flac2mp3.cli;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;

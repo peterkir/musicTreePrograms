@@ -14,7 +14,7 @@
 	nl.pelagic.audio.musicTree.syncer;version=latest,\
 	nl.pelagic.audio.musicTree.syncer.api;version=latest,\
 	nl.pelagic.jaudiotagger.util;version=latest,\
-	nl.pelagic.musicTree.flac2mp3;version=latest,\
+	nl.pelagic.musicTree.flac2mp3.cli;version=latest,\
 	nl.pelagic.shell.script.listener;version=latest,\
 	nl.pelagic.shell.script.listener.api;version=latest,\
 	nl.pelagic.shutdownhook;version=latest,\
@@ -35,7 +35,7 @@
 	osgi.enterprise;version='[5.0.0,5.0.1)'
 -runee: JavaSE-1.7
 -runfw: org.apache.felix.framework;version='[4,5)'
--runrequires: osgi.identity;filter:='(osgi.identity=nl.pelagic.musicTree.flac2mp3)',\
+-runrequires: osgi.identity;filter:='(osgi.identity=nl.pelagic.musicTree.flac2mp3.cli)',\
 	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.musicTree.syncer)',\
 	osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.conversion.flac2mp3)',\
 	osgi.identity;filter:='(osgi.identity=nl.pelagic.shutdownhook)',\

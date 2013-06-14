@@ -1,4 +1,4 @@
-package nl.pelagic.musicTree.flac2mp3.testhelpers;
+package nl.pelagic.musicTree.flac2mp3.cli.testhelpers;
 
 import java.io.File;
 import java.io.InputStream;

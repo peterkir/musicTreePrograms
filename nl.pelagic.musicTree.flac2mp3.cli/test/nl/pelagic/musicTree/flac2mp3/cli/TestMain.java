@@ -1,4 +1,4 @@
-package nl.pelagic.musicTree.flac2mp3;
+package nl.pelagic.musicTree.flac2mp3.cli;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
@@ -10,7 +10,7 @@ import java.util.Map;
 import nl.pelagic.audio.conversion.flac2mp3.testhelpers.MyFlacToMp3;
 import nl.pelagic.audio.musicTree.configuration.api.MusicTreeConfiguration;
 import nl.pelagic.audio.musicTree.syncer.testhelpers.MySyncer;
-import nl.pelagic.musicTree.flac2mp3.testhelpers.MyBundleContext;
+import nl.pelagic.musicTree.flac2mp3.cli.testhelpers.MyBundleContext;
 import nl.pelagic.shell.script.listener.testhelpers.MyShellScriptListener;
 
 import org.junit.After;
