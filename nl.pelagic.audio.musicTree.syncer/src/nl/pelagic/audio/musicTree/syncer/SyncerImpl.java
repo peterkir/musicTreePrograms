@@ -301,13 +301,13 @@ public class SyncerImpl implements Syncer {
 
     File mp3Dir =
         MusicTreeHelpers.flacFileToMp3File(musicTreeConfiguration.getFlacBaseDir(),
-            musicTreeConfiguration.getFlacBaseDir(), directoryToSync);
+            musicTreeConfiguration.getMp3BaseDir(), directoryToSync);
 
     /* get the shell script listener */
     ShellScriptListener listener = shellScriptListener.get();
 
     if (listener != null) {
-      listener.addMessage(String.format(Messages.getString("SyncerImpl.6"), directoryToSync.getPath())); //$NON-NLS-1$
+      listener.addVerboseMessage(String.format(Messages.getString("SyncerImpl.6"), directoryToSync.getPath())); //$NON-NLS-1$
     }
 
     /*

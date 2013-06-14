@@ -24,6 +24,13 @@ public interface ShellScriptListener {
   void addMessage(String message);
 
   /**
+   * Add a shell (progress) message
+   * 
+   * @param message the message
+   */
+  void addVerboseMessage(String message);
+
+  /**
    * Convert a list with shell commands to a string
    * 
    * @param commandList the list of shell commands

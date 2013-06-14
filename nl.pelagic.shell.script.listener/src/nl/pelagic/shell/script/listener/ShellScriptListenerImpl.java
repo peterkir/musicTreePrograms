@@ -54,7 +54,7 @@ public class ShellScriptListenerImpl implements ShellScriptListener {
   /**
    * {@inheritDoc}
    * <p>
-   * Note: the command is only output when verbose mode is enabled.
+   * Note: the command is only output when extra verbose mode is enabled.
    * </p>
    */
   @Override
@@ -75,6 +75,22 @@ public class ShellScriptListenerImpl implements ShellScriptListener {
    */
   @Override
   public void addMessage(String message) {
+    if ((out == null) || (message == null) || quiet) {
+      return;
+    }
+
+    out.println(SHELL_COMMENT_LINE_PREFIX + message);
+  }
+
+  /**
+   * {@inheritDoc}
+   * <p>
+   * Note: a shell comments character (#) is automatically added at the
+   * beginning of the message.
+   * </p>
+   */
+  @Override
+  public void addVerboseMessage(String message) {
     if ((out == null) || (message == null) || quiet || !verbose) {
       return;
     }

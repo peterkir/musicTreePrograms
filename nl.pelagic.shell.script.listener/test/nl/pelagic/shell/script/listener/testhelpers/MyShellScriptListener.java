@@ -25,8 +25,9 @@ public class MyShellScriptListener implements ShellScriptListener {
   }
 
   public static final int TYPE_COMMAND = 0;
-  public static final int TYPE_MESSAGE = 1;
-  public static final int TYPE_VERBOSE = 2;
+  public static final int TYPE_VERBOSEMESSAGE = 1;
+  public static final int TYPE_MESSAGE = 2;
+  public static final int TYPE_VERBOSE = 3;
 
   public List<Pair> received = new LinkedList<>();
 
@@ -68,6 +69,12 @@ public class MyShellScriptListener implements ShellScriptListener {
   @Override
   synchronized public void addMessage(String message) {
     received.add(new Pair(TYPE_MESSAGE, message));
+    doStallIfNeeded(message);
+  }
+
+  @Override
+  synchronized public void addVerboseMessage(String message) {
+    received.add(new Pair(TYPE_VERBOSEMESSAGE, message));
     doStallIfNeeded(message);
   }
 

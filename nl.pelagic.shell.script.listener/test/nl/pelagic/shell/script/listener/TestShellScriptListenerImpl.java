@@ -168,7 +168,7 @@ public class TestShellScriptListenerImpl {
      * !null     null     true     FALSE#        FALSE# ""
      * !null     null    false      TRUE*         true  ""
      * !null     null     true     FALSE#        FALSE# ""
-     * !null    !null    false     false         false  ""
+     * !null    !null    false     false         false  "# " + message
      * !null    !null     true     FALSE#        FALSE# ""
      * !null    !null    false      TRUE*         true  "# " + message
      * !null    !null     true     FALSE#        FALSE# ""
@@ -208,7 +208,8 @@ public class TestShellScriptListenerImpl {
     verifyAddMessage(dummyPrintStream, null, true, true, false, ""); //$NON-NLS-1$
     verifyAddMessage(dummyPrintStream, null, false, true, true, ""); //$NON-NLS-1$
     verifyAddMessage(dummyPrintStream, null, true, true, true, ""); //$NON-NLS-1$
-    verifyAddMessage(dummyPrintStream, cmd, false, false, false, ""); //$NON-NLS-1$
+    verifyAddMessage(dummyPrintStream, cmd, false, false, false, ShellScriptListenerImpl.SHELL_COMMENT_LINE_PREFIX
+        + cmd);
     verifyAddMessage(dummyPrintStream, cmd, true, false, false, ""); //$NON-NLS-1$
     verifyAddMessage(dummyPrintStream, cmd, false, false, true, ShellScriptListenerImpl.SHELL_COMMENT_LINE_PREFIX + cmd);
     verifyAddMessage(dummyPrintStream, cmd, true, false, true, ""); //$NON-NLS-1$
@@ -216,6 +217,97 @@ public class TestShellScriptListenerImpl {
     verifyAddMessage(dummyPrintStream, cmd, true, true, false, ""); //$NON-NLS-1$
     verifyAddMessage(dummyPrintStream, cmd, false, true, true, ShellScriptListenerImpl.SHELL_COMMENT_LINE_PREFIX + cmd);
     verifyAddMessage(dummyPrintStream, cmd, true, true, true, ""); //$NON-NLS-1$
+  }
+
+  private void verifyAddVerboseMessage(PrintStream out, String command, boolean quiet, boolean verbose,
+      boolean extraVerbose, String result) {
+    shellScriptListenerImpl.setOut(out);
+    shellScriptListenerImpl.setVerbose(verbose, extraVerbose, quiet);
+    shellScriptListenerImpl.addVerboseMessage(command);
+    assertThat(dummyPrintStream.sb.toString(), equalTo(result));
+    dummyPrintStream.sb.delete(0, dummyPrintStream.sb.length());
+  }
+
+  @Test
+  public void testAddVerboseMessage() {
+    /**
+     * <pre>
+     *   out  message    quiet   verbose  extraverbose  result
+     *  null     null    false     false         false  ""
+     *  null     null     true     FALSE#        FALSE# ""
+     *  null     null    false      TRUE*         true  ""
+     *  null     null     true     FALSE#        FALSE# ""
+     *  null     null    false      true         false  ""
+     *  null     null     true     FALSE#        FALSE# ""
+     *  null     null    false      TRUE*         true  ""
+     *  null     null     true     FALSE#        FALSE# ""
+     *  null    !null    false     false         false  ""
+     *  null    !null     true     FALSE#        FALSE# ""
+     *  null    !null    false      TRUE*         true  ""
+     *  null    !null     true     FALSE#        FALSE# ""
+     *  null    !null    false      true         false  ""
+     *  null    !null     true     FALSE#        FALSE# ""
+     *  null    !null    false      TRUE*         true  ""
+     *  null    !null     true     FALSE#        FALSE# ""
+     * !null     null    false     false         false  ""
+     * !null     null     true     FALSE#        FALSE# ""
+     * !null     null    false      TRUE*         true  ""
+     * !null     null     true     FALSE#        FALSE# ""
+     * !null     null    false      true         false  ""
+     * !null     null     true     FALSE#        FALSE# ""
+     * !null     null    false      TRUE*         true  ""
+     * !null     null     true     FALSE#        FALSE# ""
+     * !null    !null    false     false         false  ""
+     * !null    !null     true     FALSE#        FALSE# ""
+     * !null    !null    false      TRUE*         true  "# " + message
+     * !null    !null     true     FALSE#        FALSE# ""
+     * !null    !null    false      true         false  "# " + message
+     * !null    !null     true     FALSE#        FALSE# ""
+     * !null    !null    false      TRUE*         true  "# " + message
+     * !null    !null     true     FALSE#        FALSE# ""
+     * 
+     * # = implied by quiet
+     * * = implied by extraVerbose
+     * </pre>
+     */
+
+    String cmd = "message"; //$NON-NLS-1$
+
+    verifyAddVerboseMessage(null, null, false, false, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, null, true, false, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, null, false, false, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, null, true, false, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, null, false, true, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, null, true, true, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, null, false, true, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, null, true, true, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, cmd, false, false, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, cmd, true, false, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, cmd, false, false, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, cmd, true, false, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, cmd, false, true, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, cmd, true, true, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, cmd, false, true, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(null, cmd, true, true, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, null, false, false, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, null, true, false, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, null, false, false, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, null, true, false, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, null, false, true, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, null, true, true, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, null, false, true, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, null, true, true, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, cmd, false, false, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, cmd, true, false, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, cmd, false, false, true,
+        ShellScriptListenerImpl.SHELL_COMMENT_LINE_PREFIX + cmd);
+    verifyAddVerboseMessage(dummyPrintStream, cmd, true, false, true, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, cmd, false, true, false,
+        ShellScriptListenerImpl.SHELL_COMMENT_LINE_PREFIX + cmd);
+    verifyAddVerboseMessage(dummyPrintStream, cmd, true, true, false, ""); //$NON-NLS-1$
+    verifyAddVerboseMessage(dummyPrintStream, cmd, false, true, true, ShellScriptListenerImpl.SHELL_COMMENT_LINE_PREFIX
+        + cmd);
+    verifyAddVerboseMessage(dummyPrintStream, cmd, true, true, true, ""); //$NON-NLS-1$
   }
 
   @Test
