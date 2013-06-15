@@ -237,6 +237,46 @@ public class TestMain {
   }
 
   @Test
+  public void testConvertFile_No_Conversion_Needed() {
+    File fbd = new File(testdatadir, "Music");
+    File mbd = new File(testdatadir, "from.flac");
+    Flac2Mp3Configuration flac2Mp3Configuration = new Flac2Mp3Configuration();
+    MusicTreeConfiguration musicTreeConfiguration = new MusicTreeConfiguration(fbd, mbd);
+    File fileToConvert = new File(fbd, "dummy2.flac");
+    File fileToConvertTo = new File(mbd, "Music/dummy2.mp3");
+    boolean modified = fileToConvertTo.setLastModified(fileToConvert.lastModified());
+    assertThat(Boolean.valueOf(modified), equalTo(Boolean.TRUE));
+
+    flacToMp3.retval = true;
+
+    boolean result = main.convertFile(out, flac2Mp3Configuration, musicTreeConfiguration, true, fileToConvert);
+
+    assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
+
+    assertThat(Integer.valueOf(out.strings.size()), equalTo(Integer.valueOf(0)));
+  }
+
+  @Test
+  public void testConvertFile_Conversion_Needed() {
+    File fbd = new File(testdatadir, "Music");
+    File mbd = new File(testdatadir, "from.flac");
+    Flac2Mp3Configuration flac2Mp3Configuration = new Flac2Mp3Configuration();
+    MusicTreeConfiguration musicTreeConfiguration = new MusicTreeConfiguration(fbd, mbd);
+    File fileToConvert = new File(fbd, "dummy2.flac");
+    File fileToConvertTo = new File(mbd, "Music/dummy2.mp3");
+    boolean modified = fileToConvertTo.setLastModified(fileToConvert.lastModified() - 10000);
+    assertThat(Boolean.valueOf(modified), equalTo(Boolean.TRUE));
+
+    flacToMp3.retval = true;
+
+    boolean result = main.convertFile(out, flac2Mp3Configuration, musicTreeConfiguration, true, fileToConvert);
+
+    assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
+
+    assertThat(Integer.valueOf(out.strings.size()), equalTo(Integer.valueOf(0)));
+  }
+
+  @Test
   public void testStayAlive_Not() {
     MyBundleContext bundleContext = new MyBundleContext();
     bundleContext.property = "false";

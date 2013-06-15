@@ -309,6 +309,11 @@ public class Main implements Runnable, ShutdownHookParticipant {
       return false;
     }
 
+    boolean doConversion = !mp3File.exists() || (fileToConvert.lastModified() > mp3File.lastModified());
+    if (!doConversion) {
+      return true;
+    }
+
     boolean converted = false;
     try {
       converted = flacToMp3.convert(flac2Mp3Configuration, fileToConvert, mp3File, simulate);
