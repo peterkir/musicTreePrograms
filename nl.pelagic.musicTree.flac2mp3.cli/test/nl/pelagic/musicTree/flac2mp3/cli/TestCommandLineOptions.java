@@ -9,6 +9,7 @@ import static org.junit.Assert.assertThat;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -41,7 +42,9 @@ public class TestCommandLineOptions {
   public void testCommandLineOptions_Defaults() throws IOException {
     assertThat(cli.getFlacBaseDir(), equalTo(new File(CommandLineOptions.DEFAULT_FLAC_BASE_DIR).getCanonicalFile()));
     assertThat(cli.getMp3BaseDir(), equalTo(new File(CommandLineOptions.DEFAULT_MP3_BASE_DIR).getCanonicalFile()));
-    assertThat(cli.getFlacSubDir(), equalTo(CommandLineOptions.flacSubDirDefault));
+    List<String> entries = cli.getEntriesToConvert();
+    assertThat(entries, notNullValue());
+    assertThat(Integer.valueOf(entries.size()), equalTo(Integer.valueOf(0)));
     assertThat(cli.getFileList(), nullValue());
     assertThat(Boolean.valueOf(cli.isHelp()), equalTo(Boolean.FALSE));
     assertThat(Boolean.valueOf(cli.isQuiet()), equalTo(Boolean.valueOf(CommandLineOptions.quietDefault)));

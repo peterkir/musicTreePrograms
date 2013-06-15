@@ -1,2 +1,0 @@
-/some/file/not/below/flac/base/dir1.flac
-/some/file/not/below/flac/base/dir2.flac

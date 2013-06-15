@@ -3,6 +3,8 @@ package nl.pelagic.musicTree.flac2mp3.cli;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.LinkedList;
+import java.util.List;
 
 import nl.pelagic.musicTree.flac2mp3.cli.i18n.Messages;
 
@@ -23,9 +25,6 @@ public class CommandLineOptions {
    * as mp3 files
    */
   public static final String DEFAULT_MP3_BASE_DIR = "from.flac"; //$NON-NLS-1$
-
-  /** The default flac sub-directory */
-  public static final String flacSubDirDefault = null;
 
   /** The default quiet mode */
   public static final boolean quietDefault = false;
@@ -73,8 +72,8 @@ public class CommandLineOptions {
       metaVar = "flacSubDirectory",
       required = false,
       index = 0,
-      usage = "The subdirectory of the flac tree to process (optional, by default the same as the flac tree base directory)")
-  private String flacSubDir = flacSubDirDefault;
+      usage = "Subdirectory of the flac tree or files in the flac tree to process (optional, by default the same as the flac tree base directory)")
+  private List<String> entriesToConvert = new LinkedList<>();
 
   /** the quiet mode */
   @Option(name = "-q", aliases = {
@@ -180,10 +179,10 @@ public class CommandLineOptions {
   }
 
   /**
-   * @return the flacSubDir
+   * @return the entriesToConvert
    */
-  public String getFlacSubDir() {
-    return flacSubDir;
+  public List<String> getEntriesToConvert() {
+    return entriesToConvert;
   }
 
   /**
