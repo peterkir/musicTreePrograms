@@ -32,13 +32,13 @@ public class TagHelper {
     album = Long.valueOf(new Random().nextLong()).toString();
     albumArtist = Long.valueOf(new Random().nextLong()).toString();
     artist = Long.valueOf(new Random().nextLong()).toString();
-    date = Integer.valueOf(new Random().nextInt(2014)).toString();
-    discNumber = Integer.valueOf(new Random().nextInt(100)).toString();
-    discTotal = Integer.valueOf(new Random().nextInt(100)).toString();
+    date = Integer.valueOf(new Random().nextInt(2012) + 1).toString();
+    discNumber = Integer.valueOf(new Random().nextInt(99) + 1).toString();
+    discTotal = Integer.valueOf(new Random().nextInt(99) + 1).toString();
     genre = Long.valueOf(new Random().nextLong()).toString();
     title = Long.valueOf(new Random().nextLong()).toString();
-    tracknumber = Integer.valueOf(new Random().nextInt(100)).toString();
-    trackTotal = Integer.valueOf(new Random().nextInt(100)).toString();
+    tracknumber = Integer.valueOf(new Random().nextInt(99) + 1).toString();
+    trackTotal = Integer.valueOf(new Random().nextInt(99) + 1).toString();
 
     flacTag.addField(FieldKey.ALBUM, album);
     flacTag.addField(FieldKey.ALBUM_ARTIST, albumArtist);
