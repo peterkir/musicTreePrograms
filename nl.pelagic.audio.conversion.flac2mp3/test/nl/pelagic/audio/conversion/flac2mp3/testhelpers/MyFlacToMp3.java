@@ -15,6 +15,7 @@ import org.junit.Ignore;
     "nls", "javadoc"
 })
 public class MyFlacToMp3 implements FlacToMp3 {
+  public static final String msg = "BOOM";
 
   public int countAll = 0;
   public int countNormal = 0;
@@ -26,7 +27,7 @@ public class MyFlacToMp3 implements FlacToMp3 {
       throws FileNotFoundException {
     countAll++;
     if (throwException) {
-      throw new FileNotFoundException("BOOM");
+      throw new FileNotFoundException(msg);
     }
     if (retval && !simulate) {
       try (FileWriter fw = new FileWriter(mp3)) {
