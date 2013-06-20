@@ -401,6 +401,17 @@ public class Main implements Runnable, ShutdownHookParticipant {
 
     /* print usage when so requested and exit */
     if (commandLineOptions.isHelp()) {
+      try {
+        /* can't be covered by a test */
+        int cols = Integer.parseInt(System.getenv("COLUMNS")); //$NON-NLS-1$
+        if (cols > 80) {
+          parser.setUsageWidth(cols);
+        }
+      }
+      catch (NumberFormatException e) {
+        /* swallow, can't be covered by a test */
+      }
+
       CommandLineOptions.usage(err, PROGRAM_NAME, parser);
       return false;
     }
