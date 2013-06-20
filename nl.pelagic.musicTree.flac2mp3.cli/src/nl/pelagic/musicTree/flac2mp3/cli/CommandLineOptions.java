@@ -115,8 +115,8 @@ public class CommandLineOptions {
     "--flac"
   }, metaVar = "/flac/base/directory", usage = "The flac tree base directory (default = " + DEFAULT_FLAC_BASE_DIR + ")")
   public
-      void setFlacBaseDir(String flacBaseDir) throws IOException {
-    this.flacBaseDir = new File(flacBaseDir).getCanonicalFile();
+      void setFlacBaseDir(File flacBaseDir) throws IOException {
+    this.flacBaseDir = flacBaseDir.getCanonicalFile();
   }
 
   /**
@@ -126,19 +126,20 @@ public class CommandLineOptions {
   @Option(name = "-m", aliases = {
     "--mp3"
   }, metaVar = "/mp3/base/directory", usage = "The mp3 tree base directory (default = " + DEFAULT_MP3_BASE_DIR + ")")
-  public void setMp3BaseDir(String mp3BaseDir) throws IOException {
-    this.mp3BaseDir = new File(mp3BaseDir).getCanonicalFile();
+  public void setMp3BaseDir(File mp3BaseDir) throws IOException {
+    this.mp3BaseDir = mp3BaseDir.getCanonicalFile();
   }
 
   /**
    * @param fileList the fileList to set
+   * @throws IOException when the file could not be resolved
    */
   @Option(name = "-l", aliases = {
     "--filelist"
   }, metaVar = "/some/file/list", usage = "Convert the directories and files listed"
       + " in the specified file (no default)")
-  public void setFileList(String fileList) {
-    this.fileList = new File(fileList);
+  public void setFileList(File fileList) throws IOException {
+    this.fileList = fileList.getCanonicalFile();
   }
 
   /**

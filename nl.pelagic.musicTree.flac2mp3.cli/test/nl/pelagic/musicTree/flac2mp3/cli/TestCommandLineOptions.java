@@ -56,16 +56,14 @@ public class TestCommandLineOptions {
   @Test
   public void testSetFlacBaseDir() throws IOException {
     File dirFile = new File("");
-    String dir = dirFile.getPath();
-    cli.setFlacBaseDir(dir);
+    cli.setFlacBaseDir(dirFile);
     assertThat(cli.getFlacBaseDir(), equalTo(dirFile.getCanonicalFile()));
   }
 
   @Test
   public void testSetMp3BaseDir() throws IOException {
     File dirFile = new File("");
-    String dir = dirFile.getPath();
-    cli.setMp3BaseDir(dir);
+    cli.setMp3BaseDir(dirFile);
     assertThat(cli.getMp3BaseDir(), equalTo(dirFile.getCanonicalFile()));
   }
 
@@ -73,8 +71,8 @@ public class TestCommandLineOptions {
   public void testSetFileList() {
     String list = "some file list.lst";
     File dirFile = new File(list);
-    cli.setFileList(list);
-    assertThat(cli.getFileList(), equalTo(dirFile));
+    cli.setFileList(dirFile);
+    assertThat(cli.getFileList(), equalTo(dirFile.getCanonicalFile()));
   }
 
   @Test
