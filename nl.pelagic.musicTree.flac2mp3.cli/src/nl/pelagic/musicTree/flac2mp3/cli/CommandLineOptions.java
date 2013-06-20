@@ -68,11 +68,8 @@ public class CommandLineOptions {
   private File fileList = null;
 
   /** the flac sub-directory */
-  @Argument(
-      metaVar = "flacSubDirectory",
-      required = false,
-      index = 0,
-      usage = "Subdirectory of the flac tree or files in the flac tree to process (optional, by default the same as the flac tree base directory)")
+  @Argument(metaVar = "entryToConvert", required = false, index = 0, usage = "A file or directory in the flac tree."
+      + " Can be specified multiple times. Optional, by default the same as the flac tree base directory")
   private List<String> entriesToConvert = new LinkedList<>();
 
   /** the quiet mode */
@@ -138,8 +135,8 @@ public class CommandLineOptions {
    */
   @Option(name = "-l", aliases = {
     "--filelist"
-  }, metaVar = "/some/file/list",
-      usage = "Convert the files listed in the specified file (no default, but takes priority when set)")
+  }, metaVar = "/some/file/list", usage = "Convert the directories and files listed"
+      + " in the specified file (no default)")
   public void setFileList(String fileList) {
     this.fileList = new File(fileList);
   }
@@ -234,7 +231,7 @@ public class CommandLineOptions {
   static void usage(PrintStream out, String programName, CmdLineParser parser) {
     out.println();
     out.printf(
-        "%s [%s...] [%s]%n", programName, Messages.getString("CommandLineOptions.0"), Messages.getString("CommandLineOptions.1")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        "%s [%s...] [%s]*%n", programName, Messages.getString("CommandLineOptions.0"), Messages.getString("CommandLineOptions.1")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
     parser.printUsage(out);
     out.println();
     out.printf("%s: %s %s%n", "Example", programName, Messages.getString("CommandLineOptions.2")); //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
