@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import nl.pelagic.audio.conversion.flac2mp3.api.Flac2Mp3Configuration;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +44,10 @@ public class TestCommandLineOptions {
   public void testCommandLineOptions_Defaults() throws IOException {
     assertThat(cli.getFlacBaseDir(), equalTo(new File(CommandLineOptions.DEFAULT_FLAC_BASE_DIR).getCanonicalFile()));
     assertThat(cli.getMp3BaseDir(), equalTo(new File(CommandLineOptions.DEFAULT_MP3_BASE_DIR).getCanonicalFile()));
+    assertThat(cli.getFlacExecutable(), equalTo(new File(Flac2Mp3Configuration.DEFAULT_FLAC_EXECUTABLE)));
+    assertThat(cli.getLameExecutable(), equalTo(new File(Flac2Mp3Configuration.DEFAULT_LAME_EXECUTABLE)));
+    assertThat(cli.getFlacOptions(), equalTo(Flac2Mp3Configuration.DEFAULT_FLAC_OPTIONS));
+    assertThat(cli.getLameOptions(), equalTo(Flac2Mp3Configuration.DEFAULT_LAME_OPTIONS));
     List<String> entries = cli.getEntriesToConvert();
     assertThat(entries, notNullValue());
     assertThat(Integer.valueOf(entries.size()), equalTo(Integer.valueOf(0)));
@@ -68,7 +74,35 @@ public class TestCommandLineOptions {
   }
 
   @Test
-  public void testSetFileList() {
+  public void testSetFlacExecutable() {
+    File dirFile = new File("/some/path/to/flac");
+    cli.setFlacExecutable(dirFile);
+    assertThat(cli.getFlacExecutable(), equalTo(dirFile));
+  }
+
+  @Test
+  public void testSetLameExecutable() {
+    File dirFile = new File("/some/path/to/lame");
+    cli.setLameExecutable(dirFile);
+    assertThat(cli.getLameExecutable(), equalTo(dirFile));
+  }
+
+  @Test
+  public void testSetFlacOptions() {
+    String options = "--dummy --bs";
+    cli.setFlacOptions(options);
+    assertThat(cli.getFlacOptions(), equalTo(options));
+  }
+
+  @Test
+  public void testSetLameOptions() {
+    String options = "--dummy --bs";
+    cli.setLameOptions(options);
+    assertThat(cli.getLameOptions(), equalTo(options));
+  }
+
+  @Test
+  public void testSetFileList() throws IOException {
     String list = "some file list.lst";
     File dirFile = new File(list);
     cli.setFileList(dirFile);

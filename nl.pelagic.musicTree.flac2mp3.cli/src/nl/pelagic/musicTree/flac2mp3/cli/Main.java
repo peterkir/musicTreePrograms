@@ -442,6 +442,10 @@ public class Main implements Runnable, ShutdownHookParticipant {
      */
 
     Flac2Mp3Configuration flac2Mp3Configuration = new Flac2Mp3Configuration();
+    flac2Mp3Configuration.setFlacExecutable(commandLineOptions.getFlacExecutable().getPath());
+    flac2Mp3Configuration.setLameExecutable(commandLineOptions.getLameExecutable().getPath());
+    flac2Mp3Configuration.setFlacOptions(commandLineOptions.getFlacOptions());
+    flac2Mp3Configuration.setLameOptions(commandLineOptions.getLameOptions());
 
     errors = flac2Mp3Configuration.validate();
     if (errors != null) {

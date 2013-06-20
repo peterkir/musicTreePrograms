@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import nl.pelagic.audio.conversion.flac2mp3.api.Flac2Mp3Configuration;
 import nl.pelagic.musicTree.flac2mp3.cli.i18n.Messages;
 
 import org.kohsuke.args4j.Argument;
@@ -47,6 +48,17 @@ public class CommandLineOptions {
 
   /** the mp3 base directory */
   private File mp3BaseDir;
+
+  /** the flac executable */
+  private File flacExecutable = new File(Flac2Mp3Configuration.DEFAULT_FLAC_EXECUTABLE);
+
+  /** the lame executable */
+  private File lameExecutable = new File(Flac2Mp3Configuration.DEFAULT_LAME_EXECUTABLE);
+
+  /** the flac options */
+  private String flacOptions = Flac2Mp3Configuration.DEFAULT_FLAC_OPTIONS;
+  /** the lame options */
+  private String lameOptions = Flac2Mp3Configuration.DEFAULT_LAME_OPTIONS;
 
   /**
    * Default constructor
@@ -143,6 +155,42 @@ public class CommandLineOptions {
   }
 
   /**
+   * @param flacExecutable the flacExecutable to set
+   */
+  @Option(name = "--flac-executable", metaVar = "/usr/bin/flac", usage = "The flac executable (default = "
+      + Flac2Mp3Configuration.DEFAULT_FLAC_EXECUTABLE + ")")
+  public void setFlacExecutable(File flacExecutable) {
+    this.flacExecutable = flacExecutable;
+  }
+
+  /**
+   * @param lameExecutable the lameExecutable to set
+   */
+  @Option(name = "--lame-executable", metaVar = "/usr/bin/lame", usage = "The lame executable (default = "
+      + Flac2Mp3Configuration.DEFAULT_LAME_EXECUTABLE + ")")
+  public void setLameExecutable(File lameExecutable) {
+    this.lameExecutable = lameExecutable;
+  }
+
+  /**
+   * @param flacOptions the flacOptions to set
+   */
+  @Option(name = "--flac-options", metaVar = "\"-s -d -c\"", usage = "The flac options (default = \""
+      + Flac2Mp3Configuration.DEFAULT_FLAC_OPTIONS + "\")")
+  public void setFlacOptions(String flacOptions) {
+    this.flacOptions = flacOptions;
+  }
+
+  /**
+   * @param lameOptions the lameOptions to set
+   */
+  @Option(name = "--lame-options", metaVar = "\"-S -h -b 256\"", usage = "The lame options (default = \""
+      + Flac2Mp3Configuration.DEFAULT_LAME_OPTIONS + "\")")
+  public void setLameOptions(String lameOptions) {
+    this.lameOptions = lameOptions;
+  }
+
+  /**
    * @param help the help to set
    */
   public void setHelp(boolean help) {
@@ -174,6 +222,34 @@ public class CommandLineOptions {
    */
   public File getFileList() {
     return fileList;
+  }
+
+  /**
+   * @return the flacExecutable
+   */
+  public File getFlacExecutable() {
+    return flacExecutable;
+  }
+
+  /**
+   * @return the lameExecutable
+   */
+  public File getLameExecutable() {
+    return lameExecutable;
+  }
+
+  /**
+   * @return the flacOptions
+   */
+  public String getFlacOptions() {
+    return flacOptions;
+  }
+
+  /**
+   * @return the lameOptions
+   */
+  public String getLameOptions() {
+    return lameOptions;
   }
 
   /**
