@@ -21,7 +21,7 @@ public class Flac2Mp3Configuration {
   public static final String DEFAULT_LAME_EXECUTABLE = "lame"; //$NON-NLS-1$
 
   /** default lame options */
-  public static final String DEFAULT_LAME_OPTIONS = "-S --silent --quiet -h -b 320"; //$NON-NLS-1$
+  public static final String DEFAULT_LAME_OPTIONS = "-S -h -b 320"; //$NON-NLS-1$
 
   /** flac executable */
   private String flacExecutable;
