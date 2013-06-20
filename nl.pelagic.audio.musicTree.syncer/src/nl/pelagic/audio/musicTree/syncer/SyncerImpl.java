@@ -296,7 +296,7 @@ public class SyncerImpl implements Syncer {
     assert (musicTreeConfiguration != null);
     assert (musicTreeConfiguration.validate(false) == null);
     assert (directoryToSync != null);
-    assert (FileUtils.isFileBelowDirectory(musicTreeConfiguration.getFlacBaseDir(), directoryToSync));
+    assert (FileUtils.isFileBelowDirectory(musicTreeConfiguration.getFlacBaseDir(), directoryToSync, true));
     assert (filter != null);
 
     File mp3Dir = MusicTreeHelpers.flacFileToMp3File(musicTreeConfiguration, directoryToSync);

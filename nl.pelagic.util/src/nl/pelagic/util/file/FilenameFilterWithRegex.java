@@ -98,7 +98,7 @@ public class FilenameFilterWithRegex implements FilenameFilter {
         worker = new FilenameFilter() {
           @Override
           public boolean accept(File dir, String name) {
-            return FileUtils.isFileBelowDirectory(basePathFile, new File(dir, name));
+            return FileUtils.isFileBelowDirectory(basePathFile, new File(dir, name), true);
           }
         };
       } else {
@@ -108,7 +108,7 @@ public class FilenameFilterWithRegex implements FilenameFilter {
         worker = new FilenameFilter() {
           @Override
           public boolean accept(File dir, String name) {
-            if (!FileUtils.isFileBelowDirectory(basePathFile, new File(dir, name))) {
+            if (!FileUtils.isFileBelowDirectory(basePathFile, new File(dir, name), true)) {
               return false;
             }
 

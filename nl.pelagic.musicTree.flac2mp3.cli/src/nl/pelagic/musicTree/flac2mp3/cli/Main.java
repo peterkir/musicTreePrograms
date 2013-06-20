@@ -273,7 +273,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
      * check that entry is below the flac base directory so that it doesn't
      * escape the base directory by doing a ../../..
      */
-    if (!FileUtils.isFileBelowDirectory(musicTreeConfiguration.getFlacBaseDir(), entryToConvert)) {
+    if (!FileUtils.isFileBelowDirectory(musicTreeConfiguration.getFlacBaseDir(), entryToConvert, true)) {
       out.printf(Messages.getString("Main.6"), //$NON-NLS-1$
           entryToConvert.getPath(), musicTreeConfiguration.getFlacBaseDir().getPath());
       return false;

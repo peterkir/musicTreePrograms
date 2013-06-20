@@ -31,7 +31,7 @@ public class MusicTreeHelpers {
     assert (musicTreeConfiguration.validate(false) == null);
     assert (flacFile != null);
 
-    if (!FileUtils.isFileBelowDirectory(musicTreeConfiguration.getFlacBaseDir(), flacFile)) {
+    if (!FileUtils.isFileBelowDirectory(musicTreeConfiguration.getFlacBaseDir(), flacFile, true)) {
       return null;
     }
 

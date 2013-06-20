@@ -19,10 +19,10 @@ import org.junit.Test;
 public class TestFileUtils {
   @Test
   public void testIsFileBelowDirectory_Nulls() {
-    boolean r = FileUtils.isFileBelowDirectory(null, null);
+    boolean r = FileUtils.isFileBelowDirectory(null, null, true);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
 
-    r = FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, null);
+    r = FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, null, true);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
   }
 
@@ -30,13 +30,13 @@ public class TestFileUtils {
   public void testIsFileBelowDirectory_Directory_DoesNotExist() {
     boolean r =
         FileUtils.isFileBelowDirectory(new File("somedirectorythatdoesnotexist"), new File(
-            TestConstants.tmpTestBaseDir, ".gitignore"));
+            TestConstants.tmpTestBaseDir, ".gitignore"), true);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
   }
 
   @Test
   public void testIsFileBelowDirectory_Directory_IsFile() {
-    boolean r = FileUtils.isFileBelowDirectory(new File(TestConstants.tmpTestBaseDir, ".gitignore"), null);
+    boolean r = FileUtils.isFileBelowDirectory(new File(TestConstants.tmpTestBaseDir, ".gitignore"), null, true);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
   }
 
@@ -44,21 +44,24 @@ public class TestFileUtils {
   public void testIsFileBelowDirectory_Directory_NameAlike() {
     boolean r =
         FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, new File(TestConstants.tmpTestBaseDir2,
-            ".gitignore"));
+            ".gitignore"), true);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
   }
 
   @Test
   public void testIsFileBelowDirectory_Directory_Normal_Same() {
-    boolean r = FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, TestConstants.tmpTestBaseDir);
+    boolean r = FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, TestConstants.tmpTestBaseDir, true);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.TRUE));
+
+    r = FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, TestConstants.tmpTestBaseDir, false);
+    assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
   }
 
   @Test
   public void testIsFileBelowDirectory_Directory_Normal_Below() {
     boolean r =
         FileUtils.isFileBelowDirectory(TestConstants.tmpTestBaseDir, new File(TestConstants.tmpTestBaseDir,
-            ".gitignore"));
+            ".gitignore"), true);
     assertThat(Boolean.valueOf(r), equalTo(Boolean.TRUE));
   }
 

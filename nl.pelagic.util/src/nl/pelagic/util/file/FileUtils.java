@@ -22,10 +22,12 @@ public class FileUtils {
    * @param directory the directory. When null or not an existing directory then
    *          false is returned.
    * @param file the file. When null then false is returned.
+   * @param allowEqual true to also return true when directory and file are
+   *          equal
    * @return true when file is equal to directory or when file is below
    *         directory
    */
-  public static boolean isFileBelowDirectory(File directory, File file) {
+  public static boolean isFileBelowDirectory(File directory, File file, boolean allowEqual) {
     if ((directory == null) || !directory.isDirectory() || (file == null)) {
       return false;
     }
@@ -33,7 +35,7 @@ public class FileUtils {
     try {
       String directoryPath = directory.getCanonicalPath();
       String filePath = file.getCanonicalPath();
-      return (directoryPath.equals(filePath)) || filePath.startsWith(directoryPath + File.separator);
+      return ((allowEqual && directoryPath.equals(filePath))) || filePath.startsWith(directoryPath + File.separator);
     }
     catch (IOException e) {
       /* swallow, can't be covered by a test */

@@ -108,7 +108,7 @@ public class MusicTreeConfiguration {
     }
 
     /* check mp3 directory is NOT a sub directory of flac base directory */
-    if (FileUtils.isFileBelowDirectory(flacBaseDir, mp3BaseDir)) {
+    if (FileUtils.isFileBelowDirectory(flacBaseDir, mp3BaseDir, true)) {
       result.add(String.format(Messages.getString("MusicTreeConfiguration.2"), //$NON-NLS-1$
           mp3BaseDir.getPath(), flacBaseDir.getPath()));
     }
