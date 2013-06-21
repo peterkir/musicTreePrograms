@@ -18,7 +18,7 @@
 	</target>
 
 	<target name="build" depends="iterate_init">
-		<iterate target="build" />
+		<ant dir="build" target="build" />
 	</target>
 
 	<target name="junit" depends="iterate_init">
