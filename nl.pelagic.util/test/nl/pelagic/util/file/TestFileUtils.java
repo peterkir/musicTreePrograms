@@ -143,6 +143,16 @@ public class TestFileUtils {
     FileUtils.copy(srcFile, new File(dstFile, "testCopy_DstExists.dst"));
   }
 
+  @Test(expected = FileAlreadyExistsException.class)
+  public void testCopy_DstEqualToSrc() throws FileAlreadyExistsException, FileNotFoundException, IOException {
+    FileUtils.copy(TestConstants.tmpTestBaseDir, TestConstants.tmpTestBaseDir);
+  }
+
+  @Test(expected = FileAlreadyExistsException.class)
+  public void testCopy_DstBelowSrc() throws FileAlreadyExistsException, FileNotFoundException, IOException {
+    FileUtils.copy(TestConstants.tmpTestBaseDir, new File(TestConstants.tmpTestBaseDir, "subdir"));
+  }
+
   @Test
   public void testCopy_File() throws FileAlreadyExistsException, FileNotFoundException, IOException {
     File srcFile = new File("bnd.bnd");
@@ -159,6 +169,7 @@ public class TestFileUtils {
   public void testCopy_Directory() throws FileAlreadyExistsException, FileNotFoundException, IOException {
     File srcDir = TestConstants.tmpTestBaseDir;
     File dstDir = new File("test", "testCopy_Directory.dst");
+    dstDir.deleteOnExit();
 
     FileUtils.copy(srcDir, dstDir);
 
@@ -176,10 +187,12 @@ public class TestFileUtils {
   @Test
   public void testCopy_EmptyDirectory() throws FileAlreadyExistsException, FileNotFoundException, IOException {
     File srcDir = new File("test", "testCopy_EmptyDirectory.src");
+    srcDir.deleteOnExit();
     if (!srcDir.mkdirs()) {
       throw new IOException("could not create srcDir " + srcDir.getPath());
     }
     File dstDir = new File("test", "testCopy_EmptyDirectory.dst");
+    dstDir.deleteOnExit();
 
     FileUtils.copy(srcDir, dstDir);
 

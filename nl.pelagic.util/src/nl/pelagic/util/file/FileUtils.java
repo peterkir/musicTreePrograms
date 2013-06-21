@@ -114,13 +114,13 @@ public class FileUtils {
    * </ul>
    * </ul>
    * 
-   * FIXME dst must not be below src when copying directories
-   * 
    * @param src the input file
    * @param dst the output file
    * @throws IOException upon a create, read or write error
    * @throws FileAlreadyExistsException if the parent directory of dst could not
-   *           be created (for example because it already exists as a file)
+   *           be created (for example because it already exists as a file), or
+   *           when the destination directory is equal to/below the source
+   *           directory (when copying directories)
    * @throws FileNotFoundException when src does not exist or when dst exists
    *           but is a directory rather than a regular file, does not exist but
    *           cannot be created
@@ -154,6 +154,11 @@ public class FileUtils {
     }
 
     if (src.isDirectory()) {
+      if (isFileBelowDirectory(src, dst, true)) {
+        throw new FileAlreadyExistsException(String.format(Messages.getString("FileUtils.5"), //$NON-NLS-1$
+            dst.getPath(), src.getPath()));
+      }
+
       File srcDirFiles[] = src.listFiles();
       if (srcDirFiles.length == 0) {
         if (!DirUtils.mkdir(dst)) {
