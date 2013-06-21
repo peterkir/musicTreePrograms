@@ -43,16 +43,16 @@ import aQute.bnd.annotation.component.Reference;
 })
 public class Main implements Runnable, ShutdownHookParticipant {
   /** the application logger name */
-  private final String LOGGER_APPLICATION_NAME = "nl.pelagic"; //$NON-NLS-1$
+  static private final String LOGGER_APPLICATION_NAME = "nl.pelagic"; //$NON-NLS-1$
 
   /** the application logger level to allow */
-  private final Level LOGGER_APPLICATION_LEVEL = Level.SEVERE;
+  static private final Level LOGGER_APPLICATION_LEVEL = Level.SEVERE;
 
   /** the jaudiotagger library logger name */
-  private final String LOGGER_JAUDIOTAGGER_NAME = "org.jaudiotagger"; //$NON-NLS-1$
+  static private final String LOGGER_JAUDIOTAGGER_NAME = "org.jaudiotagger"; //$NON-NLS-1$
 
   /** the jaudiotagger library logger level to allow */
-  private final Level LOGGER_JAUDIOTAGGER_LEVEL = Level.SEVERE;
+  static private final Level LOGGER_JAUDIOTAGGER_LEVEL = Level.SEVERE;
 
   /** the program name */
   static final String PROGRAM_NAME = "audiotagchecker"; //$NON-NLS-1$
@@ -66,6 +66,18 @@ public class Main implements Runnable, ShutdownHookParticipant {
   /*
    * Construction
    */
+
+  /**
+   * The set of (lowercase) filename extensions (without the dot) supported by
+   * the jaudiotagger library
+   */
+  private static final Set<String> supportedExtensions = new TreeSet<>();
+
+  static {
+    for (SupportedFileFormat format : SupportedFileFormat.values()) {
+      supportedExtensions.add(format.getFilesuffix().toLowerCase());
+    }
+  }
 
   /**
    * Default constructor
@@ -182,7 +194,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
    * @param bundleContext the bundle context
    */
   @Activate
-  protected void activate(BundleContext bundleContext) {
+  void activate(BundleContext bundleContext) {
     String ex = bundleContext.getProperty(PROGRAM_NAME + "." + SETTING_STAYALIVE); //$NON-NLS-1$
     if (ex != null) {
       stayAlive = Boolean.parseBoolean(ex);
@@ -290,208 +302,6 @@ public class Main implements Runnable, ShutdownHookParticipant {
    */
 
   /**
-   * Print an overview of the known tag checkers
-   * 
-   * @param out the stream to print to
-   */
-  void listTagCheckers(PrintStream out) {
-    String fmt = "%30s  %s%n"; //$NON-NLS-1$
-
-    out.println();
-
-    String m1 = Messages.getString("Main.4"); //$NON-NLS-1$
-    String u1 = m1.replaceAll(".", "="); //$NON-NLS-1$//$NON-NLS-2$
-    out.println(m1);
-    out.println(u1);
-
-    m1 = Messages.getString("Main.5"); //$NON-NLS-1$
-    u1 = m1.replaceAll(".", "="); //$NON-NLS-1$//$NON-NLS-2$
-    String m2 = Messages.getString("Main.6"); //$NON-NLS-1$
-    String u2 = m2.replaceAll(".", "="); //$NON-NLS-1$ //$NON-NLS-2$
-    out.printf(fmt, m1, m2);
-    out.printf(fmt, u1, u2);
-
-    Map<String, String> checkers = new TreeMap<>();
-    for (TagChecker tagChecker : tagCheckers) {
-      checkers.put(tagChecker.getClass().getSimpleName(), tagChecker.getClass().getName());
-    }
-    for (Entry<String, String> entry : checkers.entrySet()) {
-      out.printf(fmt, entry.getKey(), entry.getValue());
-    }
-  }
-
-  /*
-   * Main
-   */
-
-  /**
-   * Since we're registered as a Runnable with the main.thread property we get
-   * called when the system is fully initialised.
-   */
-  @Override
-  public void run() {
-    boolean success = doMain(System.out, System.err);
-
-    if (stayAlive) {
-      System.out.printf(Messages.getString("Main.7")); //$NON-NLS-1$
-      try {
-        Thread.sleep(Long.MAX_VALUE);
-      }
-      catch (InterruptedException e) {
-        /* swallow */
-      }
-    }
-
-    if (!success) {
-      /* can't be covered by a test */
-      System.exit(1);
-    }
-  }
-
-  /**
-   * Run the main program
-   * 
-   * @param out stdout
-   * @param err stderr
-   * @return true when successful
-   */
-  boolean doMain(PrintStream out, PrintStream err) {
-    /* setup the commandline options parser */
-    CommandLineOptions commandLineOptions = new CommandLineOptions();
-    CmdLineParser parser = new CmdLineParser(commandLineOptions);
-
-    /*
-     * if the launcher didn't set our command line options then set empty
-     * arguments (use defaults)
-     */
-    if (args == null) {
-      args = new String[0];
-    }
-
-    /* parse the command line arguments */
-    try {
-      parser.parseArgument(args);
-    }
-    catch (CmdLineException e) {
-      err.println(e.getMessage());
-      commandLineOptions.setHelp(true);
-    }
-
-    /*
-     * print a list of tag checkers when so requested and exit when no help must
-     * be shown
-     */
-    if (commandLineOptions.isListCheckers()) {
-      listTagCheckers(err);
-      if (!commandLineOptions.isHelp()) {
-        return true;
-      }
-    }
-
-    /* print usage when so requested and exit */
-    if (commandLineOptions.isHelp()) {
-      CommandLineOptions.usage(err, PROGRAM_NAME, parser);
-      return false;
-    }
-
-    /*
-     * Validate the configuration
-     */
-
-    if (!validateConfiguration(commandLineOptions, err)) {
-      if (commandLineOptions.isListCheckers()) {
-        listTagCheckers(err);
-      }
-      CommandLineOptions.usage(err, PROGRAM_NAME, parser);
-      return false;
-    }
-
-    /*
-     * Setup config
-     */
-
-    /* callback */
-    Callback callback = new Callback();
-    callback.setVerbose(commandLineOptions.isVerbose());
-    callback.setExtraVerbose(commandLineOptions.isExtraVerbose());
-
-    /* disabled / enabled checkers */
-    Set<String> disabledTagCheckers = new TreeSet<>(commandLineOptions.getDisabledTagCheckers());
-    Set<String> enabledTagCheckers = new TreeSet<>(commandLineOptions.getEnabledTagCheckers());
-
-    /* auto tag checker configuration */
-    AudioTagCheckerConfiguration config = new AudioTagCheckerConfiguration();
-    /* checkPath is set in the loop */
-    config.setRecursiveScan(!commandLineOptions.isNonRecursive());
-    config.setRegexInAllDirs(commandLineOptions.isRegexInAllDirs());
-
-    String regex = commandLineOptions.getRegex();
-    regex = constructExtensionRegex(regex, config);
-    assert ((regex != null) && !regex.isEmpty());
-    int flags = Pattern.UNICODE_CASE;
-    if (!commandLineOptions.isRegexCaseSensitive()) {
-      flags |= Pattern.CASE_INSENSITIVE;
-    }
-    config.setRegexPattern(Pattern.compile(regex, flags));
-
-    config.setDisabledTagCheckers((disabledTagCheckers.isEmpty()) ? null : disabledTagCheckers);
-    config.setEnabledTagCheckers((enabledTagCheckers.isEmpty()) ? null : enabledTagCheckers);
-
-    /*
-     * Run
-     */
-
-    boolean result = true;
-
-    printSettings(out, commandLineOptions, config);
-    Date startDate = new Date();
-
-    /* loop over all check paths */
-    for (File checkPath : commandLineOptions.getCheckPaths()) {
-      if (!run.get()) {
-        break;
-      }
-
-      config.setCheckPath(checkPath);
-
-      boolean resultInLoop = false;
-      try {
-        resultInLoop = audioTagChecker.check(config, callback);
-        if (!resultInLoop) {
-          out.printf(Messages.getString("Main.8"), config.getCheckPath()); //$NON-NLS-1$
-        }
-      }
-      catch (IOException e) {
-        out.printf(Messages.getString("Main.9"), config.getCheckPath(), //$NON-NLS-1$
-            e.getLocalizedMessage());
-      }
-
-      result = result && resultInLoop;
-    }
-
-    if (commandLineOptions.isVerbose()) {
-      out.println();
-    }
-
-    Date endDate = new Date();
-    printDiagnostics(out, commandLineOptions, startDate, endDate);
-
-    return result;
-  }
-
-  /**
-   * The set of (lowercase) filename extensions (without the dot) supported by
-   * the jaudiotagger library
-   */
-  private static final Set<String> supportedExtensions = new TreeSet<>();
-
-  static {
-    for (SupportedFileFormat format : SupportedFileFormat.values()) {
-      supportedExtensions.add(format.getFilesuffix().toLowerCase());
-    }
-  }
-
-  /**
    * Construct a default regular expression when the incoming regex is null or
    * empty. The default expression is based on the jaudiotagger library
    * supported extensions. When such an expression is constructed then the
@@ -516,10 +326,6 @@ public class Main implements Runnable, ShutdownHookParticipant {
     }
     return regex;
   }
-
-  /*
-   * Private Methods
-   */
 
   /**
    * Print the bundle configuration
@@ -635,15 +441,234 @@ public class Main implements Runnable, ShutdownHookParticipant {
     }
   }
 
+  /**
+   * Print an overview of the known tag checkers
+   * 
+   * @param out the stream to print to
+   */
+  void listTagCheckers(PrintStream out) {
+    String fmt = "%30s  %s%n"; //$NON-NLS-1$
+
+    out.println();
+
+    String m1 = Messages.getString("Main.4"); //$NON-NLS-1$
+    String u1 = m1.replaceAll(".", "="); //$NON-NLS-1$//$NON-NLS-2$
+    out.println(m1);
+    out.println(u1);
+
+    m1 = Messages.getString("Main.5"); //$NON-NLS-1$
+    u1 = m1.replaceAll(".", "="); //$NON-NLS-1$//$NON-NLS-2$
+    String m2 = Messages.getString("Main.6"); //$NON-NLS-1$
+    String u2 = m2.replaceAll(".", "="); //$NON-NLS-1$ //$NON-NLS-2$
+    out.printf(fmt, m1, m2);
+    out.printf(fmt, u1, u2);
+
+    Map<String, String> checkers = new TreeMap<>();
+    for (TagChecker tagChecker : tagCheckers) {
+      checkers.put(tagChecker.getClass().getSimpleName(), tagChecker.getClass().getName());
+    }
+    for (Entry<String, String> entry : checkers.entrySet()) {
+      out.printf(fmt, entry.getKey(), entry.getValue());
+    }
+  }
+
+  /**
+   * Stay alive, if needed (which is when the component has a SETTING_STAYALIVE
+   * property set to true).
+   * 
+   * @param err the stream to print a 'staying alive' message to
+   */
+  void stayAlive(PrintStream err) {
+    if (!stayAlive) {
+      return;
+    }
+
+    err.printf(Messages.getString("Main.7")); //$NON-NLS-1$
+
+    try {
+      Thread.sleep(Long.MAX_VALUE);
+    }
+    catch (InterruptedException e) {
+      /* swallow */
+    }
+  }
+
   /*
    * ShutdownHookParticipant
    */
 
-  /** true while we must keep running */
-  private AtomicBoolean run = new AtomicBoolean(true);
+  /** true when we have to stop */
+  private AtomicBoolean stop = new AtomicBoolean(false);
 
   @Override
   public void shutdownHook() {
-    run.set(false);
+    stop.set(true);
+  }
+
+  /*
+   * Main
+   */
+
+  /**
+   * Run the main program
+   * 
+   * @param out the stream to print messages to
+   * @param err the stream to print errors to
+   * @return true when successful
+   */
+  boolean doMain(PrintStream out, PrintStream err) {
+    if (args == null) {
+      /*
+       * the launcher didn't set our command line options so set empty arguments
+       * (use defaults)
+       */
+      args = new String[0];
+    }
+
+    /*
+     * Parse the command line
+     */
+
+    CommandLineOptions commandLineOptions = new CommandLineOptions();
+    CmdLineParser parser = new CmdLineParser(commandLineOptions);
+    try {
+      parser.parseArgument(args);
+    }
+    catch (CmdLineException e) {
+      err.printf(Messages.getString("Main.32"), e.getLocalizedMessage()); //$NON-NLS-1$
+      commandLineOptions.setHelp(true);
+    }
+
+    /*
+     * Process command-line options
+     */
+
+    if (commandLineOptions.isListCheckers()) {
+      /*
+       * print a list of tag checkers when so requested and exit when no help
+       * must be shown
+       */
+      listTagCheckers(err);
+      if (!commandLineOptions.isHelp()) {
+        return true;
+      }
+    }
+
+    /* print usage when so requested and exit */
+    if (commandLineOptions.isHelp()) {
+      try {
+        /* can't be covered by a test */
+        int cols = Integer.parseInt(System.getenv("COLUMNS")); //$NON-NLS-1$
+        if (cols > 80) {
+          parser.setUsageWidth(cols);
+        }
+      }
+      catch (NumberFormatException e) {
+        /* swallow, can't be covered by a test */
+      }
+
+      CommandLineOptions.usage(err, PROGRAM_NAME, parser);
+      return false;
+    }
+
+    /*
+     * Validate the configuration
+     */
+
+    if (!validateConfiguration(commandLineOptions, err)) {
+      if (commandLineOptions.isListCheckers()) {
+        listTagCheckers(err);
+      }
+      CommandLineOptions.usage(err, PROGRAM_NAME, parser);
+      return false;
+    }
+
+    /*
+     * Setup config
+     */
+
+    /* callback */
+    Callback callback = new Callback();
+    callback.setVerbose(commandLineOptions.isVerbose());
+    callback.setExtraVerbose(commandLineOptions.isExtraVerbose());
+
+    /* disabled / enabled checkers */
+    Set<String> disabledTagCheckers = new TreeSet<>(commandLineOptions.getDisabledTagCheckers());
+    Set<String> enabledTagCheckers = new TreeSet<>(commandLineOptions.getEnabledTagCheckers());
+
+    /* auto tag checker configuration */
+    AudioTagCheckerConfiguration config = new AudioTagCheckerConfiguration();
+    /* checkPath is set in the loop */
+    config.setRecursiveScan(!commandLineOptions.isNonRecursive());
+    config.setRegexInAllDirs(commandLineOptions.isRegexInAllDirs());
+
+    String regex = commandLineOptions.getRegex();
+    regex = constructExtensionRegex(regex, config);
+    assert ((regex != null) && !regex.isEmpty());
+    int flags = Pattern.UNICODE_CASE;
+    if (!commandLineOptions.isRegexCaseSensitive()) {
+      flags |= Pattern.CASE_INSENSITIVE;
+    }
+    config.setRegexPattern(Pattern.compile(regex, flags));
+
+    config.setDisabledTagCheckers((disabledTagCheckers.isEmpty()) ? null : disabledTagCheckers);
+    config.setEnabledTagCheckers((enabledTagCheckers.isEmpty()) ? null : enabledTagCheckers);
+
+    /*
+     * Run
+     */
+
+    boolean result = true;
+
+    printSettings(out, commandLineOptions, config);
+    Date startDate = new Date();
+
+    /* loop over all check paths */
+    for (File checkPath : commandLineOptions.getCheckPaths()) {
+      if (stop.get()) {
+        break;
+      }
+
+      config.setCheckPath(checkPath);
+
+      boolean resultInLoop = false;
+      try {
+        resultInLoop = audioTagChecker.check(config, callback);
+        if (!resultInLoop) {
+          err.printf(Messages.getString("Main.8"), config.getCheckPath()); //$NON-NLS-1$
+        }
+      }
+      catch (IOException e) {
+        err.printf(Messages.getString("Main.9"), config.getCheckPath(), //$NON-NLS-1$
+            e.getLocalizedMessage());
+      }
+
+      result = result && resultInLoop;
+    }
+
+    if (commandLineOptions.isVerbose()) {
+      err.println();
+    }
+
+    Date endDate = new Date();
+    printDiagnostics(err, commandLineOptions, startDate, endDate);
+
+    return result;
+  }
+
+  /*
+   * Since we're registered as a Runnable with the main.thread property we get
+   * called when the system is fully initialised.
+   */
+  @Override
+  public void run() {
+    boolean success = doMain(System.out, System.err);
+
+    stayAlive(System.err);
+
+    if (!success) {
+      /* can't be covered by a test */
+      System.exit(1);
+    }
   }
 }

@@ -345,7 +345,7 @@ public class TestMain {
       parser.parseArgument(args);
     }
     catch (CmdLineException e) {
-      tmp.println(e.getMessage());
+      tmp.printf(Messages.getString("Main.32"), e.getLocalizedMessage());
     }
     CommandLineOptions.usage(tmp, Main.PROGRAM_NAME, parser);
     tmp.close();
@@ -516,11 +516,11 @@ public class TestMain {
     boolean r = main.doMain(out, err);
 
     assertThat(Boolean.valueOf(r), equalTo(Boolean.TRUE));
-    assertThat(Integer.valueOf(out.strings.size()), equalTo(Integer.valueOf(1)));
-    String s = out.strings.get(0);
+    assertThat(Integer.valueOf(out.strings.size()), equalTo(Integer.valueOf(0)));
+    assertThat(Integer.valueOf(err.strings.size()), equalTo(Integer.valueOf(1)));
+    String s = err.strings.get(0);
     assertThat(s, notNullValue());
     assertThat(s, equalTo(""));
-    assertThat(Integer.valueOf(err.strings.size()), equalTo(Integer.valueOf(0)));
   }
 
   @Test
@@ -548,14 +548,14 @@ public class TestMain {
     boolean r = main.doMain(out, err);
 
     assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
-    assertThat(Integer.valueOf(out.strings.size()), equalTo(Integer.valueOf(2)));
-    String s = out.strings.get(0);
+    assertThat(Integer.valueOf(out.strings.size()), equalTo(Integer.valueOf(0)));
+    assertThat(Integer.valueOf(err.strings.size()), equalTo(Integer.valueOf(2)));
+    String s = err.strings.get(0);
     assertThat(s, notNullValue());
     assertThat(s, equalTo(String.format(Messages.getString("Main.8"), cp)));
-    s = out.strings.get(1);
+    s = err.strings.get(1);
     assertThat(s, notNullValue());
     assertThat(s, equalTo(String.format(Messages.getString("Main.8"), cp)));
-    assertThat(Integer.valueOf(err.strings.size()), equalTo(Integer.valueOf(0)));
   }
 
   @Test
@@ -604,17 +604,17 @@ public class TestMain {
     boolean r = main.doMain(out, err);
 
     assertThat(Boolean.valueOf(r), equalTo(Boolean.FALSE));
-    assertThat(Integer.valueOf(out.strings.size()), equalTo(Integer.valueOf(3)));
-    String s = out.strings.get(0);
+    assertThat(Integer.valueOf(out.strings.size()), equalTo(Integer.valueOf(0)));
+    assertThat(Integer.valueOf(err.strings.size()), equalTo(Integer.valueOf(3)));
+    String s = err.strings.get(0);
     assertThat(s, notNullValue());
     assertThat(s, equalTo(String.format(Messages.getString("Main.9"), cp, "test")));
-    s = out.strings.get(1);
+    s = err.strings.get(1);
     assertThat(s, notNullValue());
     assertThat(s, equalTo(String.format(Messages.getString("Main.9"), cp, "test")));
-    s = out.strings.get(2);
+    s = err.strings.get(2);
     assertThat(s, notNullValue());
     assertThat(s, equalTo(String.format(Messages.getString("Main.9"), cp, "test")));
-    assertThat(Integer.valueOf(err.strings.size()), equalTo(Integer.valueOf(0)));
   }
 
   @Test(timeout = 1000)
