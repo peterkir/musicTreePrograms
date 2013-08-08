@@ -18,6 +18,9 @@
        <Package name="nl.pelagic.audio.musicTree.configuration.api" />
      </Match>
      <Match>
+       <Package name="nl.pelagic.audio.musicTree.configuration.api.i18n" />
+     </Match>
+     <Match>
        <Package name="nl.pelagic.audio.musicTree.syncer" />
      </Match>
      <Match>
@@ -30,16 +33,67 @@
        <Package name="nl.pelagic.audio.musicTree.syncer.testhelpers" />
      </Match>
      <Match>
+       <Package name="nl.pelagic.audio.musicTree.util" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.api" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.basic" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.basic.i18n" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.cli" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.cli.i18n" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.common" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.converter.flac" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.converter.mp3" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.filename" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.filename.i18n" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.id3v1" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.id3v1.i18n" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.types" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.unchar" />
+     </Match>
+     <Match>
+       <Package name="nl.pelagic.audio.tag.checker.unchar.i18n" />
+     </Match>
+     <Match>
        <Package name="nl.pelagic.jaudiotagger.util" />
      </Match>
      <Match>
-       <Package name="nl.pelagic.musicTree.flac2mp3" />
+       <Package name="nl.pelagic.musicTree.flac2mp3.cli" />
      </Match>
      <Match>
-       <Package name="nl.pelagic.musicTree.flac2mp3.i18n" />
+       <Package name="nl.pelagic.musicTree.flac2mp3.cli.i18n" />
      </Match>
      <Match>
-       <Package name="nl.pelagic.musicTree.flac2mp3.testhelpers" />
+       <Package name="nl.pelagic.musicTree.flac2mp3.cli.testhelpers" />
      </Match>
      <Match>
        <Package name="nl.pelagic.shell.script.listener" />
