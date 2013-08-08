@@ -5,9 +5,10 @@
 	nl.pelagic.util;version=latest,\
 	biz.aQute.bnd.annotation,\
 	osgi.core,\
-	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file,\
 	org.kohsuke.args4j,\
-	nl.pelagic.shutdownhook.api;version=latest
+	nl.pelagic.shutdownhook.api;version=latest,\
+	${workspace}/cnf/dependencies/org.junit/junit-latest.jar;version=file,\
+	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-latest.jar;version=file
 
 Private-Package: nl.pelagic.musicTree.flac2mp3.cli,\
 	nl.pelagic.musicTree.flac2mp3.cli.i18n

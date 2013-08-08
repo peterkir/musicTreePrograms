@@ -1,6 +1,7 @@
 -buildpath: biz.aQute.bnd.annotation,\
 	nl.pelagic.util;version=latest,\
-	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+	${workspace}/cnf/dependencies/org.junit/junit-latest.jar;version=file,\
+	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-latest.jar;version=file
 Export-Package: nl.pelagic.audio.musicTree.configuration.api,\
 	nl.pelagic.audio.musicTree.util
 Bundle-Version: 1.1.1

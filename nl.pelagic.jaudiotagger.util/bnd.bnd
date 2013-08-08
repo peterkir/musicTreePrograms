@@ -1,5 +1,6 @@
 -buildpath: jaudiotagger,\
-	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+	${workspace}/cnf/dependencies/org.junit/junit-latest.jar;version=file,\
+	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-latest.jar;version=file
 Export-Package: nl.pelagic.jaudiotagger.util
 Bundle-Version: 1.1.0
 Bundle-Name: Pelagic JAudioTagger Utilities Library

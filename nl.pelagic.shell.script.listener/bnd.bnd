@@ -1,6 +1,7 @@
 -buildpath: nl.pelagic.shell.script.listener.api;version=latest,\
 	biz.aQute.bnd.annotation,\
-	${workspace}/cnf/dependencies/org.junit/org.junit-4.10.jar;version=file
+	${workspace}/cnf/dependencies/org.junit/junit-latest.jar;version=file,\
+	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-latest.jar;version=file
 Private-Package: nl.pelagic.shell.script.listener
 Service-Component: *
 Bundle-Version: 1.0.2
