@@ -5,8 +5,18 @@
 		<Bug pattern="RU_INVOKE_RUN" />
 	</Match>
 	<Match>
-		<Class name="nl.pelagic.musicTree.flac2mp3.Main" />
+		<Class name="nl.pelagic.musicTree.flac2mp3.cli.Main" />
 		<Method name="run" />
 		<Bug pattern="DM_EXIT" />
+	</Match>
+	<Match>
+		<Class name="nl.pelagic.audio.tag.checker.cli.Main" />
+		<Method name="run" />
+		<Bug pattern="DM_EXIT" />
+	</Match>
+	<Match>
+		<Class name="nl.pelagic.audio.tag.checker.cli.Main" />
+		<Method name="listTagCheckers" />
+		<Bug pattern="RE_POSSIBLE_UNINTENDED_PATTERN" />
 	</Match>
 </FindBugsFilter>

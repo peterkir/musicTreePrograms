@@ -34,7 +34,7 @@ public class UnwantedCharactersChecker implements TagChecker {
   };
 
   /** The regular expression for unwanted characters, for incremental matching */
-  private static final String REGEX_UNCHAR = ".*?([^" + new String(allowedCharacters) + "]+)"; //$NON-NLS-1$ //$NON-NLS-2$
+  private static final String REGEX_UNCHAR;
 
   /** The compiled regex expression REGEX_UNCHAR */
   public static final Pattern patternUnchar;
@@ -44,6 +44,7 @@ public class UnwantedCharactersChecker implements TagChecker {
    */
   static {
     try {
+      REGEX_UNCHAR = ".*?([^" + new String(allowedCharacters, "UTF-8") + "]+)"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
       patternUnchar = Pattern.compile(REGEX_UNCHAR);
     }
     catch (Throwable e) {
