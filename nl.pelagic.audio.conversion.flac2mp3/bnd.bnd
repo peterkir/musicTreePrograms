@@ -5,8 +5,8 @@
 	nl.pelagic.jaudiotagger.util;version=latest,\
 	jaudiotagger,\
 	biz.aQute.bnd.annotation,\
-	${workspace}/cnf/dependencies/org.junit/junit-latest.jar;version=file,\
-	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-latest.jar;version=file
+	${workspace}/cnf/dependencies/org.junit/junit-4.11.jar;version=file,\
+	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
 Private-Package: nl.pelagic.audio.conversion.flac2mp3,\
 	nl.pelagic.audio.conversion.flac2mp3.i18n
 Service-Component: *

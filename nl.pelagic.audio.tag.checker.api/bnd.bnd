@@ -1,7 +1,7 @@
 -buildpath: jaudiotagger,\
 	biz.aQute.bnd.annotation,\
-	${workspace}/cnf/dependencies/org.junit/junit-latest.jar;version=file,\
-	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-latest.jar;version=file
+	${workspace}/cnf/dependencies/org.junit/junit-4.11.jar;version=file,\
+	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
 
 Export-Package: nl.pelagic.audio.tag.checker.api,\
 	nl.pelagic.audio.tag.checker.types,\
