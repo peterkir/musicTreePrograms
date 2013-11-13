@@ -94,7 +94,7 @@ public class TestFlacToMp3Impl {
     flac2mp3Config = new Flac2Mp3Configuration();
     List<String> r = flac2mp3Config.validate();
     if (r != null) {
-      throw new ExceptionInInitializerError("flac2mp3Config did not validate");
+      throw new ExceptionInInitializerError("flac2mp3Config did not validate: " + r);
     }
   }
 
