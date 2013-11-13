@@ -20,5 +20,5 @@
 	nl.pelagic.shutdownhook.api,\
 	nl.pelagic.util
 
-# Dummy include to stop bnd from complaining about an empty bundle
--includeresource: bnd.bnd
+# Pseudo project, do not generate a bundle
+-nobundles
