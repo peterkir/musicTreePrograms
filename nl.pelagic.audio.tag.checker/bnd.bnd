@@ -7,6 +7,6 @@
 	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
 Private-Package: nl.pelagic.audio.tag.checker
 Service-Component: *
-Bundle-Version:1.0.1
+Bundle-Version:1.0.1.${tstamp}
 Bundle-Name: AudioTagChecker - Audio Tag Checker Service
 Bundle-Description: The audio tag checker service.

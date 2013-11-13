@@ -4,7 +4,7 @@
 	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
 Export-Package: nl.pelagic.audio.musicTree.configuration.api,\
 	nl.pelagic.audio.musicTree.util
-Bundle-Version: 1.1.2
+Bundle-Version: 1.1.2.${tstamp}
 Bundle-Name: Music Tree Configuration - API
 Bundle-Description: Configuration API of the music tree
 Private-Package: nl.pelagic.audio.musicTree.configuration.api.i18n

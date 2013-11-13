@@ -4,7 +4,7 @@
 	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
 Private-Package: nl.pelagic.shutdownhook
 Service-Component: *
-Bundle-Version:1.0.2
+Bundle-Version:1.0.2.${tstamp}
 Bundle-Name: Shutdown Hook Thread
 Bundle-Description: This bundle attaches itself to the VM shutdown hook and signals\n\
 	every ShutdownHook participant in case the VM is shut down.\n\

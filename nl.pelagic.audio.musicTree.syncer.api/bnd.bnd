@@ -3,6 +3,6 @@
 	biz.aQute.bnd.annotation,\
 	nl.pelagic.audio.musicTree.configuration.api;version=latest
 Export-Package: nl.pelagic.audio.musicTree.syncer.api
-Bundle-Version: 2.0.1
+Bundle-Version: 2.0.1.${tstamp}
 Bundle-Name: MusicTreeSyncer - API
 Bundle-Description: API for the synchroniser of a tree with flac files into a tree with mp3 files

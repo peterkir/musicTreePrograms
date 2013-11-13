@@ -10,6 +10,6 @@
 Private-Package: nl.pelagic.audio.conversion.flac2mp3,\
 	nl.pelagic.audio.conversion.flac2mp3.i18n
 Service-Component: *
-Bundle-Version:1.0.3
+Bundle-Version:1.0.3.${tstamp}
 Bundle-Name: Audio Conversion - flac to mp3
 Bundle-Description: Convert a flac file into an mp3 file

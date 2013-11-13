@@ -6,7 +6,7 @@
 Private-Package: nl.pelagic.audio.tag.checker.id3v1,\
 	nl.pelagic.audio.tag.checker.id3v1.i18n
 Service-Component: *
-Bundle-Version:1.0.1
+Bundle-Version:1.0.1.${tstamp}
 Bundle-Name: AudioTagChecker - ID3v1 Truncated Field Checker
 Bundle-Description: Perform 'ID3v1 truncated field' checks on a generic tag.\n\
 	\n\
