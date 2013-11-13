@@ -38,3 +38,5 @@ Bundle-ContactAddress: http://www.pelagic.nl
 
 -diffignore: Git-Descriptor,Git-SHA
 -upto: 2.2.0
+
+-baseline: *
