@@ -6,6 +6,6 @@
 Export-Package: nl.pelagic.audio.tag.checker.api,\
 	nl.pelagic.audio.tag.checker.types,\
 	nl.pelagic.audio.tag.checker.common
-Bundle-Version: 1.0.0
+Bundle-Version: 1.0.1
 Bundle-Name: AudioTagChecker - API
 Bundle-Description: The API of the AudioTagChecker application

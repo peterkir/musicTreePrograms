@@ -2,6 +2,6 @@
 	${workspace}/cnf/dependencies/org.junit/junit-4.11.jar;version=file,\
 	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
 Export-Package: nl.pelagic.jaudiotagger.util
-Bundle-Version: 1.1.0
+Bundle-Version: 1.1.1
 Bundle-Name: Pelagic JAudioTagger Utilities Library
 Bundle-Description: This library bundle contains utility methods
