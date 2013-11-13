@@ -7,7 +7,7 @@
 	${workspace}/cnf/dependencies/org.junit/junit-4.11.jar;version=file,\
 	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
 Service-Component: *
-Bundle-Version: 1.0.5
+Bundle-Version:1.0.6
 Bundle-Name: MusicTreeSyncer
 Bundle-Description: Synchronises a tree with flac files into a tree with mp3 files
 Private-Package: nl.pelagic.audio.musicTree.syncer,\

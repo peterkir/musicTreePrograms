@@ -35,3 +35,5 @@ Bundle-Copyright: (c) Pelagic
 Bundle-License: http://www.gnu.org/licenses/gpl-2.0.txt
 Bundle-Vendor: Pelagic
 Bundle-ContactAddress: http://www.pelagic.nl
+
+-upto: 2.2.0
