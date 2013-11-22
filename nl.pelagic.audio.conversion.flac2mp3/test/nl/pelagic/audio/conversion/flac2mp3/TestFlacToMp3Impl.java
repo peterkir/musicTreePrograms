@@ -787,6 +787,27 @@ public class TestFlacToMp3Impl {
   }
 
   @Test
+  public void testConvert_Normal_FileWithQuote() throws IOException {
+    File mp3DstDir = new File(tmpTestDir, "from.flac");
+    File mp3Dst = new File(mp3DstDir, "mp3Dst.mp3");
+    mp3Dst.delete();
+
+    File flac = new File(testdataDir, "laser with \"quotes\" in name.flac");
+
+    try {
+      boolean r = flacToMp3Impl.convert(flac2mp3Config, flac, mp3Dst, false);
+
+      assertThat(Boolean.valueOf(r), equalTo(Boolean.TRUE));
+      assertThat(Boolean.valueOf(mp3DstDir.exists()), equalTo(Boolean.TRUE));
+      assertThat(Boolean.valueOf(mp3Dst.exists()), equalTo(Boolean.TRUE));
+    }
+    finally {
+      mp3Dst.delete();
+      FileUtils.delete(mp3DstDir);
+    }
+  }
+
+  @Test
   public void testConvert_Normal() throws IOException {
     File mp3DstDir = new File(tmpTestDir, "from.flac");
     File mp3Dst = new File(mp3DstDir, "mp3Dst.mp3");

@@ -468,7 +468,7 @@ public class FlacToMp3Impl implements FlacToMp3, ShutdownHookParticipant {
       flacCommandList.add(config.getFlacExecutable());
 
       flacCommandList.addAll(config.getFlacOptions());
-      flacCommandList.add(StringUtils.escQuote(flac.getPath()));
+      flacCommandList.add(flac.getPath());
 
       /* lame */
       List<String> lameCommandList = new LinkedList<>();
@@ -480,19 +480,19 @@ public class FlacToMp3Impl implements FlacToMp3, ShutdownHookParticipant {
       lameCommandList.add("--add-id3v2"); //$NON-NLS-1$
       lameCommandList.add("--pad-id3v2"); //$NON-NLS-1$
       lameCommandList.add("--ta"); //$NON-NLS-1$
-      lameCommandList.add(StringUtils.escQuote(tagInformation.getArtist()));
+      lameCommandList.add(tagInformation.getArtist());
       lameCommandList.add("--tl"); //$NON-NLS-1$
-      lameCommandList.add(StringUtils.escQuote(tagInformation.getAlbum()));
+      lameCommandList.add(tagInformation.getAlbum());
       lameCommandList.add("--tt"); //$NON-NLS-1$
-      lameCommandList.add(StringUtils.escQuote(tagInformation.getTitle()));
+      lameCommandList.add(tagInformation.getTitle());
       lameCommandList.add("--tg"); //$NON-NLS-1$
-      lameCommandList.add(StringUtils.escQuote(tagInformation.getGenre()));
+      lameCommandList.add(tagInformation.getGenre());
       lameCommandList.add("--ty"); //$NON-NLS-1$
-      lameCommandList.add(StringUtils.escQuote(tagInformation.getDate()));
+      lameCommandList.add(tagInformation.getDate());
       lameCommandList.add("--tn"); //$NON-NLS-1$
-      lameCommandList.add(StringUtils.escQuote(tagInformation.getTrackNumber() + "/" + //$NON-NLS-1$
-          tagInformation.getTrackTotal()));
-      lameCommandList.add(StringUtils.escQuote(mp3.getPath()));
+      lameCommandList.add(tagInformation.getTrackNumber() + "/" + //$NON-NLS-1$
+          tagInformation.getTrackTotal());
+      lameCommandList.add(mp3.getPath());
 
       /* re-get the shell script listener */
       listener = shellScriptListener.get();
@@ -520,22 +520,22 @@ public class FlacToMp3Impl implements FlacToMp3, ShutdownHookParticipant {
         List<String> commandList = new LinkedList<>();
         commandList.add("id3v2"); //$NON-NLS-1$
         commandList.add("-a"); //$NON-NLS-1$
-        commandList.add(StringUtils.escQuote(tagInformation.getArtist()));
+        commandList.add(tagInformation.getArtist());
         commandList.add("-A"); //$NON-NLS-1$
-        commandList.add(StringUtils.escQuote(tagInformation.getAlbum()));
+        commandList.add(tagInformation.getAlbum());
         commandList.add("--TPE2"); //$NON-NLS-1$
-        commandList.add(StringUtils.escQuote(tagInformation.getAlbumArtist()));
+        commandList.add(tagInformation.getAlbumArtist());
         commandList.add("-t"); //$NON-NLS-1$
-        commandList.add(StringUtils.escQuote(tagInformation.getTitle()));
+        commandList.add(tagInformation.getTitle());
         commandList.add("-g"); //$NON-NLS-1$
-        commandList.add(StringUtils.escQuote(tagInformation.getGenre()));
+        commandList.add(tagInformation.getGenre());
         commandList.add("-y"); //$NON-NLS-1$
-        commandList.add(StringUtils.escQuote(tagInformation.getDate()));
+        commandList.add(tagInformation.getDate());
         commandList.add("-T"); //$NON-NLS-1$
-        commandList.add(StringUtils.escQuote(tagInformation.getTrackNumber() + "/" + tagInformation.getTrackTotal())); //$NON-NLS-1$
+        commandList.add(tagInformation.getTrackNumber() + "/" + tagInformation.getTrackTotal()); //$NON-NLS-1$
         commandList.add("--TPOS"); //$NON-NLS-1$
-        commandList.add(StringUtils.escQuote(tagInformation.getDiscNumber()));
-        commandList.add(StringUtils.escQuote(mp3.getPath()));
+        commandList.add(tagInformation.getDiscNumber());
+        commandList.add(mp3.getPath());
         listener.addCommand(listener.commandListToString(commandList, 0));
       }
 
