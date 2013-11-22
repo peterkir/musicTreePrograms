@@ -1,4 +1,6 @@
--buildpath: nl.pelagic.shell.script.listener.api;version=latest,\
+-buildpath: \
+	nl.pelagic.shell.script.listener.api;version=latest,\
+	nl.pelagic.util;version=latest,\
 	biz.aQute.bnd.annotation,\
 	${workspace}/cnf/dependencies/org.junit/junit-4.11.jar;version=file,\
 	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file

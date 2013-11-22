@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.List;
 
 import nl.pelagic.shell.script.listener.api.ShellScriptListener;
+import nl.pelagic.util.string.StringUtils;
 import aQute.bnd.annotation.component.Component;
 
 /**
@@ -137,7 +138,7 @@ public class ShellScriptListenerImpl implements ShellScriptListener {
       } else {
         /* cmd is a regular argument, so quote it */
         sb.append("\""); //$NON-NLS-1$
-        sb.append(cmd);
+        sb.append(StringUtils.escQuote(cmd));
         sb.append("\""); //$NON-NLS-1$
       }
 
