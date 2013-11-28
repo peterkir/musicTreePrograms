@@ -71,7 +71,7 @@
 		</for>
 	</target>
 
-	<target name="javadoc" depends="template.init">
+	<target name="javadoc" depends="template.build">
 		<javadoc
 			windowtitle="${project.name}"
 			doctitle="${project.name}"
