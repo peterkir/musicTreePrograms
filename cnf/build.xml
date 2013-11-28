@@ -113,7 +113,7 @@
 	</target>
 
 
-	<target name="findbugs" depends="template.init,findbugs_init,template.build">
+	<target name="findbugs" depends="template.init,findbugs_init,template.build" unless="no.findbugs">
 		<property name="project.bootclasspath.adjusted" value="${project.bootclasspath}" />
 		<property name="project.buildpath.adjusted" value="${project.buildpath}" />
 		<property name="project.testpath.adjusted" value="${project.testpath}" />
