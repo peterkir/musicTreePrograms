@@ -4,7 +4,7 @@
 	nl.pelagic.audio.musicTree.syncer.api;version=latest,\
 	nl.pelagic.util;version=latest,\
 	biz.aQute.bnd.annotation,\
-	osgi.core,\
+	osgi.core;version=${osgi.core.version},\
 	org.kohsuke.args4j,\
 	nl.pelagic.shutdownhook.api;version=latest,\
 	${junit}
