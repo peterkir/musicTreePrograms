@@ -2,6 +2,7 @@ package nl.pelagic.audio.tag.checker.cli;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Dictionary;
 
 import org.junit.Ignore;
@@ -88,37 +89,37 @@ public class MyBundleContext implements BundleContext {
   }
 
   @Override
-  public ServiceRegistration registerService(String[] clazzes, Object service, Dictionary properties) {
+  public ServiceRegistration<?> registerService(String[] clazzes, Object service, Dictionary<String, ?> properties) {
     return null;
   }
 
   @Override
-  public ServiceRegistration registerService(String clazz, Object service, Dictionary properties) {
+  public ServiceRegistration<?> registerService(String clazz, Object service, Dictionary<String, ?> properties) {
     return null;
   }
 
   @Override
-  public ServiceReference[] getServiceReferences(String clazz, String filter) throws InvalidSyntaxException {
+  public ServiceReference<?>[] getServiceReferences(String clazz, String filter) throws InvalidSyntaxException {
     return null;
   }
 
   @Override
-  public ServiceReference[] getAllServiceReferences(String clazz, String filter) throws InvalidSyntaxException {
+  public ServiceReference<?>[] getAllServiceReferences(String clazz, String filter) throws InvalidSyntaxException {
     return null;
   }
 
   @Override
-  public ServiceReference getServiceReference(String clazz) {
+  public ServiceReference<?> getServiceReference(String clazz) {
     return null;
   }
 
   @Override
-  public Object getService(ServiceReference reference) {
+  public <S> S getService(ServiceReference<S> reference) {
     return null;
   }
 
   @Override
-  public boolean ungetService(ServiceReference reference) {
+  public boolean ungetService(ServiceReference<?> reference) {
     return false;
   }
 
@@ -132,4 +133,24 @@ public class MyBundleContext implements BundleContext {
     return null;
   }
 
+  @Override
+  public <S> ServiceRegistration<S> registerService(Class<S> clazz, S service, Dictionary<String, ?> properties) {
+    return null;
+  }
+
+  @Override
+  public <S> ServiceReference<S> getServiceReference(Class<S> clazz) {
+    return null;
+  }
+
+  @Override
+  public <S> Collection<ServiceReference<S>> getServiceReferences(Class<S> clazz, String filter)
+      throws InvalidSyntaxException {
+    return null;
+  }
+
+  @Override
+  public Bundle getBundle(String location) {
+    return null;
+  }
 }
