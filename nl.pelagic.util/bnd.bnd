@@ -1,5 +1,4 @@
--buildpath: ${workspace}/cnf/dependencies/org.junit/junit-4.11.jar;version=file,\
-	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
+-buildpath: ${junit}
 Export-Package: nl.pelagic.util.file,\
 	nl.pelagic.util.string
 Private-Package: nl.pelagic.util.i18n

@@ -4,8 +4,7 @@
 	nl.pelagic.audio.musicTree.syncer.api;version=latest,\
 	nl.pelagic.audio.musicTree.configuration.api;version=latest,\
 	nl.pelagic.util;version=latest,\
-	${workspace}/cnf/dependencies/org.junit/junit-4.11.jar;version=file,\
-	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
+	${junit}
 Service-Component: *
 Bundle-Version:1.0.6.${tstamp}
 Bundle-Name: MusicTreeSyncer

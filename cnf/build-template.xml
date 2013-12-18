@@ -44,9 +44,15 @@
         <taskdef resource="aQute/bnd/ant/taskdef.properties" classpathref="bnd-classpath" />
         <bndprepare basedir="${projectdir}" print="false" top="${release.dir}" />
 
-        <condition property="testDirExists">
-            <available file="${basedir}/test" type="dir"/>
-        </condition>
+        <fileset dir="${project}" id="srcjavafiles">
+            <include name="${src}/**/*.java"/>
+        </fileset>
+        <pathconvert refid="srcjavafiles" property="srcjavafiles.present" setonempty="false"/>
+
+        <fileset dir="${project}" id="testjavafiles">
+            <include name="${testsrc}/**/*.java"/>
+        </fileset>
+        <pathconvert refid="testjavafiles" property="testjavafiles.present" setonempty="false"/>
 
         <!-- Create a marker property to indicate that initialisation has been completed -->
         <property name="initialized" value="set" />
@@ -71,16 +77,16 @@
 
          Compile the sources.
     -->
-    <target name="compile" depends="dependencies" if="project.sourcepath">
-        <mkdir dir="${project.output}"/>
-        <javac fork="yes" executable="${javac}" srcdir="${project.sourcepath}" destdir="${project.output}" classpath="${project.buildpath}" bootclasspath="${project.bootclasspath}" deprecation="true" listfiles="true" target="${javac.target}" source="${javac.source}" debug="${javac.debug}" includeAntRuntime="no" verbose="${verbose}" />
+    <target name="compile" depends="dependencies" if="srcjavafiles.present">
+        <mkdir dir="${bin}"/>
+        <javac fork="yes" executable="${javac}" srcdir="${src}" destdir="${bin}" classpath="${project.buildpath}" bootclasspath="${project.bootclasspath}" deprecation="true" listfiles="true" target="${javac.target}" source="${javac.source}" debug="${javac.debug}" includeAntRuntime="no" verbose="${verbose}" />
         <!--
           The eclipse compiler copies resources but the Javac compiler does not
           If ${src} == ${bin} then this is not necessary, but unfortunately, now
           it is.
         -->
-        <copy todir="${project.output}" verbose="${verbose}" preservelastmodified="true">
-            <fileset dir="${project.sourcepath}">
+        <copy todir="${bin}" verbose="${verbose}" preservelastmodified="true">
+            <fileset dir="${src}">
                 <exclude name="**/*.java" />
                 <exclude name="**/*.class" />
             </fileset>
@@ -104,31 +110,31 @@
 
         Run the junit test if present and no disabled by the no.junit property.
     -->
-    <target name="compileTests" depends="init,build" if="testDirExists">
-        <mkdir dir="bin_test"/>
-        <javac fork="yes" executable="${javac}" srcdir="test" destdir="bin_test" classpath="${project.buildpath}:${project.testpath}" bootclasspath="${project.bootclasspath}" deprecation="true" listfiles="true" target="${javac.target}" source="${javac.source}" debug="${javac.debug}" includeAntRuntime="no" verbose="${verbose}" />
+    <target name="compileTests" depends="init,build" if="testjavafiles.present" unless="no.junit">
+        <mkdir dir="${testbin}"/>
+        <javac fork="yes" executable="${javac}" srcdir="${testsrc}" destdir="${testbin}" classpath="${project.buildpath}:${project.testpath}" bootclasspath="${project.bootclasspath}" deprecation="true" listfiles="true" target="${javac.target}" source="${javac.source}" debug="${javac.debug}" includeAntRuntime="no" verbose="${verbose}" />
         <!--
           The eclipse compiler copies resources but the Javac compiler does not
           If ${src} == ${bin} then this is not necessary, but unfortunately, now
           it is.
         -->
-        <copy todir="bin_test" verbose="${verbose}" preservelastmodified="true">
-            <fileset dir="test">
+        <copy todir="${testbin}" verbose="${verbose}" preservelastmodified="true">
+            <fileset dir="${testsrc}">
                 <exclude name="**/*.java" />
                 <exclude name="**/*.class" />
             </fileset>
         </copy>
     </target>
 
-    <target name="junit" depends="init,compileTests" if="testDirExists" unless="no.junit">
+    <target name="junit" depends="init,compileTests" if="testjavafiles.present" unless="no.junit">
         <junit showoutput="false" printsummary="true" failureproperty='stop' errorproperty='stop' fork="true" dir="${basedir}">
             <assertions>
                 <enable />
             </assertions>
-            <classpath path="${project.buildpath}:bin_test/" />
+            <classpath path="${project.buildpath}:${testbin}/" />
             <formatter type="xml"/>
             <batchtest todir="${target}">
-                <fileset dir="test">
+                <fileset dir="${testsrc}">
                     <include name="**/*.java"/>
                 </fileset>
             </batchtest>
@@ -165,15 +171,45 @@
 
          Clean up the project.
     -->
+    <target name="clean" depends="init">
+        <bnd command="clean" exceptions="true" basedir="${project}" />
+        <delete dir="${bin}"/>
+        <delete dir="${testbin}"/>
+        <delete dir="${target}"/>
+    </target>
+
     <target name="deepclean" depends="init,clean" if="project.dependson">
         <subant target="clean" inheritAll="false" buildpath="${project.dependson}" />
     </target>
 
-    <target name="clean" depends="init">
-        <bnd command="clean" exceptions="true" basedir="${project}" />
-        <delete dir="bin"/>
-        <delete dir="bin_test"/>
-        <delete dir="${target}"/>
+
+    <!--
+         JAVADOC
+
+         Generate javadoc
+    -->
+    <target name="javadoc" depends="init,build" if="srcjavafiles.present">
+        <javadoc
+            sourcepath="${src}"
+            destdir="${target}/javadoc"
+            maxmemory="256M"
+            classpath="${project.buildpath}"
+            bootclasspath="${project.bootclasspath}"
+            access="private"
+            version="true"
+            use="true"
+            author="true"
+            splitindex="true"
+            windowtitle="${project.name}"
+            doctitle="${project.name}"
+            nodeprecated="false"
+            nodeprecatedlist="false"
+            notree="false"
+            noindex="false"
+            nohelp="false"
+            nonavbar="false"
+            source="${javac.source}"
+        />
     </target>
 
 
@@ -186,6 +222,10 @@
         <echo>verbose:                ${verbose}</echo>
         <echo>project.name:           ${project.name}</echo>
         <echo>Bundle-Version:         ${Bundle-Version}</echo>
+        <echo>src:                    ${src}</echo>
+        <echo>bin:                    ${bin}</echo>
+        <echo>testsrc:                ${testsrc}</echo>
+        <echo>testbin:                ${testbin}</echo>
         <echo>project.output:         ${project.output}</echo>
         <echo>project.sourcepath:     ${project.sourcepath}</echo>
         <echo>project.allsourcepath:  ${project.allsourcepath}</echo>
@@ -207,8 +247,10 @@
         <echo>jars.compile.order:     ${jars.compile.order}</echo>
         <echo>bin.includes:           ${bin.includes}</echo>
         <echo>base.modfied:           ${base.modified} (${base.modified.readable})</echo>
+        <echo>build:                  ${build}</echo>
         <echo>target:                 ${target}</echo>
         <echo>release.target:         ${release.target}</echo>
+        <echo>releaserepo:            ${releaserepo}</echo>
         <echo>licensed repo:          ${licensed-repo}</echo>
         <echo>repo:                   ${repo}</echo>
         <echo>use.bnd:                ${use.bnd}</echo>

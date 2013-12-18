@@ -2,8 +2,7 @@
 	nl.pelagic.audio.tag.checker.api;version=latest,\
 	nl.pelagic.jaudiotagger.util;version=latest,\
 	nl.pelagic.util;version=latest,\
-	${workspace}/cnf/dependencies/org.junit/junit-4.11.jar;version=file,\
-	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
+	${junit}
 Private-Package: nl.pelagic.audio.tag.checker.filename,\
 	nl.pelagic.audio.tag.checker.filename.i18n
 Service-Component: *

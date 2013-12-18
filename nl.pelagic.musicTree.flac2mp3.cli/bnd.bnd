@@ -7,8 +7,7 @@
 	osgi.core,\
 	org.kohsuke.args4j,\
 	nl.pelagic.shutdownhook.api;version=latest,\
-	${workspace}/cnf/dependencies/org.junit/junit-4.11.jar;version=file,\
-	${workspace}/cnf/dependencies/org.hamcrest/hamcrest-core-1.3.jar;version=file
+	${junit}
 
 Private-Package: nl.pelagic.musicTree.flac2mp3.cli,\
 	nl.pelagic.musicTree.flac2mp3.cli.i18n
