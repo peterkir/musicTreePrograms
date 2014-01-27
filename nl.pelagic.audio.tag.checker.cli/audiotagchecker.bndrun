@@ -39,5 +39,5 @@
 -runvm: -ea
 
 # needed for nl.pelagic.shutdownhook: sun.misc
-# needed for jaudiotagger library   : sun.misc,sun.nio,sun.nio.ch
--runsystempackages: sun.misc,sun.nio,sun.nio.ch
+# needed for jaudiotagger library   : sun.misc,sun.nio.ch
+-runsystempackages: sun.misc,sun.nio.ch
