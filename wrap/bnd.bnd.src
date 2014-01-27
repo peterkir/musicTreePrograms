@@ -1,0 +1,19 @@
+Bundle-SymbolicName: org.jaudiotagger
+Bundle-Version: __version__
+-includeresource: @__jar_in__, OSGI-OPT/=@__jar_in_src__
+
+Bundle-DocURL: http://www.jthink.net/jaudiotagger
+Bundle-License: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+
+Bundle-Description: JAudiotagger is a JAVA API for audio metatagging. Both a \
+ common API and format specific APIs are available, currently supports \
+ ID3,Flac,OggVorbis,Wma and Mp4.
+
+Import-Package: \
+ sun.misc,\
+ sun.nio.ch,\
+ *;resolution:=optional
+
+Export-Package: org.jaudiotagger.*
+
+-noee

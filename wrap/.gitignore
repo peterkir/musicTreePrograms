@@ -1,3 +1,4 @@
 /*.jar
 /WRAPPEDDIRTMP.*/
 !/biz.aQute.bnd.jar
+/bnd.bnd

@@ -154,25 +154,31 @@ declare scriptDir="$(dirname "${script}")"
 
 exitPrintStackTracePrint=0
 if [[ ${#} -ne 2 ]]; then
-  echo "Usage: ${script} BSN VERSION"
+  echo "Usage: ${script} VERSION QUALIFIER"
   exit 1
 fi
 exitPrintStackTracePrint=1
 unset script
 
-declare BSN="$(stringTrim "${1}")"
-declare VERSION="$(stringTrim "${2}")"
-
+declare BSN="jaudiotagger"
+declare VERSION="$(stringTrim "${1}")"
+declare QUALIFIER="$(stringTrim "${2}")"
 
 declare BND="${scriptDir}/biz.aQute.bnd.jar"
-declare JAR_IN="${scriptDir}/${BSN}-${VERSION}"
+declare BND_BND_SRC="${scriptDir}/bnd.bnd.src"
+declare BND_BND="${scriptDir}/bnd.bnd"
+declare JAR_IN="${scriptDir}/${BSN}-${VERSION}.${QUALIFIER}"
 declare JAR_IN_SRC="${JAR_IN}-sources"
-declare JAR_OUT="${scriptDir}/${BSN}-${VERSION}-wrapped"
+declare JAR_OUT="${scriptDir}/${BSN}-${VERSION}"
 
 
 exitPrintStackTracePrint=0
 if [[ ! -f "${BND}" ]]; then
   echo "BND jar ${BND} does not exist"
+  exit 1
+fi
+if [[ ! -f "${BND_BND_SRC}" ]]; then
+  echo "BND file ${BND_BND_SRC} does not exist"
   exit 1
 fi
 if [[ ! -f "${JAR_IN}.jar" ]]; then
@@ -186,32 +192,16 @@ fi
 exitPrintStackTracePrint=1
 
 
-rm -f "${JAR_OUT}.jar"
-java -jar "${BND}" wrap --output "${JAR_OUT}.jar" "${JAR_IN}.jar"
+rm -f "${BND_BND}" "${JAR_OUT}.jar"
 
+sed -e "s/__version__/${VERSION}.${QUALIFIER}/" \
+    -e "s/__jar_in__/$(basename "${JAR_IN}").jar/" \
+    -e "s/__jar_in_src__/$(basename "${JAR_IN_SRC}").jar/" \
+    "${BND_BND_SRC}" > "${BND_BND}"
 
-declare WRAPPEDDIRTMP="$(mktemp -d -p "${scriptDir}" "WRAPPEDDIRTMP.XXXXXXXXXX")"
-WRAPPEDDIRTMP="$(pathCanonicalPath "${WRAPPEDDIRTMP}")"
+java -jar "${BND}" "${BND_BND}"
 
-cd "${WRAPPEDDIRTMP}"
-jar xf "${JAR_OUT}.jar"
-
-mkdir -p "${WRAPPEDDIRTMP}/OSGI-OPT/src"
-cd "${WRAPPEDDIRTMP}/OSGI-OPT/src"
-jar xf "${JAR_IN_SRC}.jar"
-rm -fr META-INF
-
-cd "${WRAPPEDDIRTMP}"
-
-sed -r -i \
-    -e "s/^(Bundle-Version:).*\$/\1 ${VERSION}/" \
-    -e "s/^(Bundle-(|Symbolic)Name:).*\$/\1 ${BSN}/" \
-    "META-INF/MANIFEST.MF"
-
-
-rm -f "${JAR_OUT}.jar"
-jar cmf "META-INF/MANIFEST.MF" "${JAR_OUT}.jar" *
-
+rm -f "${BND_BND}"
 
 echo "Produced jars:"
 echo "${JAR_OUT}.jar"
