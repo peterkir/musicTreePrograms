@@ -1,5 +1,5 @@
 -buildpath: biz.aQute.bnd.annotation,\
-	jaudiotagger,\
+	org.jaudiotagger,\
 	nl.pelagic.audio.tag.checker.api;version=latest,\
 	${junit}
 Private-Package: nl.pelagic.audio.tag.checker.id3v1,\

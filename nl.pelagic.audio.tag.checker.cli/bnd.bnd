@@ -1,7 +1,7 @@
 -buildpath: biz.aQute.bnd.annotation,\
 	osgi.core;version=${osgi.core.version},\
 	nl.pelagic.audio.tag.checker.api;version=latest,\
-	jaudiotagger,\
+	org.jaudiotagger,\
 	nl.pelagic.shutdownhook.api;version=latest,\
 	org.kohsuke.args4j,\
 	${junit}

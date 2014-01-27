@@ -1,4 +1,4 @@
--buildpath: jaudiotagger,\
+-buildpath: org.jaudiotagger,\
 	${junit}
 Export-Package: nl.pelagic.jaudiotagger.util
 Bundle-Version: 1.1.1.${tstamp}

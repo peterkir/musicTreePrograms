@@ -1,6 +1,6 @@
 -buildpath: biz.aQute.bnd.annotation,\
 	nl.pelagic.audio.tag.checker.api;version=latest,\
-	jaudiotagger,\
+	org.jaudiotagger,\
 	${junit}
 
 -sub: *.bnd

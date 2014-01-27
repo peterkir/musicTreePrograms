@@ -1,4 +1,4 @@
--buildpath: jaudiotagger,\
+-buildpath: org.jaudiotagger,\
 	biz.aQute.bnd.annotation,\
 	${junit}
 
