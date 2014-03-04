@@ -80,10 +80,10 @@ ext.gradleBuild_javadocVersion                 = true
 /* Findbugs settings */
 ext.gradleBuild_findbugsIncludesFile           = "$rootProject.rootDir/$rootProject.bnd_cnf/findbugs.include.xml"
 ext.gradleBuild_findbugsExcludesFile           = "$rootProject.rootDir/$rootProject.bnd_cnf/findbugs.exclude.xml"
-ext.gradleBuild_findbugsEffort                 = "default"           /* min, default (default),max          */
+ext.gradleBuild_findbugsEffort                 = "max"               /* min, default (default),max          */
 ext.gradleBuild_findbugsIgnoreFailures         = true
 ext.gradleBuild_findbugsPropertyXmlReports     = "CI"
-ext.gradleBuild_findbugsReportLevel            = "medium"            /* low, medium (default), high         */
+ext.gradleBuild_findbugsReportLevel            = "low"               /* low, medium (default), high         */
 ext.gradleBuild_findbugsReportsDir             = "findbugs"          /* relative to bnd_targetDir           */
 ext.gradleBuild_findbugsToolVersion            = "2.0.3"
 
