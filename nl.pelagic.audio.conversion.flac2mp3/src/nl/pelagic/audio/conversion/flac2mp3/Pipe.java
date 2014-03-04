@@ -138,7 +138,7 @@ public class Pipe implements Runnable {
         dstInputStream.write(buffer, 0, read);
       }
     }
-    catch (Exception e) {
+    catch (Throwable e) {
       exitValue.compareAndSet(EXIT_OK, (read == -2) ? EXIT_ERROR_READ : EXIT_ERROR_WRITE);
     }
     finally {

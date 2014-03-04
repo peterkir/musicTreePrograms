@@ -2,6 +2,7 @@ package nl.pelagic.audio.musicTree.syncer;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -34,13 +35,14 @@ public class FlacTreeFilenameFilter implements FilenameFilter {
     super();
 
     if ((extensions != null) && (extensions.size() > 0)) {
+      Locale locale = Locale.getDefault();
       this.extensions = new TreeSet<>();
       for (String extension : extensions) {
         if ((extension.length() == 0) || (extension.charAt(0) != '.')) {
           throw new ExceptionInInitializerError(String.format(Messages.getString("FlacTreeFilenameFilter.0"), //$NON-NLS-1$
               extension));
         }
-        this.extensions.add(extension.toLowerCase());
+        this.extensions.add(extension.toLowerCase(locale));
       }
     }
 
@@ -69,7 +71,8 @@ public class FlacTreeFilenameFilter implements FilenameFilter {
     }
 
     /* accept if the extension is in the configured extensions */
-    if ((extensions != null) && extensions.contains(ExtensionUtils.split(name, true)[1].toLowerCase())) {
+    if ((extensions != null)
+        && extensions.contains(ExtensionUtils.split(name, true)[1].toLowerCase(Locale.getDefault()))) {
       return true;
     }
 

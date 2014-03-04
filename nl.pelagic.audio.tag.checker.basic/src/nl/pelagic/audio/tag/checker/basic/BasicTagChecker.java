@@ -73,7 +73,7 @@ public class BasicTagChecker implements TagChecker {
           Messages.getString("BasicTagChecker.1") + " " + missingPrimaries, null, //$NON-NLS-1$//$NON-NLS-2$
           null, null);
     }
-    missingPrimaries = null;
+    missingPrimaries.clear();
 
     for (Entry<GenericTagFieldName, Map<String, Set<String>>> entry : fields.entrySet()) {
       GenericTagFieldName fieldName = entry.getKey();

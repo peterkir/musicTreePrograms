@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -74,8 +75,9 @@ public class Main implements Runnable, ShutdownHookParticipant {
   private static final Set<String> supportedExtensions = new TreeSet<>();
 
   static {
+    Locale locale = Locale.getDefault();
     for (SupportedFileFormat format : SupportedFileFormat.values()) {
-      supportedExtensions.add(format.getFilesuffix().toLowerCase());
+      supportedExtensions.add(format.getFilesuffix().toLowerCase(locale));
     }
   }
 
@@ -220,9 +222,10 @@ public class Main implements Runnable, ShutdownHookParticipant {
    * @return true when valid
    */
   boolean isInTagCheckers(String checker) {
+    Locale locale = Locale.getDefault();
     for (TagChecker tagChecker : tagCheckers) {
-      if (tagChecker.getClass().getSimpleName().toLowerCase().equals(checker.toLowerCase())
-          || tagChecker.getClass().getName().toLowerCase().equals(checker.toLowerCase())) {
+      if (tagChecker.getClass().getSimpleName().toLowerCase(locale).equals(checker.toLowerCase(locale))
+          || tagChecker.getClass().getName().toLowerCase(locale).equals(checker.toLowerCase(locale))) {
         return true;
       }
     }
@@ -248,10 +251,9 @@ public class Main implements Runnable, ShutdownHookParticipant {
 
     for (File f : cps) {
       try {
-        if (!f.exists()) {
+        if (!f.getCanonicalFile().exists()) {
           throw new IOException();
         }
-        f = f.getCanonicalFile();
       }
       catch (IOException e) {
         out.printf(Messages.getString("Main.0"), f.getPath()); //$NON-NLS-1$
@@ -604,7 +606,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
 
     String regex = commandLineOptions.getRegex();
     regex = constructExtensionRegex(regex, config);
-    assert ((regex != null) && !regex.isEmpty());
+    assert (!regex.isEmpty());
     int flags = Pattern.UNICODE_CASE;
     if (!commandLineOptions.isRegexCaseSensitive()) {
       flags |= Pattern.CASE_INSENSITIVE;

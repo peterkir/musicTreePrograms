@@ -3,6 +3,7 @@ package nl.pelagic.audio.tag.checker.converter.flac;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -63,6 +64,7 @@ public class FlacTagConverter implements TagConverter {
   public boolean convert(GenericTag genericTag, Tag tag) {
     assert (tag instanceof FlacTag);
 
+    Locale locale = Locale.getDefault();
     NameValuePair previousTagNameValuePair = new NameValuePair();
 
     /* iterate over all fields */
@@ -71,7 +73,7 @@ public class FlacTagConverter implements TagConverter {
       TagField tagField = tagFieldIterator.next();
 
       /* get name and value */
-      String name = tagField.getId().trim().toUpperCase();
+      String name = tagField.getId().trim().toUpperCase(locale);
       String value = tagField.toString();
 
       /* determine which (generic) field to set */

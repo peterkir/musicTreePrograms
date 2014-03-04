@@ -128,13 +128,13 @@ public class FileUtils {
   public static void copy(File src, File dst) throws IOException, FileAlreadyExistsException, FileNotFoundException {
     if (src.isFile()) {
       File dstDir = dst.getParentFile();
-      boolean dstDirCreated = false;
+      boolean dstDirCreated = true;
       try {
         dstDirCreated = DirUtils.mkdir(dstDir);
-        dstDirCreated = true;
       }
       catch (Exception e) {
         /* swallow */
+        dstDirCreated = false;
       }
       if (!dstDirCreated) {
         throw new FileAlreadyExistsException(String.format(Messages.getString("FileUtils.2"), //$NON-NLS-1$

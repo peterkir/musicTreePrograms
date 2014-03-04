@@ -31,6 +31,13 @@ import java.util.regex.Pattern;
  * </p>
  */
 public class FilenameFilterWithRegex implements FilenameFilter {
+  static class FilenameFileerAcceptAll implements FilenameFilter {
+    @Override
+    public boolean accept(File dir, String name) {
+      return true;
+    }
+  }
+
   /** the base path */
   protected final File basePathFile;
 
@@ -70,12 +77,7 @@ public class FilenameFilterWithRegex implements FilenameFilter {
         /*
          * A
          */
-        worker = new FilenameFilter() {
-          @Override
-          public boolean accept(File dir, String name) {
-            return true;
-          }
-        };
+        worker = new FilenameFileerAcceptAll();
       } else {
         /*
          * B

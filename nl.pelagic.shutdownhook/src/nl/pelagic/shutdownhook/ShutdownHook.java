@@ -65,7 +65,7 @@ public class ShutdownHook extends Thread {
     try {
       Runtime.getRuntime().removeShutdownHook(this);
     }
-    catch (Exception e) {
+    catch (Throwable e) {
       /*
        * swallow: this can throw 'java.lang.IllegalStateException: Shutdown in
        * progress'

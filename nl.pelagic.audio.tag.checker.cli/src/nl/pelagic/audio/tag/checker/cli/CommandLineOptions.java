@@ -45,13 +45,7 @@ public class CommandLineOptions {
     return diagnostics;
   }
 
-  /** the compiled regular expression */
-  @Option(name = "-r", aliases = {
-    "--regex"
-  }, metaVar = "regex", usage = "The regular expression to use for filename filtering."
-      + "If no regular expression is specified then a default one will be"
-      + " generated and used, which will accept all files that have a supported file extension"
-      + " (implies --regex-in-all-dirs). For example: '^.*?\\.(flac|mp3)$'")
+  /** the regular expression */
   private String regex = null;
 
   /**
@@ -59,6 +53,19 @@ public class CommandLineOptions {
    */
   public String getRegex() {
     return regex;
+  }
+
+  /**
+   * @param regex the regex to set
+   */
+  @Option(name = "-r", aliases = {
+    "--regex"
+  }, metaVar = "regex", usage = "The regular expression to use for filename filtering."
+      + "If no regular expression is specified then a default one will be"
+      + " generated and used, which will accept all files that have a supported file extension"
+      + " (implies --regex-in-all-dirs). For example: '^.*?\\.(flac|mp3)$'")
+  public void setRegex(String regex) {
+    this.regex = regex;
   }
 
   /** the regexInAllDirs mode */

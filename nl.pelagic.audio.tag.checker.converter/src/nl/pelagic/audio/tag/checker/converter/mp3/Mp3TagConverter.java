@@ -3,6 +3,7 @@ package nl.pelagic.audio.tag.checker.converter.mp3;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -127,18 +128,20 @@ public class Mp3TagConverter implements TagConverter {
     } else if (tag instanceof ID3v23Tag) {
       tagFieldIterator = ((ID3v23Tag) tag).getFields();
       unknowns = unknownTagFieldNames.get(ID3v23Tag.class);
-    } else /* if (tag instanceof ID3v22Tag) */{
+    } else {
+      assert (tag instanceof ID3v22Tag);
       tagFieldIterator = ((ID3v22Tag) tag).getFields();
       unknowns = unknownTagFieldNames.get(ID3v22Tag.class);
     }
     assert (tagFieldIterator != null);
     assert (unknowns != null);
 
+    Locale locale = Locale.getDefault();
     while (tagFieldIterator.hasNext()) {
       TagField tagField = tagFieldIterator.next();
 
       /* get name and value */
-      String name = tagField.getId().trim().toUpperCase();
+      String name = tagField.getId().trim().toUpperCase(locale);
       String value = tagField.toString();
       value = extractValues(name, value);
 

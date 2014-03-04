@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -45,8 +46,9 @@ public class AudioTagCheckerImpl implements AudioTagChecker, ShutdownHookPartici
   private static final Set<String> supportedExtensions = new TreeSet<>();
 
   static {
+    Locale locale = Locale.getDefault();
     for (SupportedFileFormat format : SupportedFileFormat.values()) {
-      supportedExtensions.add(format.getFilesuffix().toLowerCase());
+      supportedExtensions.add(format.getFilesuffix().toLowerCase(locale));
     }
   }
 
@@ -152,7 +154,7 @@ public class AudioTagCheckerImpl implements AudioTagChecker, ShutdownHookPartici
      * We're not dealing with a directory; it must be a file
      */
 
-    String extension = ExtensionUtils.split(file.getName(), false)[1].toLowerCase();
+    String extension = ExtensionUtils.split(file.getName(), false)[1].toLowerCase(Locale.getDefault());
     if (extension.isEmpty() || !supportedExtensions.contains(extension)) {
       callback.unsupportedExtension(file);
       return;
