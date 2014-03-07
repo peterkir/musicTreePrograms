@@ -64,5 +64,7 @@
 # needed for jaudiotagger library   : sun.misc,sun.nio.ch
 -runsystempackages: sun.misc,sun.nio.ch
 
--runproperties: audiotagchecker.stayAlive=true,\
-	org.osgi.service.http.port=8080
+-runproperties: \
+    audiotagchecker.stayAlive=true,\
+    gosh.args=-sc telnetd start,\
+    org.osgi.service.http.port=8080

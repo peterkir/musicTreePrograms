@@ -60,5 +60,7 @@
 # needed for jaudiotagger library   : sun.misc,sun.nio.ch
 -runsystempackages: sun.misc,sun.nio.ch
 
--runproperties: flac2mp3.stayAlive=true,\
-	org.osgi.service.http.port=8080
+-runproperties: \
+    flac2mp3.stayAlive=true,\
+    gosh.args=-sc telnetd start,\
+    org.osgi.service.http.port=8080
