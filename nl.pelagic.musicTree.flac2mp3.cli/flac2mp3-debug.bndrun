@@ -51,6 +51,9 @@
 	osgi.identity;filter:='(osgi.identity=org.apache.felix.shell.remote)',\
 	osgi.identity;filter:='(osgi.identity=org.apache.felix.metatype)',\
 	osgi.identity;filter:='(osgi.identity=org.apache.felix.http.jetty)'
+-resolve.effective: active
+
+
 -runvm: -ea
 
 # needed for nl.pelagic.shutdownhook: sun.misc

@@ -29,6 +29,9 @@
 	osgi.identity;filter:='(osgi.identity=nl.pelagic.shutdownhook)',\
 	osgi.identity;filter:='(osgi.identity=nl.pelagic.shell.script.listener)',\
 	osgi.identity;filter:='(osgi.identity=org.apache.felix.scr)'
+-resolve.effective: active
+
+
 -runvm: -ea
 
 # needed for nl.pelagic.shutdownhook: sun.misc
