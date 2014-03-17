@@ -31,6 +31,9 @@ import java.util.regex.Pattern;
  * </p>
  */
 public class FilenameFilterWithRegex implements FilenameFilter {
+  /**
+   * A filename filter that accepts everything.
+   */
   static class FilenameFileerAcceptAll implements FilenameFilter {
     @Override
     public boolean accept(File dir, String name) {
