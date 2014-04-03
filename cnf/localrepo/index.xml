@@ -1,303 +1,303 @@
 <?xml version='1.0' encoding='utf-8'?>
-<repository increment='1390849169605' name='Local' xmlns='http://www.osgi.org/xmlns/repository/v1.0.0'>
+<repository increment='1396556722479' name='Local' xmlns='http://www.osgi.org/xmlns/repository/v1.0.0'>
   <resource>
     <capability namespace='osgi.identity'>
       <attribute name='osgi.identity' value='org.jaudiotagger'/>
       <attribute name='type' value='osgi.bundle'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.content'>
-      <attribute name='osgi.content' value='91b572c830b14b169d9d09d40a71d6608cccd71135c308e9974cd662d60df680'/>
+      <attribute name='osgi.content' value='749f05fb9f8ac21856d3eb148e24db54618d7f5f058af6df3968e5a05ea969e8'/>
       <attribute name='url' value='org.jaudiotagger/org.jaudiotagger-2.2.0.jar'/>
-      <attribute name='size' type='Long' value='1870497'/>
+      <attribute name='size' type='Long' value='1870159'/>
       <attribute name='mime' value='application/vnd.osgi.bundle'/>
     </capability>
     <capability namespace='osgi.wiring.bundle'>
       <attribute name='osgi.wiring.bundle' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.wiring.host'>
       <attribute name='osgi.wiring.host' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.tag'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.aiff'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio,org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.tag,org.jaudiotagger.tag.aiff'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.asf'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio,org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.tag,org.jaudiotagger.tag.asf'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.asf.data'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.asf.io'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.asf.io'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.asf.data'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.asf.util'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.asf.data,org.jaudiotagger.tag,org.jaudiotagger.tag.asf'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.exceptions'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.flac'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.tag,org.jaudiotagger.tag.flac'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.flac.metadatablock'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.tag'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.generic'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio,org.jaudiotagger.audio.exceptions,org.jaudiotagger.tag,org.jaudiotagger.tag.images'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.mp3'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio,org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.logging,org.jaudiotagger.tag,org.jaudiotagger.tag.id3,org.jaudiotagger.tag.reference'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.mp4'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.audio.mp4.atom,org.jaudiotagger.tag,org.jaudiotagger.tag.mp4,org.jaudiotagger.utils.tree'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.mp4.atom'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.ogg'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.audio.ogg.util,org.jaudiotagger.tag'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.ogg.util'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.real'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.tag'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.wav'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.tag'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.audio.wav.util'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.logging'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.tag.id3.framebody,org.jaudiotagger.tag.images,org.jaudiotagger.tag.options,org.jaudiotagger.tag.reference'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.aiff'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.tag,org.jaudiotagger.tag.id3,org.jaudiotagger.tag.images'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.asf'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.asf.data,org.jaudiotagger.audio.generic,org.jaudiotagger.tag,org.jaudiotagger.tag.images'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.datatype'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.tag,org.jaudiotagger.tag.id3,org.jaudiotagger.tag.id3.framebody'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.flac'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.flac.metadatablock,org.jaudiotagger.tag,org.jaudiotagger.tag.images,org.jaudiotagger.tag.vorbiscomment'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.id3'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.tag,org.jaudiotagger.tag.datatype,org.jaudiotagger.tag.id3.framebody,org.jaudiotagger.tag.images,org.jaudiotagger.tag.lyrics3'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.id3.framebody'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.tag,org.jaudiotagger.tag.datatype,org.jaudiotagger.tag.id3'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.id3.reference'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.tag.reference'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.id3.valuepair'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.tag.datatype'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.images'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.flac.metadatablock'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.lyrics3'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.tag,org.jaudiotagger.tag.datatype,org.jaudiotagger.tag.id3,org.jaudiotagger.tag.id3.framebody'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.mp4'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.generic,org.jaudiotagger.audio.mp4.atom,org.jaudiotagger.tag,org.jaudiotagger.tag.images,org.jaudiotagger.tag.mp4.field,org.jaudiotagger.tag.reference'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.mp4.atom'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.mp4.atom'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.mp4.field'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.mp4.atom,org.jaudiotagger.tag,org.jaudiotagger.tag.mp4'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.options'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.reference'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.tag.datatype'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.vorbiscomment'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <directive name='uses' value='org.jaudiotagger.audio.exceptions,org.jaudiotagger.audio.generic,org.jaudiotagger.tag,org.jaudiotagger.tag.images,org.jaudiotagger.tag.reference'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.tag.vorbiscomment.util'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.test'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.utils'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <capability namespace='osgi.wiring.package'>
       <attribute name='osgi.wiring.package' value='org.jaudiotagger.utils.tree'/>
-      <attribute name='version' type='Version' value='2.2.0.1156'/>
+      <attribute name='version' type='Version' value='2.2.0.1156-5a3e62a'/>
       <attribute name='bundle-symbolic-name' value='org.jaudiotagger'/>
-      <attribute name='bundle-version' type='Version' value='2.2.0.1156'/>
+      <attribute name='bundle-version' type='Version' value='2.2.0.1156-5a3e62a'/>
     </capability>
     <requirement namespace='osgi.wiring.package'>
       <directive name='filter' value='(osgi.wiring.package=sun.misc)'/>
