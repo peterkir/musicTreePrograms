@@ -67,6 +67,10 @@ public class FlacTagConverter implements TagConverter {
     Locale locale = Locale.getDefault();
     NameValuePair previousTagNameValuePair = new NameValuePair();
 
+    String discNumberFull = null;
+    String discNumber = null;
+    String discTotal = null;
+
     /* iterate over all fields */
     Iterator<TagField> tagFieldIterator = ((FlacTag) tag).getFields();
     while (tagFieldIterator.hasNext()) {
@@ -83,7 +87,17 @@ public class FlacTagConverter implements TagConverter {
       /* primary fields */
 
         case "DISCNUMBER": //$NON-NLS-1$
-          genericTagFieldName = GenericTagFieldName.ALBUMDISCNUMBER;
+          if (RegularExpressions.patternSimpleNumber.matcher(value).matches()) {
+            discNumber = value;
+          } else {
+            discNumberFull = value;
+          }
+          value = null;
+          break;
+
+        case "DISCTOTAL": //$NON-NLS-1$
+          discTotal = value;
+          value = null;
           break;
 
         case "GENRE": //$NON-NLS-1$
@@ -128,7 +142,21 @@ public class FlacTagConverter implements TagConverter {
           break;
       }
 
-      previousTagNameValuePair = genericTag.addField(previousTagNameValuePair, genericTagFieldName, name, value);
+      if (value != null) {
+        previousTagNameValuePair = genericTag.addField(previousTagNameValuePair, genericTagFieldName, name, value);
+      }
+    }
+
+    if ((discNumberFull != null) || (discTotal != null) || (discNumber != null)) {
+      String newValue = null;
+      if ((discTotal != null) && (discNumber != null)) {
+        newValue = discNumber + "/" + discTotal; //$NON-NLS-1$
+      } else if (discNumberFull != null) {
+        newValue = discNumberFull;
+      } else {
+        newValue = (discNumber == null ? "" : discNumber) + (discTotal == null ? "" : "/" + discTotal); //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+      }
+      genericTag.addField(previousTagNameValuePair, GenericTagFieldName.ALBUMDISCNUMBER, "DISCNUMBER", newValue); //$NON-NLS-1$
     }
 
     return true;

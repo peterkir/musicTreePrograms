@@ -254,4 +254,200 @@ public class TestFlacTagConverter {
     assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
     checkFields(genericTag, idNames, idExpectedValues, genericids, unknowns);
   }
+
+  @Test
+  public void testConvert_DiscNumberAndTotal() throws FieldDataInvalidException {
+    GenericTag genericTag = new GenericTag();
+
+    String[] idNames = {
+        "DISCNUMBER", "DISCTOTAL"
+    };
+
+    String[] idValues = {
+        "15", "53"
+    };
+
+    String[] idExpectedValues = {
+        "15/53"
+    };
+
+    GenericTagFieldName[] genericids = {
+        GenericTagFieldName.ALBUMDISCNUMBER
+    };
+
+    String[] unknowns = {};
+
+    FlacTag tag = setupTag(idNames, idValues);
+
+    boolean result = converter.convert(genericTag, tag);
+
+    assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
+    String[] idNames2 = {
+        "DISCNUMBER"
+    };
+    checkFields(genericTag, idNames2, idExpectedValues, genericids, unknowns);
+  }
+
+  @Test
+  public void testConvert_DiscNumberAndTotalOverrideOldFormat() throws FieldDataInvalidException {
+    GenericTag genericTag = new GenericTag();
+
+    String[] idNames = {
+        "DISCNUMBER", "DISCNUMBER", "DISCTOTAL"
+    };
+
+    String[] idValues = {
+        "13/21", "15", "53"
+    };
+
+    String[] idExpectedValues = {
+        "15/53"
+    };
+
+    GenericTagFieldName[] genericids = {
+        GenericTagFieldName.ALBUMDISCNUMBER
+    };
+
+    String[] unknowns = {};
+
+    FlacTag tag = setupTag(idNames, idValues);
+
+    boolean result = converter.convert(genericTag, tag);
+
+    assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
+    String[] idNames2 = {
+        "DISCNUMBER"
+    };
+    checkFields(genericTag, idNames2, idExpectedValues, genericids, unknowns);
+  }
+
+  @Test
+  public void testConvert_OldFormatBetterThanDiscNumber() throws FieldDataInvalidException {
+    GenericTag genericTag = new GenericTag();
+
+    String[] idNames = {
+        "DISCNUMBER", "DISCNUMBER"
+    };
+
+    String[] idValues = {
+        "15", "13/21"
+    };
+
+    String[] idExpectedValues = {
+      "13/21"
+    };
+
+    GenericTagFieldName[] genericids = {
+      GenericTagFieldName.ALBUMDISCNUMBER
+    };
+
+    String[] unknowns = {};
+
+    FlacTag tag = setupTag(idNames, idValues);
+
+    boolean result = converter.convert(genericTag, tag);
+
+    assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
+    String[] idNames2 = {
+      "DISCNUMBER"
+    };
+    checkFields(genericTag, idNames2, idExpectedValues, genericids, unknowns);
+  }
+
+  @Test
+  public void testConvert_OldFormatBetterThanDiscTotal() throws FieldDataInvalidException {
+    GenericTag genericTag = new GenericTag();
+
+    String[] idNames = {
+        "DISCTOTAL", "DISCNUMBER"
+    };
+
+    String[] idValues = {
+        "15", "13/21"
+    };
+
+    String[] idExpectedValues = {
+        "13/21"
+    };
+
+    GenericTagFieldName[] genericids = {
+        GenericTagFieldName.ALBUMDISCNUMBER
+    };
+
+    String[] unknowns = {};
+
+    FlacTag tag = setupTag(idNames, idValues);
+
+    boolean result = converter.convert(genericTag, tag);
+
+    assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
+    String[] idNames2 = {
+        "DISCNUMBER"
+    };
+    checkFields(genericTag, idNames2, idExpectedValues, genericids, unknowns);
+  }
+
+  @Test
+  public void testConvert_OnlyDiscNumber() throws FieldDataInvalidException {
+    GenericTag genericTag = new GenericTag();
+
+    String[] idNames = {
+      "DISCNUMBER"
+    };
+
+    String[] idValues = {
+      "15"
+    };
+
+    String[] idExpectedValues = {
+        "15"
+    };
+
+    GenericTagFieldName[] genericids = {
+        GenericTagFieldName.ALBUMDISCNUMBER
+    };
+
+    String[] unknowns = {};
+
+    FlacTag tag = setupTag(idNames, idValues);
+
+    boolean result = converter.convert(genericTag, tag);
+
+    assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
+    checkFields(genericTag, idNames, idExpectedValues, genericids, unknowns);
+  }
+
+  @Test
+  public void testConvert_OnlyDiscTotal() throws FieldDataInvalidException {
+    GenericTag genericTag = new GenericTag();
+
+    String[] idNames = {
+      "DISCTOTAL"
+    };
+
+    String[] idValues = {
+      "15"
+    };
+
+    String[] idExpectedValues = {
+      "/15"
+    };
+
+    GenericTagFieldName[] genericids = {
+      GenericTagFieldName.ALBUMDISCNUMBER
+    };
+
+    String[] unknowns = {};
+
+    FlacTag tag = setupTag(idNames, idValues);
+
+    boolean result = converter.convert(genericTag, tag);
+
+    assertThat(Boolean.valueOf(result), equalTo(Boolean.TRUE));
+    String[] idNames2 = {
+        "DISCNUMBER"
+    };
+    checkFields(genericTag, idNames2, idExpectedValues, genericids, unknowns);
+  }
+
 }
