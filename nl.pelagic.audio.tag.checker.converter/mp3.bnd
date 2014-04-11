@@ -2,5 +2,4 @@ Private-Package: nl.pelagic.audio.tag.checker.converter.mp3
 Service-Component: *
 Bundle-Version:1.0.1.${tstamp}
 Bundle-Name: AudioTagChecker - MP3 Tag Converter
-Bundle-Description: Converts a (non-generic) MP3 tag into a (generic) GenericTag.\n\
-	Supported tag classes are ID3v22Tag, ID3v23Tag and ID3v24Tag.
+Bundle-Description: Converts a (non-generic) MP3 tag into a (generic) GenericTag

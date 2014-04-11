@@ -7,5 +7,4 @@ Private-Package: nl.pelagic.shell.script.listener
 Service-Component: *
 Bundle-Version:1.0.3.${tstamp}
 Bundle-Name: Shell Script Listener
-Bundle-Description: This bundle listens for shell commands are outputs them\n\
-	so that they can be copied & pasted into a shell.
+Bundle-Description: This bundle listens for shell commands are outputs them so that they can be copied & pasted into a shell

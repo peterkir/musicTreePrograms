@@ -8,4 +8,4 @@ Private-Package: nl.pelagic.audio.tag.checker
 Service-Component: *
 Bundle-Version:1.0.1.${tstamp}
 Bundle-Name: AudioTagChecker - Audio Tag Checker Service
-Bundle-Description: The audio tag checker service.
+Bundle-Description: The audio tag checker service

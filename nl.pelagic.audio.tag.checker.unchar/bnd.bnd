@@ -6,7 +6,4 @@ Private-Package: nl.pelagic.audio.tag.checker.unchar,\
 Service-Component: *
 Bundle-Version:1.0.1.${tstamp}
 Bundle-Name: AudioTagChecker - Unwanted Characters Checker
-Bundle-Description: Perform 'unwanted character' checks on a generic tag.\n\
-	Only regular ASCII characters are allowed; character codes [32, 126], hex [20, 7e].\n\
-	\n\
-	Note: only primary and pseudo-primary fields are considered when checking fields.
+Bundle-Description: Perform 'unwanted character' checks on a generic tag
