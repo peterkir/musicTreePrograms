@@ -22,6 +22,3 @@
 
 # Pseudo project, do not generate a bundle
 -nobundles
-
-no.junit: true
-no.findbugs: true
