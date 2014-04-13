@@ -1,5 +1,46 @@
 <?xml version='1.0' encoding='utf-8'?>
-<repository increment='1396556722479' name='Local' xmlns='http://www.osgi.org/xmlns/repository/v1.0.0'>
+<repository increment='1397400771800' name='Local' xmlns='http://www.osgi.org/xmlns/repository/v1.0.0'>
+  <resource>
+    <capability namespace='osgi.identity'>
+      <attribute name='osgi.identity' value='org.kohsuke.args4j'/>
+      <attribute name='type' value='osgi.bundle'/>
+      <attribute name='version' type='Version' value='2.0.26'/>
+    </capability>
+    <capability namespace='osgi.content'>
+      <attribute name='osgi.content' value='3cd82e2e45ea2b618ef6c96e1965d158f345c457e3d2da64b0de9b5d0e6d0d8b'/>
+      <attribute name='url' value='org.kohsuke.args4j/args4j-2.0.26.jar'/>
+      <attribute name='size' type='Long' value='74710'/>
+      <attribute name='mime' value='application/vnd.osgi.bundle'/>
+    </capability>
+    <capability namespace='osgi.wiring.bundle'>
+      <attribute name='osgi.wiring.bundle' value='org.kohsuke.args4j'/>
+      <attribute name='bundle-version' type='Version' value='2.0.26'/>
+    </capability>
+    <capability namespace='osgi.wiring.host'>
+      <attribute name='osgi.wiring.host' value='org.kohsuke.args4j'/>
+      <attribute name='bundle-version' type='Version' value='2.0.26'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='org.kohsuke.args4j'/>
+      <attribute name='version' type='Version' value='2.0.26'/>
+      <attribute name='bundle-symbolic-name' value='org.kohsuke.args4j'/>
+      <attribute name='bundle-version' type='Version' value='2.0.26'/>
+      <directive name='uses' value='org.kohsuke.args4j.spi,org.xml.sax.helpers,org.xml.sax'/>
+    </capability>
+    <capability namespace='osgi.wiring.package'>
+      <attribute name='osgi.wiring.package' value='org.kohsuke.args4j.spi'/>
+      <attribute name='version' type='Version' value='2.0.26'/>
+      <attribute name='bundle-symbolic-name' value='org.kohsuke.args4j'/>
+      <attribute name='bundle-version' type='Version' value='2.0.26'/>
+      <directive name='uses' value='org.kohsuke.args4j'/>
+    </capability>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.xml.sax)'/>
+    </requirement>
+    <requirement namespace='osgi.wiring.package'>
+      <directive name='filter' value='(osgi.wiring.package=org.xml.sax.helpers)'/>
+    </requirement>
+  </resource>
   <resource>
     <capability namespace='osgi.identity'>
       <attribute name='osgi.identity' value='org.jaudiotagger'/>
@@ -320,47 +361,6 @@
     <requirement namespace='osgi.wiring.package'>
       <directive name='filter' value='(osgi.wiring.package=sun.security.action)'/>
       <directive name='resolution' value='optional'/>
-    </requirement>
-  </resource>
-  <resource>
-    <capability namespace='osgi.identity'>
-      <attribute name='osgi.identity' value='org.kohsuke.args4j'/>
-      <attribute name='type' value='osgi.bundle'/>
-      <attribute name='version' type='Version' value='2.0.23'/>
-    </capability>
-    <capability namespace='osgi.content'>
-      <attribute name='osgi.content' value='ad9cb94da88bc17fb6fe23232e0776ec0cbc185a69ea9dff2c5937b81bbbc72d'/>
-      <attribute name='url' value='org.kohsuke.args4j/org.kohsuke.args4j-2.0.23.jar'/>
-      <attribute name='size' type='Long' value='66632'/>
-      <attribute name='mime' value='application/vnd.osgi.bundle'/>
-    </capability>
-    <capability namespace='osgi.wiring.bundle'>
-      <attribute name='osgi.wiring.bundle' value='org.kohsuke.args4j'/>
-      <attribute name='bundle-version' type='Version' value='2.0.23'/>
-    </capability>
-    <capability namespace='osgi.wiring.host'>
-      <attribute name='osgi.wiring.host' value='org.kohsuke.args4j'/>
-      <attribute name='bundle-version' type='Version' value='2.0.23'/>
-    </capability>
-    <capability namespace='osgi.wiring.package'>
-      <attribute name='osgi.wiring.package' value='org.kohsuke.args4j'/>
-      <attribute name='version' type='Version' value='2.0.23'/>
-      <attribute name='bundle-symbolic-name' value='org.kohsuke.args4j'/>
-      <attribute name='bundle-version' type='Version' value='2.0.23'/>
-      <directive name='uses' value='org.kohsuke.args4j.spi,org.xml.sax.helpers,org.xml.sax'/>
-    </capability>
-    <capability namespace='osgi.wiring.package'>
-      <attribute name='osgi.wiring.package' value='org.kohsuke.args4j.spi'/>
-      <attribute name='version' type='Version' value='2.0.23'/>
-      <attribute name='bundle-symbolic-name' value='org.kohsuke.args4j'/>
-      <attribute name='bundle-version' type='Version' value='2.0.23'/>
-      <directive name='uses' value='org.kohsuke.args4j'/>
-    </capability>
-    <requirement namespace='osgi.wiring.package'>
-      <directive name='filter' value='(osgi.wiring.package=org.xml.sax)'/>
-    </requirement>
-    <requirement namespace='osgi.wiring.package'>
-      <directive name='filter' value='(osgi.wiring.package=org.xml.sax.helpers)'/>
     </requirement>
   </resource>
   <resource>
