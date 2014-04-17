@@ -3,3 +3,6 @@
  *
  * Build settings overrides that are applied to all projects.
  */
+
+ext.gradleBuild_findbugsEffort      = "max" /* min, default (default),max  */
+ext.gradleBuild_findbugsReportLevel = "low" /* low, medium (default), high */
