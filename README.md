@@ -49,10 +49,12 @@ Base
 
 ## Building
 
+You'll need at least Gradle 1.12.
+
 In the root of the checkout, run
 
 ```
-ant build package
+gradle export
 ```
 
 ## flac2mp3
@@ -117,13 +119,13 @@ Base
 After building, the program can be found in the directory
 
 ```
-nl.pelagic.musicTree.flac2mp3.cli/generated/packaged
+nl.pelagic.musicTree.flac2mp3.cli/generated/export
 ```
 
 Getting usage information for the program is performed by running:
 
 ```
-java -jar nl.pelagic.musicTree.flac2mp3.cli/generated/packaged/flac2mp3.jar -h
+java -jar nl.pelagic.musicTree.flac2mp3.cli/generated/export/flac2mp3.jar -h
 ```
 
 ### Installation
@@ -214,13 +216,13 @@ No special requirements.
 After building, the program can be found in the directory
 
 ```
-/nl.pelagic.audio.tag.checker.cli/generated/packaged
+nl.pelagic.audio.tag.checker.cli/generated/export
 ```
 
 Getting usage information for the program is performed by running:
 
 ```
-java -jar /nl.pelagic.audio.tag.checker.cli/generated/packaged/audiotagchecker.jar -h
+java -jar nl.pelagic.audio.tag.checker.cli/generated/export/audiotagchecker.jar -h
 ```
 
 ### Installation
