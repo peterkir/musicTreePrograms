@@ -93,7 +93,7 @@ ext.gradleBuild_jacocoXmlReport                = true
 ext.gradleBuild_jacocoCsvReport                = false
 ext.gradleBuild_jacocoHtmlDir                  = "html"              /* relative to gradleBuild_jacocoReportsDir */
 /* set the version when you don't want the latest */
-//ext.gradleBuild_jacocoToolVersion              = "0.7.1.201405082137"
+ext.gradleBuild_jacocoToolVersion              = "0.7.1.201405082137"
 
 /* Export task settings */
 ext.gradleBuild_exportDir                      = "export"            /* relative to bnd_targetDir           */
