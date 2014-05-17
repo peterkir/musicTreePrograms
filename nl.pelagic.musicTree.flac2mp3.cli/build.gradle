@@ -1,0 +1,22 @@
+assert(project != rootProject)
+
+
+def javadocIncludes = [
+  "nl.pelagic.audio.conversion.flac2mp3",
+  "nl.pelagic.audio.conversion.flac2mp3.api",
+  "nl.pelagic.audio.musicTree.configuration.api",
+  "nl.pelagic.audio.musicTree.syncer",
+  "nl.pelagic.audio.musicTree.syncer.api",
+  "nl.pelagic.musicTree.flac2mp3.cli",
+  "nl.pelagic.shell.script.listener",
+  "nl.pelagic.shell.script.listener.api",
+
+  "nl.pelagic.jaudiotagger.util",
+  "nl.pelagic.shutdownhook",
+  "nl.pelagic.shutdownhook.api",
+  "nl.pelagic.util"
+]
+
+javadocIncludes.each {
+  javadoc.source(rootProject.findProject(it).fileTree(bnd_srcDir).include("**/*.java"))
+}
