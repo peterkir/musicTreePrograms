@@ -151,7 +151,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
   /**
    * The bnd launcher provides access to the command line arguments via the
    * Launcher object. This object is also registered under Object.
-   * 
+   *
    * @param done unused
    * @param parameters the launcher parameters, which includes the command line
    *          arguments
@@ -173,7 +173,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
 
   /**
    * Bundle activator
-   * 
+   *
    * @param bundleContext the bundle context
    */
   @Activate
@@ -198,7 +198,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
 
   /**
    * Read a filelist file into a list of entries to convert
-   * 
+   *
    * @param out the stream to print the error messages to
    * @param fileList the filelist file
    * @param entriesToConvert a list of files to convert, to which the files read
@@ -215,9 +215,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
       return false;
     }
 
-    BufferedReader reader = null;
-    try {
-      reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileList), "UTF-8")); //$NON-NLS-1$
+    try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileList), "UTF-8"))) { //$NON-NLS-1$
       String line = null;
 
       while ((line = reader.readLine()) != null) {
@@ -233,17 +231,6 @@ public class Main implements Runnable, ShutdownHookParticipant {
       out.printf(Messages.getString("Main.11"), fileList, e.getLocalizedMessage()); //$NON-NLS-1$
       return false;
     }
-    finally {
-      if (reader != null) {
-        try {
-          reader.close();
-        }
-        catch (IOException e) {
-          /* swallow, can't be covered in a test */
-        }
-        reader = null;
-      }
-    }
 
     return true;
   }
@@ -251,7 +238,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
   /**
    * Validate the entry to convert to filter out non-existing directories and
    * files. An entry to convert must exist and be below the flac base directory.
-   * 
+   *
    * @param out the stream to print the error messages to
    * @param musicTreeConfiguration the music tree configuration
    * @param entryToConvert the entry to convert
@@ -284,14 +271,14 @@ public class Main implements Runnable, ShutdownHookParticipant {
 
   /**
    * Convert a flac file into an mp3 file.
-   * 
+   *
    * @param err the stream to print to
    * @param flac2Mp3Configuration the conversion configuration. When null then
    *          the default configuration is used.
    * @param musicTreeConfiguration the music tree configuration
    * @param simulate true to simulate conversion
    * @param fileToConvert the flac file to convert
-   * 
+   *
    * @return true when successful
    */
   boolean convertFile(PrintStream err, Flac2Mp3Configuration flac2Mp3Configuration,
@@ -332,7 +319,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
   /**
    * Stay alive, if needed (which is when the component has a SETTING_STAYALIVE
    * property set to true).
-   * 
+   *
    * @param err the stream to print a 'staying alive' message to
    */
   void stayAlive(PrintStream err) {
@@ -368,7 +355,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
 
   /**
    * Run the main program
-   * 
+   *
    * @param err the stream to print errors to
    * @return true when successful
    */
