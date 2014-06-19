@@ -188,14 +188,18 @@ public class TestMp3TagConverter {
     assert (idNames.length == idValues.length);
 
     AbstractID3v2Tag tag;
-    if (version == 24) {
-      tag = new ID3v24Tag();
-    } else if (version == 23) {
-      tag = new ID3v23Tag();
-    } else if (version == 22) {
-      tag = new ID3v22Tag();
-    } else {
-      throw new IllegalArgumentException("Wrong version " + version);
+    switch (version) {
+      case 24:
+        tag = new ID3v24Tag();
+        break;
+      case 23:
+        tag = new ID3v23Tag();
+        break;
+      case 22:
+        tag = new ID3v22Tag();
+        break;
+      default:
+        throw new IllegalArgumentException("Wrong version " + version);
     }
 
     Iterator<TagField> it = tag.getFields();
@@ -206,14 +210,18 @@ public class TestMp3TagConverter {
 
     for (int i = 0; i < idNames.length; i++) {
       AbstractID3v2Frame frame;
-      if (version == 24) {
-        frame = new ID3v24Frame(idNames[i]);
-      } else if (version == 23) {
-        frame = new ID3v23Frame(idNames[i]);
-      } else if (version == 22) {
-        frame = new ID3v22Frame(idNames[i]);
-      } else {
-        throw new IllegalArgumentException("Wrong version " + version);
+      switch (version) {
+        case 24:
+          frame = new ID3v24Frame(idNames[i]);
+          break;
+        case 23:
+          frame = new ID3v23Frame(idNames[i]);
+          break;
+        case 22:
+          frame = new ID3v22Frame(idNames[i]);
+          break;
+        default:
+          throw new IllegalArgumentException("Wrong version " + version);
       }
 
       AbstractID3v2FrameBody frameBody;
@@ -280,14 +288,18 @@ public class TestMp3TagConverter {
     assert (idNames.length == genericids.length);
 
     Class<? extends Object> clazz;
-    if (version == 24) {
-      clazz = ID3v24Tag.class;
-    } else if (version == 23) {
-      clazz = ID3v23Tag.class;
-    } else if (version == 22) {
-      clazz = ID3v22Tag.class;
-    } else {
-      throw new IllegalArgumentException("Wrong version " + version);
+    switch (version) {
+      case 24:
+        clazz = ID3v24Tag.class;
+        break;
+      case 23:
+        clazz = ID3v23Tag.class;
+        break;
+      case 22:
+        clazz = ID3v22Tag.class;
+        break;
+      default:
+        throw new IllegalArgumentException("Wrong version " + version);
     }
 
     Map<GenericTagFieldName, Map<String, Set<String>>> fields = genericTag.getFields();

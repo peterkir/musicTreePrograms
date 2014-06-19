@@ -15,26 +15,37 @@ public class TypeUtilsForTests {
       String year, String albumGenre, String trackArtist, String trackTitle, String albumArtist) {
     GenericTag tag = new GenericTag();
     for (GenericTagFieldName primary : primaries) {
-      if (primary == GenericTagFieldName.ALBUMTOTALTRACKS) {
-        tag.addField(null, primary, primary + namePostfix, albumTotalTracks);
-      } else if (primary == GenericTagFieldName.ALBUMDISCNUMBER) {
-        tag.addField(null, primary, primary + namePostfix, discNumber);
-      } else if (primary == GenericTagFieldName.ALBUMTITLE) {
-        tag.addField(null, primary, primary + namePostfix, title);
-      } else if (primary == GenericTagFieldName.TRACKNUMBER) {
-        tag.addField(null, primary, primary + namePostfix, trackNumber);
-      } else if (primary == GenericTagFieldName.ALBUMYEAR) {
-        tag.addField(null, primary, primary + namePostfix, year);
-      } else if (primary == GenericTagFieldName.ALBUMGENRE) {
-        tag.addField(null, primary, primary + namePostfix, albumGenre);
-      } else if (primary == GenericTagFieldName.TRACKARTIST) {
-        tag.addField(null, primary, primary + namePostfix, trackArtist);
-      } else if (primary == GenericTagFieldName.TRACKTITLE) {
-        tag.addField(null, primary, primary + namePostfix, trackTitle);
-      } else if (primary == GenericTagFieldName.ALBUMARTIST) {
-        tag.addField(null, primary, primary + namePostfix, albumArtist);
-      } else {
-        assert (false);
+      switch (primary) {
+        case ALBUMTOTALTRACKS:
+          tag.addField(null, primary, primary + namePostfix, albumTotalTracks);
+          break;
+        case ALBUMDISCNUMBER:
+          tag.addField(null, primary, primary + namePostfix, discNumber);
+          break;
+        case ALBUMTITLE:
+          tag.addField(null, primary, primary + namePostfix, title);
+          break;
+        case TRACKNUMBER:
+          tag.addField(null, primary, primary + namePostfix, trackNumber);
+          break;
+        case ALBUMYEAR:
+          tag.addField(null, primary, primary + namePostfix, year);
+          break;
+        case ALBUMGENRE:
+          tag.addField(null, primary, primary + namePostfix, albumGenre);
+          break;
+        case TRACKARTIST:
+          tag.addField(null, primary, primary + namePostfix, trackArtist);
+          break;
+        case TRACKTITLE:
+          tag.addField(null, primary, primary + namePostfix, trackTitle);
+          break;
+        case ALBUMARTIST:
+          tag.addField(null, primary, primary + namePostfix, albumArtist);
+          break;
+        default:
+          assert (false);
+          break;
       }
     }
     tag.addField(null, GenericTagFieldName.OTHER, "OTHER name", "OTHER value");
