@@ -18,5 +18,7 @@ def javadocIncludes = [
 ]
 
 javadocIncludes.each {
-  javadoc.source(rootProject.findProject(it).fileTree(bnd_srcDir).include("**/*.java"))
+  rootProject.findProject(it).sourceSets.main.java.srcDirs.each {
+    javadoc.source(fileTree(it).include("**/*.java"))
+  }
 }

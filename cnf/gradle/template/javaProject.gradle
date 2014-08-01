@@ -10,22 +10,32 @@
  */
 
 assert(project != rootProject               )
-assert(rootProject.hasProperty("bnd_cnf"   ))
-assert(            hasProperty("sourceSets"))
+assert(rootProject.hasProperty('bndCnf'    ))
+assert(            hasProperty('sourceSets'))
 
 
-/*
- * Java Project
- */
+if (!hasProperty('javaLibsDirName '        )) ext.javaLibsDirName          = '.'                 /* relative to build directory             */
+if (!hasProperty('javaTestReportDirName '  )) ext.javaTestReportDirName    = 'tests/html'        /* relative to build directory / reports   */
+if (!hasProperty('javaTestResultsDirName'  )) ext.javaTestResultsDirName   = 'reports/tests/xml' /* relative to build directory             */
+if (!hasProperty('javaTestEnableAssertions')) ext.javaTestEnableAssertions = true
+if (!hasProperty('javaTestIgnoreFailures'  )) ext.javaTestIgnoreFailures   = false
+if (!hasProperty('javaTestMaxParallelForks')) ext.javaTestMaxParallelForks = 1
+
+libsDirName           = javaLibsDirName
+testResultsDirName    = javaTestResultsDirName
+testReportDirName     = javaTestReportDirName
+test.enableAssertions = javaTestEnableAssertions
+test.ignoreFailures   = javaTestIgnoreFailures
+test.maxParallelForks = javaTestMaxParallelForks
 
 /* Setup javadoc options */
-apply from: rootProject.file("$rootProject.bnd_cnf/gradle/template/javaDoc.gradle")
+apply from: rootProject.file("${rootProject.bndCnf}/gradle/template/javaDoc.gradle")
 
 /* Add findbugs to the project */
-apply from: rootProject.file("$rootProject.bnd_cnf/gradle/template/findbugs.gradle")
+apply from: rootProject.file("${rootProject.bndCnf}/gradle/template/findbugs.gradle")
 
 /* Add jacoco to the project */
-apply from: rootProject.file("$rootProject.bnd_cnf/gradle/template/jacoco.gradle")
+apply from: rootProject.file("${rootProject.bndCnf}/gradle/template/jacoco.gradle")
 
 distclean.doLast {
   sourceSets.each {

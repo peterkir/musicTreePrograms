@@ -15,16 +15,8 @@
  *       reports instead of html reports.
  */
 
-assert(project != rootProject                               )
-assert(hasProperty("bnd_targetDir"                         ))
-assert(hasProperty("gradleBuild_findbugsEffort"            ))
-assert(hasProperty("gradleBuild_findbugsExcludesFile"      ))
-assert(hasProperty("gradleBuild_findbugsIgnoreFailures"    ))
-assert(hasProperty("gradleBuild_findbugsIncludesFile"      ))
-assert(hasProperty("gradleBuild_findbugsPropertyXmlReports"))
-assert(hasProperty("gradleBuild_findbugsReportLevel"       ))
-assert(hasProperty("gradleBuild_findbugsReportsDir"        ))
-assert(hasProperty("gradleBuild_findbugsToolVersion"       ))
+assert(project != rootProject   )
+assert(hasProperty('sourceSets'))
 
 
 repositories {
@@ -32,30 +24,43 @@ repositories {
 }
 
 
-apply plugin: "findbugs"
+apply plugin: 'findbugs'
+
+
+if (!hasProperty('findbugsReportXML'     )) ext.findbugsReportXML      = 'CI'
+
+if (!hasProperty('findbugsToolVersion'   )) ext.findbugsToolVersion    = '3.0.0'
+if (!hasProperty('findbugsIgnoreFailures')) ext.findbugsIgnoreFailures = true
+if (!hasProperty('findbugsEffort'        )) ext.findbugsEffort         = 'default'  /* min, default, max           */
+if (!hasProperty('findbugsReportLevel'   )) ext.findbugsReportLevel    = 'medium'   /* low, medium (default), high */
+if (!hasProperty('findbugsReportsDir'    )) ext.findbugsReportsDir     = 'findbugs' /* relative to build directory */
+if (!hasProperty('findbugsIncludesFile'  )) ext.findbugsIncludesFile   = "${rootProject.rootDir}/${rootProject.bndCnf}/findbugs/findbugs.include.xml"
+if (!hasProperty('findbugsExcludesFile'  )) ext.findbugsExcludesFile   = "${rootProject.rootDir}/${rootProject.bndCnf}/findbugs/findbugs.exclude.xml"
 
 
 findbugs {
-  reportsDir     = file("$bnd_targetDir/$gradleBuild_findbugsReportsDir")
-  includeFilter  = file(gradleBuild_findbugsIncludesFile                )
-  excludeFilter  = file(gradleBuild_findbugsExcludesFile                )
-  effort         =      gradleBuild_findbugsEffort
-  ignoreFailures =      gradleBuild_findbugsIgnoreFailures
-  reportLevel    =      gradleBuild_findbugsReportLevel
-  toolVersion    =      gradleBuild_findbugsToolVersion
+  toolVersion    =          findbugsToolVersion
+  ignoreFailures =          findbugsIgnoreFailures
+  effort         =          findbugsEffort
+  reportLevel    =          findbugsReportLevel
+  reportsDir     = new File(buildDir, "${findbugsReportsDir}")
+  includeFilter  =     file(findbugsIncludesFile             )
+  excludeFilter  =     file(findbugsExcludesFile             )
 }
 
 findbugsMain {
+  dependsOn assemble
   reports {
-    xml.enabled  = rootProject.hasProperty(gradleBuild_findbugsPropertyXmlReports) ? true  : false
-    html.enabled = rootProject.hasProperty(gradleBuild_findbugsPropertyXmlReports) ? false : true
+    xml.enabled  = rootProject.hasProperty(findbugsReportXML) ? true  : false
+    html.enabled = rootProject.hasProperty(findbugsReportXML) ? false : true
   }
 }
 
 findbugsTest {
+  dependsOn test
   reports {
-    xml.enabled  = rootProject.hasProperty(gradleBuild_findbugsPropertyXmlReports) ? true  : false
-    html.enabled = rootProject.hasProperty(gradleBuild_findbugsPropertyXmlReports) ? false : true
+    xml.enabled  = rootProject.hasProperty(findbugsReportXML) ? true  : false
+    html.enabled = rootProject.hasProperty(findbugsReportXML) ? false : true
   }
 }
 

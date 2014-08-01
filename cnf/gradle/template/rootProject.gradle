@@ -10,26 +10,20 @@
  */
 
 assert(project == rootProject)
+assert(hasProperty('bndCnf' ))
 
 
-/*
- * Root Project
- */
-
-assert(hasProperty("bnd_cnf"))
+if (!hasProperty('rootGradleVersion')) ext.rootGradleVersion = '2.0'
+if (!hasProperty('root_defaultTask' )) ext.root_defaultTask  = 'jar'
 
 
-/* Load the default build settings for the root project */
-apply from: file("$bnd_cnf/gradle/template/settings-rootProject.gradle")
+/* Load the overrides */
+apply from: file("${bndCnf}/gradle/custom/settings-rootProject.gradle")
 
 
-assert(hasProperty("gradleBuild_gradleVersion"))
-assert(hasProperty("gradleBuild_rootProjectDefaultTasks"))
-
-
-defaultTasks.clear()
-gradleBuild_rootProjectDefaultTasks.each {
-  defaultTasks += it
+/* Setup the default tasks */
+if (project.hasProperty('root_defaultTask')) {
+  defaultTasks = root_defaultTask.trim().split(/\s*,\s*/)
 }
 
 
@@ -37,20 +31,18 @@ gradleBuild_rootProjectDefaultTasks.each {
  * Setup tasks
  */
 
-/* Create a gradle wrapper */
-task wrapper(type: Wrapper) {
-  description     "Download Gradle and generate wrapper scripts."
-  group           "Build Setup"
-
-  gradleVersion = gradleBuild_gradleVersion
-  jarFile       = file(".gradle-wrapper/gradle-wrapper.jar")
+/* Setup the gradle wrapper */
+wrapper {
+  gradleVersion = rootGradleVersion
+  jarFile       = file('.gradle-wrapper/gradle-wrapper.jar')
 }
 
+
 distclean.doLast {
-  delete("$bnd_cnf/cache")
-  delete(".gradle")
+  delete("${bndCnf}/cache")
+  delete('.gradle'      )
 }
 
 
 /* Load the build customisations */
-apply from: file("$bnd_cnf/gradle/custom/rootProject.gradle")
+apply from: file("${bndCnf}/gradle/custom/rootProject.gradle")

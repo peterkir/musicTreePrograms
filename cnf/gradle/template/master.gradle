@@ -1,0 +1,106 @@
+/*
+ * WARNING
+ *
+ * This file is maintained automatically by Bndtools.
+ * You should not edit it.
+ *
+ * See the BUILDING-GRADLE.md document in the root project for more details.
+ *
+ * Main build template.
+ */
+
+import aQute.bnd.osgi.Constants
+
+
+assert(project == rootProject      )
+assert(hasProperty('bndCnf'      ))
+assert(hasProperty('bndWorkspace'))
+
+
+/* Setup the build dependencies */
+buildscript {
+  dependencies {
+    classpath rootProject.bndBuildDependencies
+  }
+}
+
+
+/* Gradle default task settings */
+if (!hasProperty('bnd_defaultTask'   )) ext.bnd_defaultTask    = 'jar' /* comma separated */
+if (!hasProperty('others_defaultTask')) ext.others_defaultTask = 'jar' /* comma separated */
+
+/* Load the BndPlugin class */
+apply from: buildscript.classLoader.getResource('aQute/bnd/gradle/BndPlugin.gradle')
+
+/*
+ * All Projects
+ */
+
+allprojects { project ->
+  /* Load the build settings overrides */
+  apply from: rootProject.file("${rootProject.bndCnf}/gradle/custom/settings-allProjects.gradle")
+
+  /* Allow projects to individually override build settings */
+  def settingsFile = file('build-settings.gradle')
+  if (settingsFile.exists()) {
+    apply from: settingsFile
+  }
+
+  /* The Gradle build directory */
+  project.buildDir = relativePath(rootProject.bndWorkspaceDefaults.getProperty(Constants.DEFAULT_PROP_TARGET_DIR))
+
+  /* Add findbugs placeholder tasks to the project */
+  apply from: rootProject.file("${rootProject.bndCnf}/gradle/template/findbugs-placeholders.gradle")
+
+  /* Add index tasks to the project */
+  apply from: rootProject.file("${rootProject.bndCnf}/gradle/template/index.gradle")
+
+  /* Add clean tasks to the project */
+  apply from: rootProject.file("${rootProject.bndCnf}/gradle/template/clean.gradle")
+
+  /* Load the build customisations */
+  apply from: rootProject.file("${rootProject.bndCnf}/gradle/custom/allProjects.gradle")
+}
+
+
+/*
+ * Sub-Projects
+ */
+
+subprojects { project ->
+  def bndProject = bndWorkspace.getProject(name)
+  if (bndProject == null) {
+    /* Setup the default tasks */
+    if (project.hasProperty('others_defaultTask')) {
+      defaultTasks = others_defaultTask.trim().split(/\s*,\s*/)
+    }
+
+    /* Load the build customisations */
+    apply from: rootProject.file("${rootProject.bndCnf}/gradle/custom/nonBndProjects.gradle")
+  } else {
+    /* Store the bnd project for use in the bnd project template */
+    project.ext.bndProject = bndProject
+
+    plugins.apply BndPlugin
+
+    /* Override the javadoc bootclasspath */
+    ext.javadocClassPathBoot = project.bndProject.bootclasspath.collect { it.file }
+
+    /* Add tasks that are relevant to Java projects */
+    apply from: rootProject.file("${rootProject.bndCnf}/gradle/template/javaProject.gradle")
+
+    /* Load the build customisations */
+    apply from: rootProject.file("${rootProject.bndCnf}/gradle/custom/bndProjects.gradle")
+  }
+
+  /* Load the build customisations */
+  apply from: rootProject.file("${rootProject.bndCnf}/gradle/custom/subProjects.gradle")
+}
+
+
+/*
+ * Root Project
+ */
+
+/* Apply the rootProject template */
+apply from: file("${bndCnf}/gradle/template/rootProject.gradle")
