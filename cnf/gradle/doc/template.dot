@@ -99,6 +99,7 @@ digraph GradleSetup {
     javadoc                [shape=box, style=filled, fillcolor=lightcyan, label="javadoc"             ]
 
     clean                  [shape=box, style=filled, fillcolor=cyan     , label="clean"               ]
+    cleanNeeded            [shape=box, style=filled, fillcolor=cyan     , label="cleanNeeded"         ]
     echo                   [shape=box, style=filled, fillcolor=cyan     , label="echo"                ]
     bndproperties          [shape=box, style=filled, fillcolor=cyan     , label="bndproperties"       ]
     jacocoTestReport       [shape=box, style=filled, fillcolor=orange   , label="jacocoTestReport"    ]
@@ -130,6 +131,8 @@ digraph GradleSetup {
     exportX                -> export
     release                -> releaseNeeded
     releaseNeeded          -> releaseNeeded      [color=red   ]
+    clean                  -> cleanNeeded
+    cleanNeeded            -> cleanNeeded        [color=red   ]
 
     assemble               -> findbugsMain
     test                   -> findbugsTest
@@ -140,19 +143,6 @@ digraph GradleSetup {
 
 
   subgraph cluster2 {
-    label="Root Project";
-    labelloc=b
-    labeljust=l
-    style=filled;
-    fillcolor=lightgrey;
-    color=black;
-
-    init                   [shape=box, style=filled, fillcolor=lightcyan, label="init"                ]
-    wrapper                [shape=box, style=filled, fillcolor=orange   , label="wrapper"             ]
-  }
-
-
-  subgraph cluster3 {
     label="All Projects";
     labelloc=b
     labeljust=l
@@ -160,13 +150,13 @@ digraph GradleSetup {
     fillcolor=lightgrey;
     color=black;
 
-    subgraph cluster301 {
+    subgraph cluster201 {
       label="";
       style=invis;
       index                [shape=box, style=filled, fillcolor=orange   , label="index"               ]
     }
 
-    subgraph cluster302 {
+    subgraph cluster202 {
       label="";
       style=invis;
       cleanAll             [shape=box, style=filled, fillcolor=orange   , label="clean"               ]
@@ -176,10 +166,25 @@ digraph GradleSetup {
     }
 
     clean                  -> cleanAll           [color=blue  ]
-    cleanAll               -> cleanAllNeeded     [color=blue  ]
+    cleanNeeded            -> cleanAllNeeded     [color=blue  ]
+    cleanAll               -> cleanAllNeeded
+    cleanAll               -> distclean
     cleanAllNeeded         -> cleanAllNeeded     [color=red   ]
-    cleanAll               -> distclean          [color=blue  ]
+    cleanAllNeeded         -> distcleanNeeded
     distclean              -> distcleanNeeded
     distcleanNeeded        -> distcleanNeeded    [color=red   ]
+  }
+
+
+  subgraph cluster3 {
+    label="Root Project";
+    labelloc=b
+    labeljust=l
+    style=filled;
+    fillcolor=lightgrey;
+    color=black;
+
+    init                   [shape=box, style=filled, fillcolor=lightcyan, label="init"                ]
+    wrapper                [shape=box, style=filled, fillcolor=orange   , label="wrapper"             ]
   }
 }

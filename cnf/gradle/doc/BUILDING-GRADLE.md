@@ -231,28 +231,24 @@ It contains:
 
 * Build files.
 
-  * <a name="BuildProperties"/>```build.gradle.properties```
+  * <a name="BuildProperties"/>```gradle.properties```
 
-    This file is used to bootstrap the build and defines the build dependencies:
+    This file is used to bootstrap the build and (among other things) defines
+    the build dependencies:
 
-    * All ```*.location``` and ```*.url``` settings are considered to be build
-      dependencies.
+    * All ```*.url``` settings are considered to be build dependencies.
 
-    * A ```*.location``` setting has priority over the corresponding ```*.url```
-      setting, which means that the ```example.url``` setting will be ignored
-      if ```example.location``` is also specified.
+    * An ```example.url``` setting will make the build script add the file
+      indicated by the URL to the build dependencies when the file exists on the
+      local filesystem. If the file doesn't exist on the local filesystem, then
+      the build script will download the build dependency from the specified URL
+      into the ```cnf/cache``` directory and add it to the build dependencies.
 
-    * An ```example.location``` setting will make the build script add the
-      specified location (path) to the build dependencies.
+      Using a ```*.url``` setting that points to an external location is
+      not **not recommended** since the build will then no longer be
+      self-contained (because it needs network access).
 
-    * An ```example.url``` setting will make the build script download
-      the ```example``` build dependency from the specified URL into
-      the ```cnf/cache/gradle``` directory and add it to the build dependencies.
-
-      Using a ```*.url``` setting is not **not recommended** since the build
-      will then no longer be self-contained (because it needs network access).
-
-  * &nbsp;```gradle```
+  * &nbsp;```cnf/gradle```
 
     This directory contains all build script files that are used by the build,
     and documentation pertaining to the build.
@@ -264,9 +260,9 @@ It contains:
 
     * &nbsp;```custom```
 
-      This directory contains build script files that allow specification of
-      overrides for various settings and and additions to the build. The build
-      script files are effectively hooks into the build setup.
+      This directory contains build script files that are hooks into the
+      build process. They allow specification of overrides for various settings,
+      additions to the build, modifications to the build, etc.
 
       These **are** meant to be changed (when the build customisations are
       needed).
@@ -339,31 +335,32 @@ build, properties must be overridden, etc.
 
 The build has the following flow:
 
-* Gradle loads the ```settings.gradle``` file from the root project. This file
-  instructs Gradle to include all **bnd** projects and all **Gradle** projects
-  (see [Sub-Projects](#ProjectsAndWorkspacesSubProjects) for an explanation).
+* Gradle loads all properties defined in the ```gradle.properties``` file in
+  the root of the workspace.
+
+* Gradle invokes the ```settings.gradle``` file in the root of the workspace.
+  This file initialises the build:
+
+  * Detect the location of the configuration project
+    (see [Configuration Project](#ProjectsAndWorkspacesCnf)).
+
+  * initialise the bnd workspace.
+
+  * The build dependencies are determined from the (bootstrap) build
+    properties that were loaded from the ```gradle.properties``` file
+    (see [the explanation of the build properties file](#BuildProperties).
+
+  * Include all **bnd** projects and all **Gradle** projects
+    (see [Sub-Projects](#ProjectsAndWorkspacesSubProjects) for an explanation).
 
 * Gradle loads the ```build.gradle``` file from the root project. This file
   sets up the build:
 
-  * Scan for the configuration project (see [Configuration Project](#ProjectsAndWorkspacesCnf)).
+  * The bnd plugin is loaded.
 
-  * The workspace build settings overrides are loaded from
-    the ```cnf/gradle/custom/settings-workspace.gradle``` file.
+  * The hook ```cnf/gradle/custom/workspace-pre.gradle``` is invoked.
 
-  * Build logging is setup, as specified by the workspace build settings.
-
-  * The build dependencies are setup by loading the (bootstrap) build
-    properties from the ```cnf/gradle/build.gradle.properties``` file
-    (see [the explanation of the build properties file](#BuildProperties).
-
-  * The bnd workspace is initialised by loading the
-    file ```cnf/gradle/template/bndWorkspace.gradle```.
-
-  * The build template is applied by loading the
-    file ```cnf/gradle/template/master.gradle```.
-
-    The build template has 3 distinct sections which are applied in the order:
+  * From now on the build template has 3 sections which are applied in the order:
 
     * All projects
     * Sub-Projects
@@ -375,91 +372,88 @@ The build has the following flow:
     iterating over all included projects and performing the actions described
     below.
 
-    * Load the build settings overrides from
-      the ```cnf/gradle/custom/settings-allProjects.gradle``` file.
+    * The hook ```cnf/gradle/custom/allProject-pre.gradle``` is invoked.
 
-    * Load project specific build settings overrides from
-      the ```build-settings.gradle``` file in the project directory if it's
-      present.
+    * Load project specific build settings from the ```build-settings.gradle```
+      file in the project directory if the file is present.
 
       A project specific ```build-settings.gradle``` is placed in the
       root of an included project and allows overrides of the build
-      settings on an project-by-project basis.
+      settings, additions to the build, modifications of the build, etc, on a
+      project-by-project basis.
 
-    * Findbugs (placeholder) tasks, index tasks and clean (placeholder) tasks
-      are added to the project.
+    * Index tasks are added to the project.
 
-    * Build customisations are loaded from
-      the ```cnf/gradle/custom/allProjects.gradle``` file.
+    * Clean tasks are added to the project.
+
+    * The hook ```cnf/gradle/custom/allProject-post.gradle``` is invoked.
 
     **Sub-Projects**
 
     This section sets up the build (defaults) for all included projects,
     (excluding the root project) by iterating over all included sub-projects.
-
     A distinction is made between **bnd** projects and **Gradle** projects.
 
-    * Gradle projects
+    * The hook ```cnf/gradle/custom/subProject-pre.gradle``` is invoked.
+
+    * Gradle projects (Non-Bnd Projects)
+
+      * The hook ```cnf/gradle/custom/nonBndProject-pre.gradle``` is invoked.
 
       * The default tasks are setup (specified by the ```others_defaultTask```
         property). This is a comma separated list of task names.
 
-      * Build customisations are loaded from
-        the ```cnf/gradle/custom/nonBndProjects.gradle``` file.
-
     * bnd projects
 
-      * The default tasks are setup (specified by the ```bnd_defaultTask```
-        property).  This is a comma separated list of task names.
+      * The bnd project instance is save in the project as the ```bndProject```
+        property.
 
-      * The bnd project build is setup by loading
-        the ```cnf/gradle/template/bndProject.gradle``` file.
+      * The hook ```cnf/gradle/custom/bndProject-pre.gradle``` is invoked.
+      
+      * The bnd plugin is applied.
 
-        * The bnd project is initialised (prepared) by bnd.
+      * The hook ```cnf/gradle/custom/bndProject-post.gradle``` is invoked.
 
-        * The bnd properties are loaded from bnd.
+    * For all projects that have applied the Gradle Java plugin the
+      buildscript ```cnf/gradle/template/javaProject.gradle``` is applied,
+      thereby adding tasks that are relevant to Java projects.
 
-        * Properties (source and output directories, classpath
-          directories, compiler options, etc) are setup for the project by
-          using the bnd properties retrieved in the previous step.
+      * The hook ```cnf/gradle/custom/javaProject-pre.gradle``` is invoked.
 
-        * The Java plugin is applied.
+      * Setup the library directory (when generated artifacts will be placed).
 
-          Refer to the Gradle User Guide for more information on the Java
-          plugin.
+      * Setup the test options.
 
-        * The Java compiler is configured by applying relevant properties
-          to the source sets and their compiler options.
+      * Setup the javaDoc task.
 
-        * The ```jar```, ```release```, ```releaseNeeded```, ```export```
-          , ```export.<name>```, ```check```, ```checkNeeded```
-          , ```echo```, ```bndproperties``` and ```clean``` tasks are setup and
-          their dependencies are configured in such a way that they hook into
-          the tasks that are setup by the Java plugin
-          (see [the tasks diagram](#svg)).
+      * Setup the findbugs tasks.
 
-        * Build customisations are loaded from
-          the ```cnf/gradle/custom/bndProjects.gradle``` file.
+      * Setup the jacoco task.
 
-      * Build customisations are loaded from
-        the ```cnf/gradle/custom/subProjects.gradle``` file.
+      * Adjust the distclean task to clean all output directories of all
+        sourceSets.
+
+      * The hook ```cnf/gradle/custom/javaProject-post.gradle``` is invoked.
+
+    * The hook ```cnf/gradle/custom/subProject-post.gradle``` is invoked.
 
     **Root Project**
 
-    This section sets up the build (defaults) for the root project by loading
-    the ```cnf/gradle/template/rootProject.gradle```, which performs the
-    actions described below.
+    This section sets up the build (defaults) for the root project.
 
-    * Load the build settings overrides from
-      the ```cnf/gradle/custom/settings-rootProject.gradle``` file.
+    * The hook ```cnf/gradle/custom/rootProject-pre.gradle``` is invoked.
 
     * The default tasks are setup (specified by the ```root_defaultTask```
       property).  This is a comma separated list of task names.
 
-    * The wrapper and distclean tasks are setup.
+    * Setup the wrapper task
+    
+    * Setup the distclean task to also clean the ```cnf/cache```
+      and ```.gradle``` directories .
 
-    * Build customisations are loaded from
-      the ```cnf/gradle/custom/rootProject.gradle``` file.
+    * The hook ```cnf/gradle/custom/rootProject-post.gradle``` is invoked.
+
+  * The hook ```cnf/gradle/custom/workspace-post.gradle``` is invoked.
 
 * For every included project with a ```build.gradle``` file Gradle loads that
   file.
@@ -735,7 +729,7 @@ property (```-PCI``` on the command line).
 
 ## <a name="CustomisingTheBuildGradle"/>Gradle
 
-The build be can easily customised by putting overrides and  additions in any of
+The build be can easily customised by putting overrides and additions in any of
 the ```cnf/gradle/custom/*.gradle``` build script files,
 see [Build Flow](#BuildFlow).
 
@@ -780,6 +774,10 @@ However, regular Java projects are not included automatically,
 a ```build.gradle``` file in the root directory of the project is needed to make
 that happen.
 
+Such projects only need to apply the Gradle Java plugin and setup their
+sourceSets, the template will then automatically apply the
+buildscript ```cnf/gradle/template/javaProject.gradle```.
+
 The ```build.gradle``` file shown below can be used as the basis. This will
 setup the Java project with the default bnd layout and add tasks that are
 relevant to a Java project (```javadoc```, findbugs tasks and ```distclean```).
@@ -793,8 +791,6 @@ assert(project != rootProject)
 
 apply plugin: 'java'
 
-assert(rootProject.hasProperty('bndCnf'))
-
 /* We use the same directory for java and resources. */
 sourceSets {
   main {
@@ -806,8 +802,5 @@ sourceSets {
     output.classesDir   = output.resourcesDir =       'test_bin'
   }
 }
-
-/* Add tasks that are relevant to Java projects */
-apply from: rootProject.file("${rootProject.bndCnf}/gradle/template/javaProject.gradle")
 ```
 

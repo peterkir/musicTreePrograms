@@ -1,35 +1,23 @@
 /*
  * WARNING
  *
- * This file is maintained automatically by Bndtools.
- * You should not edit it.
- *
- * See the BUILDING-GRADLE.md document in the root project for more details.
+ * This file should not be edited.
  *
  * Build template for the root project.
  */
 
 assert(project == rootProject)
-assert(hasProperty('bndCnf' ))
+assert(hasProperty('bnd_cnf'))
 
 
 if (!hasProperty('rootGradleVersion')) ext.rootGradleVersion = '2.0'
-if (!hasProperty('root_defaultTask' )) ext.root_defaultTask  = 'jar'
-
-
-/* Load the overrides */
-apply from: file("${bndCnf}/gradle/custom/settings-rootProject.gradle")
 
 
 /* Setup the default tasks */
-if (project.hasProperty('root_defaultTask')) {
+if (hasProperty('root_defaultTask')) {
   defaultTasks = root_defaultTask.trim().split(/\s*,\s*/)
 }
 
-
-/*
- * Setup tasks
- */
 
 /* Setup the gradle wrapper */
 wrapper {
@@ -39,10 +27,6 @@ wrapper {
 
 
 distclean.doLast {
-  delete("${bndCnf}/cache")
-  delete('.gradle'      )
+  delete("${bnd_cnf}/cache")
+  delete('.gradle'         )
 }
-
-
-/* Load the build customisations */
-apply from: file("${bndCnf}/gradle/custom/rootProject.gradle")
