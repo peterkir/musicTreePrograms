@@ -119,13 +119,13 @@ Base
 After building, the program can be found in the directory
 
 ```
-nl.pelagic.musicTree.flac2mp3.cli/generated/export
+flac2mp3/generated/distributions
 ```
 
 Getting usage information for the program is performed by running:
 
 ```
-java -jar nl.pelagic.musicTree.flac2mp3.cli/generated/export/flac2mp3.jar -h
+java -jar flac2mp3/generated/distributions/flac2mp3.jar -h
 ```
 
 ### Installation
@@ -216,13 +216,13 @@ No special requirements.
 After building, the program can be found in the directory
 
 ```
-nl.pelagic.audio.tag.checker.cli/generated/export
+audiotagchecker/generated/distributions
 ```
 
 Getting usage information for the program is performed by running:
 
 ```
-java -jar nl.pelagic.audio.tag.checker.cli/generated/export/audiotagchecker.jar -h
+java -jar audiotagchecker/generated/distributions/audiotagchecker.jar -h
 ```
 
 ### Installation
