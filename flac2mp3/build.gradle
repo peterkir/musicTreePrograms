@@ -3,6 +3,12 @@ assert(project != rootProject)
 def cp = files()
 javadocIncludes.each {
   rootProject.findProject(it).each {
+    /* depend on all projects in the workspace that have a jar task */
+    if (it != project && !it.getTasksByName('jar', false).empty) {
+      jar.dependsOn(":${it.name}:jar")
+    }
+
+    /* add java sources to the javadoc */
     it.sourceSets.main.java.srcDirs.each {
       javadoc.source(fileTree(it).include("**/*.java"))
     }
