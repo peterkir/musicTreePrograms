@@ -1,5 +1,9 @@
 assert(project != rootProject)
 
+apply plugin: 'java'
+
+ext.javadocDocTitle    = 'flac2mp3'
+ext.javadocWindowTitle = 'flac2mp3'
 
 ext.javadocIncludes = [
   "nl.pelagic.audio.conversion.flac2mp3",

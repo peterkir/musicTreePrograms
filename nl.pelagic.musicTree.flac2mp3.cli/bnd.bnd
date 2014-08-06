@@ -8,16 +8,9 @@
 	org.kohsuke.args4j,\
 	nl.pelagic.shutdownhook.api;version=latest,\
 	${junit}
-
 Private-Package: nl.pelagic.musicTree.flac2mp3.cli,\
 	nl.pelagic.musicTree.flac2mp3.cli.i18n
 Service-Component: *
 Bundle-Version:1.0.3.${tstamp}
 Bundle-Name: Flac2Mp3
-
-
-# program arguments (not exported)
--runprogramargs: -f /home/ferry/workspace/musicTreePrograms/Music\n\
-	-m /home/ferry/workspace/musicTreePrograms/from.flac\n\
-	-s -v
 Bundle-Description: CLI of the flac2mp3 program

@@ -1,0 +1,6 @@
+-nobundles
+
+# program arguments (not exported)
+-runprogramargs: -f /home/ferry/workspace/musicTreePrograms/Music\n\
+    -m /home/ferry/workspace/musicTreePrograms/from.flac\n\
+    -s -v

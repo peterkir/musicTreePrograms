@@ -1,6 +1,5 @@
 assert(project != rootProject)
 
-
 def cp = files()
 javadocIncludes.each {
   rootProject.findProject(it).each {
