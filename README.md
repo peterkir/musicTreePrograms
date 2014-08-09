@@ -34,7 +34,7 @@ bnd*tools* (http://bndtools.org) in Eclipse.
   * [Example](#flac2mp3Example)
   * [Running](#flac2mp3Running)
   * [Installation](#flac2mp3Installation)
-* [](#audiotagchecker)
+* [audiotagchecker](#audiotagchecker)
   * [Functionality](#audiotagcheckerFunctionality)
   * [Checks](#audiotagcheckerChecks)
     * [Basic Checks](#audiotagcheckerChecksBasic)
@@ -73,7 +73,7 @@ Base Directory
 # <a name="Building"/>Building
 
 You'll need at least Gradle 2.0. For instructions on how to install Gradle, see
-the [build setup documentation](BUILDING-GRADLE.md)
+the [build setup documentation](BUILDING-GRADLE.md).
 
 
 In the root of the checkout, run
