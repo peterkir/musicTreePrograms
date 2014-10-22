@@ -1,6 +1,15 @@
 This document is licensed under the GNU Free Documentation License,
 Version 1.3, 3 November 2008
 
+# Compatibility
+
+This plugin is compatible with all bndtools versions since 2.3.0.REL.
+
+# Update Log
+
+* this: f0435b5
+* bnd:  228faed
+
 # Changes since bndtools 2.3.0 release
 
 The changes were made to let the build be more in-line with what is delivered
@@ -9,6 +18,8 @@ bndtools 2.4.0.M1).
 
 Below the changes that affect users are detailed.
 
+* The wrapper task now always uses the latest released Gradle version, unless
+  unless the ```rootGradleVersion``` is set when running the task.
 * The javadoc title, docTitle and windowTitle are now configurable.
 * The ```jacocoTestReport``` task is automatically run when either of
   the ```test``` or ```check``` tasks are scheduled to run.
