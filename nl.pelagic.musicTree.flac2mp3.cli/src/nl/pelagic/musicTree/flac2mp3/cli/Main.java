@@ -392,7 +392,7 @@ public class Main implements Runnable, ShutdownHookParticipant {
         /* can't be covered by a test */
         int cols = Integer.parseInt(System.getenv("COLUMNS")); //$NON-NLS-1$
         if (cols > 80) {
-          parser.setUsageWidth(cols);
+          parser.getProperties().withUsageWidth(cols);
         }
       }
       catch (NumberFormatException e) {
