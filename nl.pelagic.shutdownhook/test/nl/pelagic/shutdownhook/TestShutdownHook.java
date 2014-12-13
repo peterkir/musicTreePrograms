@@ -29,7 +29,30 @@ public class TestShutdownHook {
   }
 
   @Test
-  public void test_NoParticipants() {
+  public void testActivateDeactive() {
+    shutdownHook.addShutdownHookParticipant(dummyShutdownHookParticipant1);
+
+    assertThat(Integer.valueOf(dummyShutdownHookParticipant1.callCount), equalTo(Integer.valueOf(0)));
+    assertThat(Integer.valueOf(dummyShutdownHookParticipant2.callCount), equalTo(Integer.valueOf(0)));
+
+    shutdownHook.activate();
+
+    assertThat(Integer.valueOf(dummyShutdownHookParticipant1.callCount), equalTo(Integer.valueOf(0)));
+    assertThat(Integer.valueOf(dummyShutdownHookParticipant2.callCount), equalTo(Integer.valueOf(0)));
+
+    shutdownHook.run();
+
+    assertThat(Integer.valueOf(dummyShutdownHookParticipant1.callCount), equalTo(Integer.valueOf(1)));
+    assertThat(Integer.valueOf(dummyShutdownHookParticipant2.callCount), equalTo(Integer.valueOf(0)));
+
+    shutdownHook.deactivate();
+
+    assertThat(Integer.valueOf(dummyShutdownHookParticipant1.callCount), equalTo(Integer.valueOf(1)));
+    assertThat(Integer.valueOf(dummyShutdownHookParticipant2.callCount), equalTo(Integer.valueOf(0)));
+  }
+
+  @Test
+  public void testNoParticipants() {
     shutdownHook.run();
 
     assertThat(Integer.valueOf(dummyShutdownHookParticipant1.callCount), equalTo(Integer.valueOf(0)));
@@ -37,7 +60,7 @@ public class TestShutdownHook {
   }
 
   @Test
-  public void test_OneParticipant() {
+  public void testOneParticipant() {
     shutdownHook.addShutdownHookParticipant(dummyShutdownHookParticipant1);
 
     shutdownHook.run();
@@ -47,7 +70,7 @@ public class TestShutdownHook {
   }
 
   @Test
-  public void test_OneParticipantThrows() {
+  public void testOneParticipantThrows() {
     shutdownHook.addShutdownHookParticipant(dummyShutdownHookParticipant1);
     dummyShutdownHookParticipant1.throwException = true;
 
@@ -58,7 +81,7 @@ public class TestShutdownHook {
   }
 
   @Test
-  public void test_OneParticipantRemoved() {
+  public void testOneParticipantRemoved() {
     shutdownHook.addShutdownHookParticipant(dummyShutdownHookParticipant1);
     shutdownHook.removeShutdownHookParticipant(dummyShutdownHookParticipant1);
 
@@ -69,7 +92,7 @@ public class TestShutdownHook {
   }
 
   @Test
-  public void test_TwoParticipants() {
+  public void testTwoParticipants() {
     shutdownHook.addShutdownHookParticipant(dummyShutdownHookParticipant1);
     shutdownHook.addShutdownHookParticipant(dummyShutdownHookParticipant2);
 
@@ -80,7 +103,7 @@ public class TestShutdownHook {
   }
 
   @Test
-  public void test_TwoParticipantsOneRemoved() {
+  public void testTwoParticipantsOneRemoved() {
     shutdownHook.addShutdownHookParticipant(dummyShutdownHookParticipant1);
     shutdownHook.addShutdownHookParticipant(dummyShutdownHookParticipant2);
     shutdownHook.removeShutdownHookParticipant(dummyShutdownHookParticipant1);

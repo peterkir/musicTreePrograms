@@ -4,23 +4,33 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import nl.pelagic.shutdownhook.api.ShutdownHookParticipant;
+import sun.misc.Signal;
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Deactivate;
 import aQute.bnd.annotation.component.Reference;
 
 /**
- * This bundle registers itself as a JVM shutdown hook: when the JVM shuts down,
- * it calls the handler in this bundle, which again calls all shutdown hook
- * participants, so that they call stop running in a controlled fashion.
+ * <p>
+ * This component registers itself as a VM shutdown hook handler service: when
+ * the VM shuts down the handler in this bundle is called, which again calls all
+ * {@link ShutdownHookParticipant}s, so that they can stop running in a
+ * controlled fashion.
+ * </p>
+ * <p>
+ * The component will install signal handlers for the HUP, INT and TERM signals.
+ * When either of these signals is received, the
+ * {@link ShutdownHookParticipant#shutdownHook()} method is invoked on all
+ * {@link ShutdownHookParticipant}s.
+ * </p>
  */
 @Component
 public class ShutdownHook extends Thread {
-  /** the registered shutdown hook participants */
+  /** The registered shutdown hook participants */
   private Set<ShutdownHookParticipant> shutdownHookParticipants = new CopyOnWriteArraySet<>();
 
   /**
-   * @param shutdownHookParticipant the shutdown hook participant to add
+   * @param shutdownHookParticipant The shutdown hook participant to add
    */
   @Reference(type = '+')
   void addShutdownHookParticipant(ShutdownHookParticipant shutdownHookParticipant) {
@@ -28,20 +38,20 @@ public class ShutdownHook extends Thread {
   }
 
   /**
-   * @param shutdownHookParticipant the shutdown hook participant to remove
+   * @param shutdownHookParticipant The shutdown hook participant to remove
    */
   void removeShutdownHookParticipant(ShutdownHookParticipant shutdownHookParticipant) {
     shutdownHookParticipants.remove(shutdownHookParticipant);
   }
 
-  /** the stop handler for the HUP signal */
-  private StopHandler stopHandler_HUP = new StopHandler("HUP", this); //$NON-NLS-1$
+  /** The stop handler for the HUP signal */
+  private StopHandler stopHandler_HUP = new StopHandler(new Signal("HUP"), this); //$NON-NLS-1$
 
-  /** the stop handler for the INT signal */
-  private StopHandler stopHandler_INT = new StopHandler("INT", this); //$NON-NLS-1$
+  /** The stop handler for the INT signal */
+  private StopHandler stopHandler_INT = new StopHandler(new Signal("INT"), this); //$NON-NLS-1$
 
-  /** the stop handler for the TERM signal */
-  private StopHandler stopHandler_TERM = new StopHandler("TERM", this); //$NON-NLS-1$
+  /** The stop handler for the TERM signal */
+  private StopHandler stopHandler_TERM = new StopHandler(new Signal("TERM"), this); //$NON-NLS-1$
 
   /**
    * Bundle activator
@@ -66,16 +76,14 @@ public class ShutdownHook extends Thread {
       Runtime.getRuntime().removeShutdownHook(this);
     }
     catch (Throwable e) {
-      /*
-       * swallow: this can throw 'java.lang.IllegalStateException: Shutdown in
-       * progress'
-       */
+      /* swallow and can't be covered in a test */
     }
   }
 
-  @Override
-  public void run() {
-    /** loop over all registered shutdown hook participants */
+  /**
+   * Invoke the callback on all registered shutdown hook participants
+   */
+  void stopAllShutdownHookParticipants() {
     for (ShutdownHookParticipant shutdownHookParticipant : this.shutdownHookParticipants) {
       try {
         shutdownHookParticipant.shutdownHook();
@@ -84,5 +92,10 @@ public class ShutdownHook extends Thread {
         /* swallow */
       }
     }
+  }
+
+  @Override
+  public void run() {
+    stopAllShutdownHookParticipants();
   }
 }
