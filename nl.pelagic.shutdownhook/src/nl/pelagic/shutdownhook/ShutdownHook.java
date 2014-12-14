@@ -4,7 +4,6 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import nl.pelagic.shutdownhook.api.ShutdownHookParticipant;
-import sun.misc.Signal;
 import aQute.bnd.annotation.component.Activate;
 import aQute.bnd.annotation.component.Component;
 import aQute.bnd.annotation.component.Deactivate;
@@ -45,13 +44,13 @@ public class ShutdownHook extends Thread {
   }
 
   /** The stop handler for the HUP signal */
-  private StopHandler stopHandler_HUP = new StopHandler(new Signal("HUP"), this); //$NON-NLS-1$
+  private StopHandler stopHandler_HUP = new StopHandler("HUP", this); //$NON-NLS-1$
 
   /** The stop handler for the INT signal */
-  private StopHandler stopHandler_INT = new StopHandler(new Signal("INT"), this); //$NON-NLS-1$
+  private StopHandler stopHandler_INT = new StopHandler("INT", this); //$NON-NLS-1$
 
   /** The stop handler for the TERM signal */
-  private StopHandler stopHandler_TERM = new StopHandler(new Signal("TERM"), this); //$NON-NLS-1$
+  private StopHandler stopHandler_TERM = new StopHandler("TERM", this); //$NON-NLS-1$
 
   /**
    * Bundle activator

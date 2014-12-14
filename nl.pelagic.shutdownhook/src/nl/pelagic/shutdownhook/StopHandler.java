@@ -21,18 +21,20 @@ public class StopHandler implements SignalHandler {
    *
    * @param signal The signal to handle
    * @param shutdownHook The shutdown hook to run when the signal is received
-   * @throws ExceptionInInitializerError when signal is null or when
-   *           shutdownHook is null
+   * @throws ExceptionInInitializerError When signal is null, when shutdownHook
+   *           is null, or when both are null
+   * @throws IllegalArgumentException When the specified signal is unknown
    */
-  public StopHandler(Signal signal, ShutdownHook shutdownHook) throws ExceptionInInitializerError {
+  public StopHandler(String signal, ShutdownHook shutdownHook) throws ExceptionInInitializerError,
+  IllegalArgumentException {
     if ((signal == null) || (shutdownHook == null)) {
       throw new ExceptionInInitializerError(String.format( //
-          "Null parameter(s):%s%s", //
-          (signal == null) ? " signal" : "", //
-          (shutdownHook == null) ? " shutdownHook" : ""));
+          "Null parameter(s):%s%s", //$NON-NLS-1$
+          (signal == null) ? " signal" : "", //$NON-NLS-1$//$NON-NLS-2$
+          (shutdownHook == null) ? " shutdownHook" : "")); //$NON-NLS-1$//$NON-NLS-2$
     }
 
-    this.signal = signal;
+    this.signal = new Signal(signal);
     this.shutdownHook = shutdownHook;
   }
 
@@ -42,7 +44,6 @@ public class StopHandler implements SignalHandler {
   public void activate() {
     if (this.oldHandler == null) {
       this.oldHandler = Signal.handle(this.signal, this);
-      assert (this.oldHandler != null);
     }
   }
 

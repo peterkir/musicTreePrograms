@@ -13,7 +13,7 @@ import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
 @SuppressWarnings({
-  "unused", "javadoc", "static-method"
+  "nls", "unused", "javadoc", "static-method"
 })
 public class TestStopHandler extends ShutdownHook implements SignalHandler {
   static final String SIGHUP_NAME = "USR2";
@@ -58,14 +58,14 @@ public class TestStopHandler extends ShutdownHook implements SignalHandler {
 
   @Test(expected = ExceptionInInitializerError.class)
   public void testConstructThrowHookNull() {
-    StopHandler handler = new StopHandler(new Signal("HUP"), null);
+    StopHandler handler = new StopHandler(SIGHUP_NAME, null);
   }
 
   @Test
   public void testActivateDeactivate() throws InterruptedException {
     assertThat(Integer.valueOf(calls), equalTo(Integer.valueOf(0)));
 
-    StopHandler handler = new StopHandler(SIGHUP, this);
+    StopHandler handler = new StopHandler(SIGHUP_NAME, this);
     handler.activate();
     handler.activate();
 
@@ -96,7 +96,7 @@ public class TestStopHandler extends ShutdownHook implements SignalHandler {
 
   @Test
   public void testHandleSignal() {
-    StopHandler handler = new StopHandler(SIGHUP, this);
+    StopHandler handler = new StopHandler(SIGHUP_NAME, this);
     handler.activate();
 
     handler.handle(SIGHUP);
@@ -108,7 +108,7 @@ public class TestStopHandler extends ShutdownHook implements SignalHandler {
 
   @Test
   public void testHandleDifferentSignal() {
-    StopHandler handler = new StopHandler(SIGHUP, this);
+    StopHandler handler = new StopHandler(SIGHUP_NAME, this);
     handler.activate();
 
     handler.handle(new Signal("INT"));
@@ -119,7 +119,7 @@ public class TestStopHandler extends ShutdownHook implements SignalHandler {
 
   @Test
   public void testHandleChainToDflt() {
-    StopHandler handler = new StopHandler(SIGHUP, this);
+    StopHandler handler = new StopHandler(SIGHUP_NAME, this);
 
     SignalHandler oldHandler = Signal.handle(SIGHUP, SIG_DFL);
     try {
@@ -138,7 +138,7 @@ public class TestStopHandler extends ShutdownHook implements SignalHandler {
 
   @Test
   public void testHandleChainToIgn() {
-    StopHandler handler = new StopHandler(SIGHUP, this);
+    StopHandler handler = new StopHandler(SIGHUP_NAME, this);
 
     SignalHandler oldHandler = Signal.handle(SIGHUP, SIG_IGN);
     try {
@@ -157,7 +157,7 @@ public class TestStopHandler extends ShutdownHook implements SignalHandler {
 
   @Test
   public void testHandleChainToThis() {
-    StopHandler handler = new StopHandler(SIGHUP, this);
+    StopHandler handler = new StopHandler(SIGHUP_NAME, this);
 
     SignalHandler oldHandler = Signal.handle(SIGHUP, this);
     try {
@@ -179,7 +179,7 @@ public class TestStopHandler extends ShutdownHook implements SignalHandler {
     ThrowingSignalHandler throwingSignalHandler = new ThrowingSignalHandler();
     SignalHandler oldHandler = Signal.handle(SIGHUP, throwingSignalHandler);
 
-    StopHandler handler = new StopHandler(SIGHUP, this);
+    StopHandler handler = new StopHandler(SIGHUP_NAME, this);
     try {
       handler.activate();
 
