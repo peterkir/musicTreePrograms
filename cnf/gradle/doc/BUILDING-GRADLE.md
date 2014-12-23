@@ -538,6 +538,9 @@ which instructs the Java runtime to run unit tests.
 
 Refer to the bnd manual/website for more details on how to setup bundle tests.
 
+Set ```check.ignoreFailures = true``` on the project to not fail the build
+on check failures.
+
 This task is automatically disabled when no bundle tests have been defined.
 
 ### <a name="BuildTasksCheckNeeded"/>checkNeeded
@@ -707,35 +710,6 @@ project itself.
 This section discusses tasks that are added to all Java projects (which
 includes bnd projects).
 
-<a name="BuildTasksJavaProjectsSettings"/>**Settings**
-
-* &nbsp;```javaLibsDirName```: The directory (relative to the project's build
-                               directory) in which to place the generated
-                               artifacts (jars and bundles). Defaults to **.**.
-
-* &nbsp;```javaTestResultsDirName```: The directory (relative to the project's
-                                      build directory) in which to place the
-                                      tests XML reports. Defaults
-                                      to **reports/tests/xml**.
-
-* &nbsp;```javaTestReportDirName```: The directory (relative to the project's
-                                      reports directory) in which to place the
-                                      tests HTML reports. Defaults
-                                      to **tests/html**.
-
-* &nbsp;```javaTestEnableAssertions```: **true** to enable assertions during
-                                        tests. Defaults to **true**.
-
-* &nbsp;```javaTestIgnoreFailures```: **true** to ignore test failures (to
-                                      **not** fail the build). Defaults
-                                      to **false**.
-
-* &nbsp;```javaTestMaxParallelForks```: The maximum number of parallel tests to
-                                        run. Defaults to **1**.
-
-The defaults for the settings can be overridden by defining the settings in the
-project's ```build-settings.gradle``` file.
-
 ### <a name="BuildTasksFindbugs"/>Findbugs
 
 The findbugs plugin is applied to all Java projects. This plugin adds the
@@ -781,24 +755,9 @@ and ```build``` are examples of such a task.
                                  create them both at the same time). Defaults
                                  to **CI**.
 
-* &nbsp;```findbugsToolVersion```: The version of the findbugs plugin to use.
-                                   Defaults to **3.0.0**.
-
 * &nbsp;```findbugsIgnoreFailures```: **true** to ignore findbugs warning (to
                                       **not** fail the build). Defaults
                                       to **true**.
-
-* &nbsp;```findbugsEffort```: The effort the expend; **min**, **default**
-                              or **max**. Defaults to **default**.
-
-* &nbsp;```findbugsReportLevel```: The minimum level to report, in which a
-                                   *lower* setting will report more warnings.
-                                   Can be **low**, **medium** or **high**.
-                                   Defaults to **medium**.
-
-* &nbsp;```findbugsReportsDir```: The directory (relative to the project's build
-                                  directory) in which to place the findbugs
-                                  reports. Defaults to **reports/findbugs**.
 
 * &nbsp;```findbugsIncludesFile```: The file with include rules. Defaults
                                     to **${rootProject.rootDir}/${rootProject.bnd_cnf}/findbugs/findbugs.include.xml**.
@@ -818,21 +777,9 @@ The ```jacocoTestReport``` task is automatically run when either of
 the ```test``` or ```check``` tasks are scheduled to run.
 
 An ```test.exec``` report - for consumption by a build server - is always
-created and is placed in the directory configured by the ```jacocoReportsDir```
-setting.
+created.
 
 <a name="BuildTasksJacocoSettings"/>**Settings**
-
-* &nbsp;```jacocoToolVersion```: The version of the jacoco plugin to use.
-                                 Defaults to **0.7.1.201405082137**.
-
-* &nbsp;```jacocoReportsDir```: The directory (relative to the project's build
-                                directory) in which to place the jacoco
-                                reports. Defaults to **reports/jacoco**.
-
-* &nbsp;```jacocoHtmlDir```: The directory (relative to ```jacocoReportsDir```)
-                             in which to place the html reports. Defaults
-                             to **html**.
 
 * &nbsp;```jacocoXmlReport```: **true** to generate XML reports. Defaults
                                to **true**.
