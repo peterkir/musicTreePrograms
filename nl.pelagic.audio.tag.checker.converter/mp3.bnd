@@ -1,5 +1,5 @@
 Private-Package: nl.pelagic.audio.tag.checker.converter.mp3
 Service-Component: *
-Bundle-Version:1.0.1.${tstamp}
+Bundle-Version: 1.0.2.${tstamp}
 Bundle-Name: AudioTagChecker - MP3 Tag Converter
 Bundle-Description: Converts a (non-generic) MP3 tag into a (generic) GenericTag

@@ -1,5 +1,5 @@
 -buildpath: biz.aQute.bnd.annotation
 Export-Package: nl.pelagic.shell.script.listener.api
-Bundle-Version: 2.0.1.${tstamp}
+Bundle-Version: 2.0.2.${tstamp}
 Bundle-Name: Shell Script Listener - API
 Bundle-Description: Listener API for shell commands

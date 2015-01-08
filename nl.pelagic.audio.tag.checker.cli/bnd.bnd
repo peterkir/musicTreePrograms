@@ -8,6 +8,6 @@
 Private-Package: nl.pelagic.audio.tag.checker.cli,\
 	nl.pelagic.audio.tag.checker.cli.i18n
 Service-Component: *
-Bundle-Version:1.0.1.${tstamp}
+Bundle-Version: 1.0.2.${tstamp}
 Bundle-Name: AudioTagChecker - CLI
 Bundle-Description: The main application of the AudioTagChecker application

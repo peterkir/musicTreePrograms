@@ -6,7 +6,9 @@ import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
 @Ignore
-@SuppressWarnings("javadoc")
+@SuppressWarnings({
+    "javadoc", "restriction"
+})
 public class ThrowingSignalHandler implements SignalHandler {
   @Override
   public void handle(Signal sig) {

@@ -1,6 +1,6 @@
 -buildpath: org.jaudiotagger,\
 	${junit}
 Export-Package: nl.pelagic.jaudiotagger.util
-Bundle-Version: 1.1.1.${tstamp}
+Bundle-Version: 1.1.2.${tstamp}
 Bundle-Name: Pelagic JAudioTagger Utilities Library
 Bundle-Description: This library bundle contains utility methods

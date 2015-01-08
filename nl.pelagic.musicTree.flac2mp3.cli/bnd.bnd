@@ -11,6 +11,6 @@
 Private-Package: nl.pelagic.musicTree.flac2mp3.cli,\
 	nl.pelagic.musicTree.flac2mp3.cli.i18n
 Service-Component: *
-Bundle-Version:1.0.3.${tstamp}
+Bundle-Version: 1.0.4.${tstamp}
 Bundle-Name: Flac2Mp3
 Bundle-Description: CLI of the flac2mp3 program

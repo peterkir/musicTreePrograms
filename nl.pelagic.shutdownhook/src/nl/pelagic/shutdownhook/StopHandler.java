@@ -6,6 +6,7 @@ import sun.misc.SignalHandler;
 /**
  * Handler for stop signals received from the OS
  */
+@SuppressWarnings("restriction")
 public class StopHandler implements SignalHandler {
   /** The signal to handle */
   private Signal signal = null;

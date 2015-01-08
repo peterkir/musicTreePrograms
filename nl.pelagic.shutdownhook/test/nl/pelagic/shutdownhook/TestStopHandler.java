@@ -13,7 +13,7 @@ import sun.misc.Signal;
 import sun.misc.SignalHandler;
 
 @SuppressWarnings({
-  "nls", "unused", "javadoc", "static-method"
+    "nls", "unused", "javadoc", "static-method", "restriction"
 })
 public class TestStopHandler extends ShutdownHook implements SignalHandler {
   static final String SIGHUP_NAME = "USR2";

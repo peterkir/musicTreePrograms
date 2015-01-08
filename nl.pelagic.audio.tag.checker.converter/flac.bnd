@@ -1,5 +1,5 @@
 Private-Package: nl.pelagic.audio.tag.checker.converter.flac
 Service-Component: *
-Bundle-Version:1.0.1.${tstamp}
+Bundle-Version: 1.0.2.${tstamp}
 Bundle-Name: AudioTagChecker - Flac Tag Converter
 Bundle-Description: Convert a (non-generic) FlacTag into a (generic) GenericTag

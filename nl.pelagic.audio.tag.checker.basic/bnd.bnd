@@ -5,6 +5,6 @@
 Private-Package: nl.pelagic.audio.tag.checker.basic,\
 	nl.pelagic.audio.tag.checker.basic.i18n
 Service-Component: *
-Bundle-Version:1.0.1.${tstamp}
+Bundle-Version: 1.0.2.${tstamp}
 Bundle-Name: AudioTagChecker - Basic Information Checker
 Bundle-Description: Perform basic checks on a generic tag

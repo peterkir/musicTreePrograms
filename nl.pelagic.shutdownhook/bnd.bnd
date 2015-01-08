@@ -3,6 +3,6 @@
 	${junit}
 Private-Package: nl.pelagic.shutdownhook
 Service-Component: *
-Bundle-Version: 1.0.2.${tstamp}
+Bundle-Version: 1.0.3.${tstamp}
 Bundle-Name: Shutdown Hook Thread
 Bundle-Description: This bundle attaches itself to the VM shutdown hook and signals every ShutdownHook participant in case the VM is shut down

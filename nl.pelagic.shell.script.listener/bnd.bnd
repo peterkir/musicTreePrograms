@@ -5,6 +5,6 @@
 	${junit}
 Private-Package: nl.pelagic.shell.script.listener
 Service-Component: *
-Bundle-Version:1.0.3.${tstamp}
+Bundle-Version: 1.0.4.${tstamp}
 Bundle-Name: Shell Script Listener
 Bundle-Description: This bundle listens for shell commands are outputs them so that they can be copied & pasted into a shell

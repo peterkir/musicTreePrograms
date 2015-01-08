@@ -6,6 +6,6 @@
 Private-Package: nl.pelagic.audio.tag.checker.filename,\
 	nl.pelagic.audio.tag.checker.filename.i18n
 Service-Component: *
-Bundle-Version:1.0.1.${tstamp}
+Bundle-Version: 1.0.2.${tstamp}
 Bundle-Name: AudioTagChecker - Filename checker
 Bundle-Description: Perform a filename check on the backing file of a generic tag
