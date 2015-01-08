@@ -1,8 +1,8 @@
 -include bnd.bnd
 
--runrepos: Workspace,\
-	Local,\
-	Bndtools Hub
+-runrepos: \
+	Workspace,\
+	Local
 
 -runbundles: \
 	nl.pelagic.audio.tag.checker;version=latest,\
