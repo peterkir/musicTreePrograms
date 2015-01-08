@@ -1,8 +1,7 @@
 -include bnd.bnd
 
 -runrepos: Workspace,\
-	Local,\
-	Bndtools Hub
+	Local
 
 -runbundles: \
 	nl.pelagic.audio.conversion.flac2mp3;version=latest,\
