@@ -26,7 +26,6 @@
 	org.apache.felix.gogo.runtime;version='[0.12.1,0.12.2)',\
 	org.apache.felix.gogo.shell;version='[0.10.0,0.10.1)',\
 	org.apache.felix.http.jetty;version='[2.2.2,2.2.3)',\
-	org.apache.felix.log;version='[1.0.1,1.0.2)',\
 	org.apache.felix.metatype;version='[1.0.10,1.0.11)',\
 	org.apache.felix.scr;version='[1.8.2,1.8.3)',\
 	org.apache.felix.webconsole;version='[4.2.2,4.2.3)',\
