@@ -21,8 +21,7 @@
 	nl.pelagic.util;version=latest,\
 	org.apache.felix.scr;version='[1.8.2,1.8.3)',\
 	org.jaudiotagger;version='[2.2.0,2.2.1)',\
-	org.kohsuke.args4j;version='[2.0.31,2.0.32)',\
-	osgi.enterprise;version='[5.0.0,5.0.1)'
+	org.kohsuke.args4j;version='[2.0.31,2.0.32)'
 -runee: JavaSE-1.7
 -runfw: org.apache.felix.framework;version='[4,5)'
 -runrequires: osgi.identity;filter:='(osgi.identity=nl.pelagic.audio.tag.checker.cli)',\
