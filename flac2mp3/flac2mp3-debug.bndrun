@@ -5,8 +5,8 @@
 	Local,\
 	Bndtools Hub
 
--runbundles: aQute.xray.plugin;version='[1.0.3,1.0.4)',\
-	org.jaudiotagger;version='[2.2.0,2.2.1)',\
+-runbundles: \
+	aQute.xray.plugin;version='[1.7.0,1.7.1)',\
 	javax.servlet;version='[2.5.0,2.5.1)',\
 	nl.pelagic.audio.conversion.flac2mp3;version=latest,\
 	nl.pelagic.audio.conversion.flac2mp3.api;version=latest,\
@@ -20,17 +20,18 @@
 	nl.pelagic.shutdownhook;version=latest,\
 	nl.pelagic.shutdownhook.api;version=latest,\
 	nl.pelagic.util;version=latest,\
-	org.apache.felix.configadmin;version='[1.4.0,1.4.1)',\
-	org.apache.felix.gogo.command;version='[0.12.0,0.12.1)',\
-	org.apache.felix.gogo.runtime;version='[0.10.0,0.10.1)',\
+	org.apache.felix.configadmin;version='[1.8.0,1.8.1)',\
+	org.apache.felix.gogo.command;version='[0.14.0,0.14.1)',\
+	org.apache.felix.gogo.runtime;version='[0.12.1,0.12.2)',\
 	org.apache.felix.gogo.shell;version='[0.10.0,0.10.1)',\
-	org.apache.felix.http.jetty;version='[2.2.0,2.2.1)',\
+	org.apache.felix.http.jetty;version='[2.2.2,2.2.3)',\
 	org.apache.felix.log;version='[1.0.1,1.0.2)',\
-	org.apache.felix.metatype;version='[1.0.4,1.0.5)',\
-	org.apache.felix.scr;version='[1.6.2,1.6.3)',\
+	org.apache.felix.metatype;version='[1.0.10,1.0.11)',\
+	org.apache.felix.scr;version='[1.8.2,1.8.3)',\
 	org.apache.felix.shell.remote;version='[1.1.2,1.1.3)',\
-	org.apache.felix.webconsole;version='[3.1.8,3.1.9)',\
-	org.kohsuke.args4j;version='[2.0.26,2.0.27)',\
+	org.apache.felix.webconsole;version='[4.2.2,4.2.3)',\
+	org.jaudiotagger;version='[2.2.0,2.2.1)',\
+	org.kohsuke.args4j;version='[2.0.31,2.0.32)',\
 	osgi.cmpn;version='[4.3.0,4.3.1)',\
 	osgi.enterprise;version='[4.2.0,4.2.1)',\
 	osgi.enterprise;version='[5.0.0,5.0.1)'
