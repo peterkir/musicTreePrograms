@@ -1,7 +1,6 @@
 -include bnd.bnd
 
 -runrepos: Workspace,\
-	Release,\
 	Local,\
 	Bndtools Hub
 
