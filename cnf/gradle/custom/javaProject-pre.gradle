@@ -1,5 +1,2 @@
 assert(project != rootProject   )
 assert(hasProperty('sourceSets'))
-
-ext.findbugsEffort      = "max" /* min, default, max  */
-ext.findbugsReportLevel = "low" /* low, medium , high */
