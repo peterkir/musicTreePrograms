@@ -2,7 +2,7 @@ Bundle-SymbolicName: org.jaudiotagger
 Bundle-Version: __version__
 -includeresource: @__jar_in__, OSGI-OPT/=@__jar_in_src__
 
-Bundle-DocURL: http://www.jthink.net/jaudiotagger
+Bundle-DocURL: https://bitbucket.org/ijabz/jaudiotagger
 Bundle-License: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
 
 Bundle-Description: JAudiotagger is a JAVA API for audio metatagging. Both a \
