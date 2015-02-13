@@ -16,4 +16,8 @@ Import-Package: \
 
 Export-Package: org.jaudiotagger.*
 
+-classpath: .
+
 -noee
+
+-removeheaders: Bnd-LastModified, Created-By, Tool

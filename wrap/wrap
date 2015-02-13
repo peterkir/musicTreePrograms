@@ -153,23 +153,27 @@ declare script="$(pathCanonicalPath "${0}")"
 declare scriptDir="$(dirname "${script}")"
 
 exitPrintStackTracePrint=0
-if [[ ${#} -ne 2 ]]; then
-  echo "Usage: ${script} VERSION QUALIFIER"
+if [[ ${#} -lt 2 ]]; then
+  echo "Usage: ${script} VERSION gGITSHA"
   exit 1
 fi
 exitPrintStackTracePrint=1
 unset script
 
-declare BSN="jaudiotagger"
+declare BSNIN="jaudiotagger"
+declare BSNOUT="org.jaudiotagger"
 declare VERSION="$(stringTrim "${1}")"
-declare QUALIFIER="$(stringTrim "${2}")"
+declare QUALIFIER="$(stringTrim "${2:-}")"
+if [ -n "$QUALIFIER" ]; then
+  QUALIFIER=".$QUALIFIER"
+fi
 
 declare BND="${scriptDir}/biz.aQute.bnd.jar"
 declare BND_BND_SRC="${scriptDir}/bnd.bnd.src"
 declare BND_BND="${scriptDir}/bnd.bnd"
-declare JAR_IN="${scriptDir}/${BSN}-${VERSION}.${QUALIFIER}"
+declare JAR_IN="${scriptDir}/${BSNIN}-${VERSION}${QUALIFIER}"
 declare JAR_IN_SRC="${JAR_IN}-sources"
-declare JAR_OUT="${scriptDir}/${BSN}-${VERSION}"
+declare JAR_OUT="${scriptDir}/${BSNOUT}-${VERSION}"
 
 
 exitPrintStackTracePrint=0
@@ -181,6 +185,13 @@ if [[ ! -f "${BND_BND_SRC}" ]]; then
   echo "BND file ${BND_BND_SRC} does not exist"
   exit 1
 fi
+
+if [[ ! -f "${JAR_IN}.jar" ]]; then
+  JAR_IN="${scriptDir}/${BSNIN}-${VERSION}"
+  JAR_IN_SRC="${JAR_IN}-sources"
+  echo "Input file ${JAR_IN}.jar does not exist, trying ${JAR_IN}.jar"
+fi
+
 if [[ ! -f "${JAR_IN}.jar" ]]; then
   echo "Input file ${JAR_IN}.jar does not exist"
   exit 1
@@ -194,7 +205,7 @@ exitPrintStackTracePrint=1
 
 rm -f "${BND_BND}" "${JAR_OUT}.jar"
 
-sed -e "s/__version__/${VERSION}.${QUALIFIER}/" \
+sed -e "s/__version__/${VERSION}${QUALIFIER}/" \
     -e "s/__jar_in__/$(basename "${JAR_IN}").jar/" \
     -e "s/__jar_in_src__/$(basename "${JAR_IN_SRC}").jar/" \
     "${BND_BND_SRC}" > "${BND_BND}"
