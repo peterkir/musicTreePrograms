@@ -17,7 +17,7 @@
 	nl.pelagic.shutdownhook.api;version=latest,\
 	nl.pelagic.util;version=latest,\
 	org.apache.felix.scr;version='[1.8.2,1.8.3)',\
-	org.jaudiotagger;version='[2.2.0,2.2.1)',\
+	org.jaudiotagger;version='[2.2.3,2.2.4)',\
 	org.kohsuke.args4j;version='[2.0.31,2.0.32)'
 -runee: JavaSE-1.7
 -runfw: org.apache.felix.framework;version='[4,5)'
